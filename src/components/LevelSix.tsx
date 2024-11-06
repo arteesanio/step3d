@@ -99,7 +99,7 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: L
             </Cylinder>
         }
         <group position={[0, -0.5, 1]}>
-            <Stairs />
+            <Stairs brightColors={false} activatedSteps={[0, 1, 2, 3, 4, 5]} />
         </group>
 
         <Box args={[0.5, 0.75, 0.5]} position={[0, -2.82, 0]}

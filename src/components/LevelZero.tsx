@@ -10,11 +10,11 @@ interface LevelOneProps {
   s__score: (score: number) => void;
   onToast: (message: string) => void;
 }
-
+// tap the coin or lose
 export const LevelZero = ({ score, s__score = () => { }, onToast = () => { } }: LevelOneProps) => {
   const solanaLogo = useTexture("./solana.png");
   const miniHdri = useTexture("./miniHdri.jpg");
-  const MAX_VEL = -0.01;
+  const MAX_VEL = -0.02;
   const [vel, s__vel] = useState(MAX_VEL);
   const [showQuiz, s__showQuiz] = useState(false);
   const $box: any = useRef(null);

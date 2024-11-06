@@ -10,11 +10,11 @@ interface LevelOneProps {
     s__score: (score: number) => void;
     onToast: (message: string) => void;
 }
-
+// you dont completely lose at once
 export const LevelOne = ({ score, s__score = () => { }, onToast = () => { } }: LevelOneProps) => {
     const solanaLogo = useTexture("./solana.png");
     const miniHdri = useTexture("./miniHdri.jpg");
-    const MAX_VEL = -0.01;
+    const MAX_VEL = -0.02;
     const [vel, s__vel] = useState(MAX_VEL);
     const [showQuiz, s__showQuiz] = useState(false);
     const $box: any = useRef(null);
@@ -24,19 +24,22 @@ export const LevelOne = ({ score, s__score = () => { }, onToast = () => { } }: L
     }
 
     const boxClick = () => {
+        // if (score == 0) {
+        //     return window.location.reload()
+        // }
         if (score == -1) {
             return window.location.reload()
         }
-        if (score < -1) {
+        if (score < -7) {
             return window.location.href = "/?lvl=2"
         }
 
         s__vel((velocity) => (velocity + 0.04))
-        if (score == 0) {
+        if (score > 5) {
             s__showQuiz(true);
             return;
         }
-        if (score > 0) {
+        if (score > 7) {
             s__score(score + 2)
             finishGame();
             onToast("You Win!");
@@ -67,7 +70,7 @@ export const LevelOne = ({ score, s__score = () => { }, onToast = () => { } }: L
         if ($box.current.position.y > -2) {
             $box.current.position.y += vel
         }
-        if ($box.current.position.y < -2 && score >= 0) { onToast("You Lose!"); finishGame() }
+        if ($box.current.position.y < -2 && score >= 7) { onToast("You Lose!"); finishGame() }
         if (vel <= MAX_VEL) { return }
         s__vel(vel - 0.001)
     })
@@ -84,7 +87,16 @@ export const LevelOne = ({ score, s__score = () => { }, onToast = () => { } }: L
                 onIncorrect={handleIncorrectAnswer}
             />
         )}
-        {score < -1 &&
+        {score >= -7 &&score < -1 &&
+            <Html position={[0, -1, 0]}>
+                <h1 className="nowrap flex-col opaci-chov--50"  onClick={()=>{window.location.reload()}}
+                    style={{ textShadow: "-2px 2px 2px #110700", color: "#ffaa00" }}>
+                    <div>You missed!</div>
+                    <div className="tx-altfont-1 tx-md">Tap to try again!</div>
+                    </h1>
+            </Html>
+        }
+        {score < -7 &&
             <Html position={[0, -1, 0]}>
                 <h1 className="nowrap flex-col opaci-chov--50" onClick={onStepClick}
                     style={{ textShadow: "-2px 2px 2px #110700", color: "#ffaa00" }}>
@@ -99,7 +111,7 @@ export const LevelOne = ({ score, s__score = () => { }, onToast = () => { } }: L
             </Cylinder>
         }
         <group position={[0, -0.5, 1]}>
-            <Stairs />
+            <Stairs brightColors={false} activatedSteps={[0]} />
         </group>
 
         <Box args={[0.5, 0.75, 0.5]} position={[0, -2.82, 0]}

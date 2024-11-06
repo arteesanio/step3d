@@ -69,9 +69,9 @@ export const GameContainer = ({ initialLevel = "start" }: GameContainerProps) =>
             );
         }
 
-        if (toastCount > 0 && score < -1) {
-            return <h1 className="tx-altfont-2">You Win!</h1>;
-        }
+        // if (toastCount > 0 && score < -1) {
+        //     return <h1 className="tx-altfont-2">You Win!</h1>;
+        // }
 
         if (toastCount > 0 && score == -1) {
             return <h1 className="tx-altfont-1 tx-center z-10 opaci-chov--50" onClick={()=>{window.location.reload()}}>You missed! <br /> <div className="tx-md">Tap to try again</div></h1>;
