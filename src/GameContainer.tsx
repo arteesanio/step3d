@@ -55,7 +55,7 @@ export const GameContainer = ({ initialLevel = "start" }: GameContainerProps) =>
             return (
                 <h1 className="flex-col">
                     <div className="tx-altfont-2 tx-xxl">Congrats!</div>
-                    <div className="tx-altfont-1">You've Won!</div>
+                    <div className="tx-altfont-1">You&apos;ve Won!</div>
                 </h1>
             );
         }
