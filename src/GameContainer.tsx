@@ -60,7 +60,7 @@ export const GameContainer = ({ initialLevel = "start" }: GameContainerProps) =>
             );
         }
 
-        if (toastCount == 0) {
+        if (toastCount == 0 && score == 0) {
             return (<>
                 <h1 className="flex-col">
                     <div className="tx-altfont-2 tx-xl">Tap</div>

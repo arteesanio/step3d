@@ -11,10 +11,22 @@ interface LevelSixProps {
     onToast: (message: string) => void;
 }
 
+const MAX_VEL = -0.02;
+const SCORE_CONDITIONS = {
+    GAME_OVER: -1,
+    PROCEED_TO_LEVEL_SEVEN: -2,
+    SHOW_QUIZ_THRESHOLD: 5,
+    WIN_THRESHOLD: 7,
+    POINTS_PER_CLICK: 2,
+} as const;
+
+const ROUTES = {
+    NEXT_LEVEL: "/?lvl=7",
+} as const;
+
 export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: LevelSixProps) => {
     const solanaLogo = useTexture("./solana.png");
     const miniHdri = useTexture("./miniHdri.jpg");
-    const MAX_VEL = -0.01;
     const [vel, s__vel] = useState(MAX_VEL);
     const [showQuiz, s__showQuiz] = useState(false);
     const $box: any = useRef(null);
@@ -24,31 +36,31 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: L
     }
 
     const boxClick = () => {
-        if (score == -1) {
+        if (score === SCORE_CONDITIONS.GAME_OVER) {
             return window.location.reload()
         }
-        if (score < -1) {
-            return window.location.href = "/?lvl=6"
+        if (score < SCORE_CONDITIONS.PROCEED_TO_LEVEL_SEVEN) {
+            return window.location.href = ROUTES.NEXT_LEVEL
         }
 
         s__vel((velocity) => (velocity + 0.04))
-        if (score == 0) {
+        if (score >= SCORE_CONDITIONS.SHOW_QUIZ_THRESHOLD) {
             s__showQuiz(true);
             return;
         }
-        if (score > 0) {
-            s__score(score + 2)
+        if (score > SCORE_CONDITIONS.WIN_THRESHOLD) {
+            s__score(score + SCORE_CONDITIONS.POINTS_PER_CLICK)
             finishGame();
             onToast("You Win!");
             return
         }
-        s__score(score + 2)
+        s__score(score + SCORE_CONDITIONS.POINTS_PER_CLICK)
     }
 
     const handleCorrectAnswer = () => {
         s__showQuiz(false);
         onToast("Correct! Keep going!");
-        s__score(score + 2);
+        s__score(score + SCORE_CONDITIONS.POINTS_PER_CLICK);
         if ($box.current) {
             $box.current.position.z += 0.2;
         }
@@ -67,13 +79,16 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: L
         if ($box.current.position.y > -2) {
             $box.current.position.y += vel
         }
-        if ($box.current.position.y < -2 && score >= 0) { onToast("You Lose!"); finishGame() }
+        if ($box.current.position.y < -2 && score >= 0) { 
+            onToast("You Lose!"); 
+            finishGame() 
+        }
         if (vel <= MAX_VEL) { return }
         s__vel(vel - 0.001)
     })
 
     const onStepClick = () => {
-        return window.location.href = "/?lvl=7"
+        return window.location.href = ROUTES.NEXT_LEVEL
     }
 
     return (<>
@@ -82,13 +97,14 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: L
                 quizSet={levelSix_quizOptions}
                 onCorrect={handleCorrectAnswer}
                 onIncorrect={handleIncorrectAnswer}
+                levelName="Level Six"
             />
         )}
-        {score < -1 &&
+        {score < SCORE_CONDITIONS.PROCEED_TO_LEVEL_SEVEN &&
             <Html position={[0, -1, 0]}>
                 <h1 className="nowrap flex-col opaci-chov--50" onClick={onStepClick}
                     style={{ textShadow: "-2px 2px 2px #110700", color: "#ffaa00" }}>
-                    <div>Level 7</div>
+                    <div>Next, Level 7!</div>
                     <div className="tx-altfont-1 tx-md">Tap to continue!</div>
                 </h1>
             </Html>

@@ -21,13 +21,19 @@ export const QuizModal = ({ quizSet, onCorrect, onIncorrect, levelName = "" }: Q
     };
 
     return (
-        <Html position={[0, 0, 0]} center>
+        <Html position={[0, 0, 0]} center className="bg-b-10 pa-2 bord-r-25"
+            style={{
+                boxShadow: '0 10px 5px -2px #77777777',
+                backdropFilter: 'blur(5px)',
+            }}
+        >
             <div className="quiz-modal pa-4 pt-2 bg-white bord-r-25" 
                 style={{
                     width: '300px',
                     background: 'rgba(255,255,255,0.25)',
-                    backdropFilter: 'blur(10px)',
-                    border: '1px solid #FFA500',
+                    boxShadow: '0 0 10px 0 #00a0ff55',
+                    backdropFilter: 'blur(5px)',
+                    border: '1px solid #00a0ff',
                 }}>
                 <h3 className="tx-lg tx-bold py-2 tx-altfont-1 tx-center">
                     {!!levelName && <div className="tx-sm pb-2 tx-shadow-1 tx-ls-2" style={{ color: "#ffaa00" }}>{levelName}</div>}
@@ -38,7 +44,7 @@ export const QuizModal = ({ quizSet, onCorrect, onIncorrect, levelName = "" }: Q
                         <button
                             key={index}
                             onClick={() => handleAnswer(option.correct)}
-                            className="px-3 py-1 bg-b-10 noborder bord-r-10 opaci-chov--50 tx-mdl w-100 tx-start tx-altfont-1"
+                            className="px-3 py-1 bg-b-50 tx-white tx-shadow-2 noborder bord-r-10 opaci-chov--50 tx-mdl w-100 tx-start tx-altfont-1"
                             style={{
                                 transition: 'all 0.2s',
                             }}

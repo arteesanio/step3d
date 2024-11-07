@@ -14,7 +14,7 @@ export const quizSets: QuizSet[] = [
         options: [
             { text: "Type of cryptocurrency", correct: false },
             { text: "Trading system", correct: false },
-            { text: "Decentralized ledger", correct: true },
+            { text: "Decentralized notebook", correct: true },
             { text: "Social media", correct: false },
             { text: "All of the above", correct: false }
         ]

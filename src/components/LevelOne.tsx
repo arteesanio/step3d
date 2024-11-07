@@ -79,7 +79,7 @@ export const LevelOne = ({ score, s__score = () => { }, onToast = () => { } }: L
         if ($box.current.position.y > -2) {
             $box.current.position.y += vel
         }
-        if ($box.current.position.y < -2 && score >= SCORE_CONDITIONS.WIN_THRESHOLD) { 
+        if ($box.current.position.y < -2 && score >= 0) { 
             onToast("You Lose!"); 
             finishGame() 
         }
