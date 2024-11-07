@@ -61,12 +61,18 @@ export const GameContainer = ({ initialLevel = "start" }: GameContainerProps) =>
         }
 
         if (toastCount == 0) {
-            return (
+            return (<>
                 <h1 className="flex-col">
                     <div className="tx-altfont-2 tx-xl">Tap</div>
                     <div className="tx-altfont-1 tx-mdl">the Coin!</div>
                 </h1>
-            );
+            {currentLevel != "zero" && 
+                <div className="z-100 opaci-75 opaci-chov--50" style={{ position: "absolute", bottom: "10%",  left: "25%" }}
+                onClick={()=>{window.location.href = "/"}}
+            >
+                <h3 className="tx-altfont-1 tx-center">Go to Home</h3>
+            </div>}
+            </>);
         }
 
         // if (toastCount > 0 && score < -1) {
