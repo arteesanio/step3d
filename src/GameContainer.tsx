@@ -18,7 +18,17 @@ import { LevelSix } from "./components/LevelSix";
 interface GameContainerProps {
     initialLevel?: string;
 }
-
+const lookup_levelMap: { [key: string]: string } = {
+    "0": "zero",
+    "1": "one", 
+    "2": "two",
+    "3": "three",
+    "4": "four",
+    "5": "five",
+    "6": "six",
+    "7": "seven",
+    "8": "eight"
+};
 export const GameContainer = ({ initialLevel = "start" }: GameContainerProps) => {
     const searchParams = useSearchParams();
     const [score, s__score] = useState(0);
@@ -49,6 +59,63 @@ export const GameContainer = ({ initialLevel = "start" }: GameContainerProps) =>
             s__currentLevel(lvlParam);
         }
     }, [searchParams]);
+const defaultLevelHeader = () => {
+    return (<>
+        <div className="tx-altfont-2 tx-xl">Tap</div>
+        <div className="tx-altfont-1 tx-mdl">the Coin!</div>
+    </>)
+}
+    const getLevelName = () => {
+        const HeaderlevelMap: { [key: string]: any } = {
+            "zero": <>
+                <div className="tx-altfont-2 tx-xl">Tap</div>
+                <div className="tx-altfont-1 tx-mdl">the Coin!</div>
+            </>,
+            "one": <>
+            <div className="tx-altfont-1 tx-mdl">Level</div>
+                <div className="tx-altfont-2 tx-xl">One</div>
+            </>,
+            "two": <>
+            <div className="tx-altfont-1 tx-mdl">Level</div>
+                <div className="tx-altfont-2 tx-xl">Two</div>
+            </>,
+            "three": <>
+            <div className="tx-altfont-1 tx-mdl">Level</div>
+                <div className="tx-altfont-2 tx-xl">Three</div>
+            </>,
+            "four": <>
+            <div className="tx-altfont-1 tx-mdl">Level</div>
+                <div className="tx-altfont-2 tx-xl">Four</div>
+            </>,
+            "five": <>
+            <div className="tx-altfont-1 tx-mdl">Level</div>
+                <div className="tx-altfont-2 tx-xl">Five</div>
+            </>,
+            "six": <>
+            <div className="tx-altfont-1 tx-mdl">Level</div>
+                <div className="tx-altfont-2 tx-xl">Six</div>
+            </>,
+            "seven": <>
+            <div className="tx-altfont-1 tx-mdl">Level</div>
+                <div className="tx-altfont-2 tx-xl">Seven</div>
+            </>,
+            "eight": <>
+                <div className="tx-altfont-2 tx-xl">Level Eight</div>
+            </>,
+            "win": <>
+                <div className="tx-altfont-2 tx-xl">Victory!</div>
+            </>
+        };
+        
+        const levelKey = lookup_levelMap[currentLevel]
+        console.log("levelKey", levelKey)
+        console.log("HeaderlevelMap[levelKey]", HeaderlevelMap[levelKey])
+        return HeaderlevelMap[levelKey] || defaultLevelHeader();
+    }
+
+    useEffect(() => {
+        document.title = `Lvl ${currentLevel}`;
+    }, [currentLevel]);
 
     const renderHeader = () => {
         if (initialLevel === "win" || currentLevel === "win") {
@@ -63,8 +130,7 @@ export const GameContainer = ({ initialLevel = "start" }: GameContainerProps) =>
         if (toastCount == 0 && score == 0) {
             return (<>
                 <h1 className="flex-col">
-                    <div className="tx-altfont-2 tx-xl">Tap</div>
-                    <div className="tx-altfont-1 tx-mdl">the Coin!</div>
+                    {getLevelName()}
                 </h1>
             {currentLevel != "zero" && 
                 <div className="z-100 opaci-75 opaci-chov--50" style={{ position: "absolute", bottom: "10%",  left: "25%" }}
@@ -89,7 +155,7 @@ export const GameContainer = ({ initialLevel = "start" }: GameContainerProps) =>
             return <LevelWin score={score} s__score={s__score} onToast={s__toast} />;
         }
         // Convert string numbers to their word equivalent
-        const levelMap: { [key: string]: string } = {
+        const lookup_levelMap: { [key: string]: string } = {
             "0": "zero",
             "1": "one", 
             "2": "two",
@@ -101,7 +167,7 @@ export const GameContainer = ({ initialLevel = "start" }: GameContainerProps) =>
             "8": "eight"
         };
 
-        const levelKey = levelMap[currentLevel] || currentLevel;
+        const levelKey = lookup_levelMap[currentLevel] || currentLevel;
 
         switch(levelKey) {
             case "zero":

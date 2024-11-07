@@ -14,9 +14,9 @@ interface LevelOneProps {
 const MAX_VEL = -0.02;
 const SCORE_CONDITIONS = {
     GAME_OVER: -1,
-    PROCEED_TO_LEVEL_TWO: -7,
-    SHOW_QUIZ_THRESHOLD: 5,
-    WIN_THRESHOLD: 7,
+    PROCEED_TO_LEVEL_TWO: -3,
+    SHOW_QUIZ_THRESHOLD: 1,
+    WIN_THRESHOLD: 3,
     POINTS_PER_CLICK: 2,
 } as const;
 
@@ -62,7 +62,7 @@ export const LevelOne = ({ score, s__score = () => { }, onToast = () => { } }: L
         onToast("Correct! Keep going!");
         s__score(score + SCORE_CONDITIONS.POINTS_PER_CLICK);
         if ($box.current) {
-            $box.current.position.z += 0.2;
+            $box.current.position.z += (0.2)*5;
         }
     };
 

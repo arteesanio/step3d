@@ -23,7 +23,10 @@ export const Stairs = ({ brightColors = true, activatedSteps = [] }: StairsProps
                     castShadow
                     receiveShadow
                 >
-                    <meshStandardMaterial color={getColor(index)} />
+                    <meshStandardMaterial 
+                        color={getColor(index)} 
+                        wireframe={!brightColors && !activatedSteps.includes(index)}
+                    />
                 </Box>
             ))}
         </group>

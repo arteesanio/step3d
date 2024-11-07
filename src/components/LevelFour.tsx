@@ -62,7 +62,7 @@ export const LevelFour = ({ score, s__score = () => { }, onToast = () => { } }: 
         onToast("Correct! Keep going!");
         s__score(score + SCORE_CONDITIONS.POINTS_PER_CLICK);
         if ($box.current) {
-            $box.current.position.z += 0.2;
+            $box.current.position.z += (0.2)*2;
         }
     };
 

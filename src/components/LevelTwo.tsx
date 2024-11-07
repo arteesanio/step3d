@@ -62,7 +62,7 @@ export const LevelTwo = ({ score, s__score = () => { }, onToast = () => { } }: L
         onToast("Correct! Keep going!");
         s__score(score + SCORE_CONDITIONS.POINTS_PER_CLICK);
         if ($box.current) {
-            $box.current.position.z += 0.2;
+            $box.current.position.z += (0.2)*4;
         }
     };
 
@@ -109,7 +109,7 @@ export const LevelTwo = ({ score, s__score = () => { }, onToast = () => { } }: L
                 </h1>
             </Html>
         }
-        {score > -2 &&
+        {score > SCORE_CONDITIONS.PROCEED_TO_LEVEL_THREE &&
             <Cylinder args={[0.5, 0.5, 0.1]} onClick={boxClick} ref={$box} rotation={[Math.PI / 2, 0, 0]}>
                 <meshMatcapMaterial matcap={miniHdri} color={"#ffdd00"} />
             </Cylinder>
