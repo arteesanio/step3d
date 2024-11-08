@@ -1,0 +1,8 @@
+{
+    "rules": [
+        {
+            "pathPattern": "/*",
+            "url": "/api/actions/donate"
+        }
+    ]
+}
