@@ -9,9 +9,7 @@ export async function GET(request: Request) {
             }
         ]
     }
-    return NextResponse.json(payload, {
-        headers: {
-            ACTIONS_CORS_HEADERS
-        }
+    return Response.json(payload, {
+        headers: ACTIONS_CORS_HEADERS
     });
 }
