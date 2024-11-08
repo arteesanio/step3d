@@ -35,7 +35,7 @@ export const LevelWin = ({ score, onToast }: LevelWinProps) => {
 
             onToast("Preparing donation transaction...");
 
-            const response = await fetch("/api/actions/memo", {
+            const response = await fetch("/api/actions/donate", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
