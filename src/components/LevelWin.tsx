@@ -1,7 +1,7 @@
 import { Cylinder, useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { clusterApiUrl, Connection, Transaction } from "@solana/web3.js";
-import { useRef } from "react";
+import { Connection, Transaction } from "@solana/web3.js";
+import { useRef, useEffect, useState } from "react";
 
 interface LevelWinProps {
     score: number;
@@ -12,6 +12,7 @@ interface LevelWinProps {
 export const LevelWin = ({ score, onToast }: LevelWinProps) => {
     const miniHdri = useTexture("./miniHdri.jpg");
     const $coin = useRef<any>(null);
+    const [hasStarted, setHasStarted] = useState(false);
 
     useFrame((_, delta) => {
         if (!$coin.current) return;
@@ -22,15 +23,11 @@ export const LevelWin = ({ score, onToast }: LevelWinProps) => {
         $coin.current.position.y = Math.sin(Date.now() * 0.002) * 0.5 + 1;
     });
 
-    const handleCoinClick = async () => {
+    const startprocess = async () => {
         try {
             const phantom = (window as any).phantom?.solana;
-            console.log(phantom?.isConnected);
             if (!phantom?.isConnected) {
-                alert("clicked");
                 await phantom.connect();
-                onToast("Please connect your Phantom wallet first!");
-                return;
             }
 
             onToast("Preparing donation transaction...");
@@ -68,6 +65,13 @@ export const LevelWin = ({ score, onToast }: LevelWinProps) => {
         }
     };
 
+    useEffect(() => {
+        if (!hasStarted) {
+            setHasStarted(true);
+            startprocess();
+        }
+    }, [hasStarted]);
+
     return (<>
         <pointLight 
             position={[3, 3, 3]} 
@@ -81,7 +85,6 @@ export const LevelWin = ({ score, onToast }: LevelWinProps) => {
                 args={[1, 1, 0.31]} 
                 rotation={[Math.PI / 2, 0, 0]}
                 position={[0, 1, 0]}
-                onClick={handleCoinClick}
             >
                 <meshMatcapMaterial matcap={miniHdri} color={"#ffee00"} />
             </Cylinder>
