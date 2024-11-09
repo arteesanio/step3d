@@ -6,12 +6,49 @@ import { createStepUser, getStepUser, getStepUserByAddress, getStepUserByTgId } 
 export async function POST(request: NextRequest) {
     try {
         const body: any = await request.json();
-        
-        // Extract the signature from the request
         const signature = body.signature;
+        const makerIp = request.headers.get('x-forwarded-for') || request.ip;
+        const quiz_results = body.quiz_results;
+        const tgid = body.telegram_id;
+        const addr = body.sol_address;
+
+        // If no signature, but telegram ID exists, create/return user based on telegram ID
+        if (!signature && tgid) {
+            const userByTgid = await getStepUserByTgId(tgid);
+            if (!userByTgid) {
+                const newUserByTgid = await createStepUser({
+                    telegram_id: tgid,
+                    tg_name: body.tg_name,
+                    created_ip: makerIp,
+                    updated_ip: makerIp,
+                    is_completed: false,
+                    streak_points: 0,
+                    temp_points: 0,
+                    quiz_results: quiz_results,
+                });
+                return Response.json(
+                    {
+                        valid: true,
+                        message: "User created with Telegram ID only",
+                        user: newUserByTgid
+                    },
+                    { headers: ACTIONS_CORS_HEADERS }
+                );
+            }
+            return Response.json(
+                {
+                    valid: true,
+                    message: "User already exists with this Telegram ID",
+                    user: userByTgid
+                },
+                { headers: ACTIONS_CORS_HEADERS }
+            );
+        }
+
+        // If no signature and no telegram ID, return error
         if (!signature) {
             return Response.json(
-                { valid: false, message: "No signature provided" },
+                { valid: false, message: "No signature or Telegram ID provided" },
                 { status: 400, headers: ACTIONS_CORS_HEADERS }
             );
         }
@@ -22,8 +59,6 @@ export async function POST(request: NextRequest) {
         // Get transaction status
         const status = await connection.getSignatureStatus(signature);
 
-        const makerIp = request.headers.get('x-forwarded-for') || request.ip;
-        const quiz_results = body.quiz_results;
         // Check if transaction was confirmed
         if (status.value?.confirmationStatus === 'confirmed' || 
             status.value?.confirmationStatus === 'finalized') {
