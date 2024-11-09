@@ -77,6 +77,7 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
         s__wndwTg(wwwTg)
         console.log("wwwTg?.initDataUnsafe?.user?.id", wwwTg?.initDataUnsafe?.user);
         s__telegram_id(wwwTg?.initDataUnsafe?.user?.id)
+        console.log("*****************************************", );
     }
 
     useFrame((_, delta) => {
