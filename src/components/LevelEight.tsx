@@ -61,6 +61,7 @@ export const LevelEight = ({ score, s__score = () => { }, onToast = () => { } }:
             return window.location.reload()
         }
         if (score < SCORE_CONDITIONS.PROCEED_TO_WIN) {
+            localStorage.setItem('level8_completion', Date.now().toString());
             const completionTime = localStorage.getItem('gameCompletionTime');
             return window.location.href = ROUTES.WIN_PAGE(completionTime || '0:00');
         }
@@ -110,6 +111,7 @@ export const LevelEight = ({ score, s__score = () => { }, onToast = () => { } }:
     })
 
     const onStepClick = () => {
+        localStorage.setItem('level8_completion', Date.now().toString());
         const completionTime = localStorage.getItem('gameCompletionTime');
         return window.location.href = ROUTES.WIN_PAGE(completionTime || '0:00');
     }

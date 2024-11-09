@@ -88,6 +88,7 @@ export const LevelFive = ({ score, s__score = () => { }, onToast = () => { } }: 
     })
 
     const onStepClick = () => {
+        localStorage.setItem('level5_completion', Date.now().toString());
         return window.location.href = ROUTES.NEXT_LEVEL
     }
 

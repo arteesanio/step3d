@@ -40,6 +40,7 @@ export const LevelThree = ({ score, s__score = () => { }, onToast = () => { } }:
             return window.location.reload()
         }
         if (score < SCORE_CONDITIONS.PROCEED_TO_LEVEL_FOUR) {
+            localStorage.setItem('level3_completion', Date.now().toString());
             return window.location.href = ROUTES.NEXT_LEVEL
         }
 
@@ -88,6 +89,7 @@ export const LevelThree = ({ score, s__score = () => { }, onToast = () => { } }:
     })
 
     const onStepClick = () => {
+        localStorage.setItem('level3_completion', Date.now().toString());
         return window.location.href = ROUTES.NEXT_LEVEL
     }
 

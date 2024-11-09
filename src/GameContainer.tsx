@@ -5,7 +5,7 @@ import { LevelOne } from "./components/LevelOne";
 import { Toast } from "./components/Toast";
 import { GameLevel } from "./components/GameLevel";
 import { LevelZero } from "./components/LevelZero";
-import { LevelWin } from "./components/LevelWin";
+import { LevelWin, LevelWinHeader } from "./components/LevelWin";
 import { useSearchParams } from 'next/navigation';
 import { LevelFour } from "./components/LevelFour";
 import { LevelThree } from "./components/LevelThree";
@@ -72,7 +72,8 @@ const defaultLevelHeader = () => {
                 <div className="tx-altfont-1 tx-mdl">the Coin!</div>
             </>,
             "one": <>
-            <div className="tx-altfont-1 tx-mdl">Level</div>
+                <div className="tx-altfont-2 tx-lg">Tap the coin Twice!</div>
+                <div className="tx-altfont-1 tx-mdl">Level</div>
                 <div className="tx-altfont-2 tx-xl">One</div>
             </>,
             "two": <>
@@ -120,10 +121,7 @@ const defaultLevelHeader = () => {
     const renderHeader = () => {
         if (initialLevel === "win" || currentLevel === "win") {
             return (
-                <h1 className="flex-col">
-                    <div className="tx-altfont-2 tx-xxl">Congrats!</div>
-                    <div className="tx-altfont-1">You&apos;ve Won!</div>
-                </h1>
+                <LevelWinHeader score={score} />
             );
         }
 

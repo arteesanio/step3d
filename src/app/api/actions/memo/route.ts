@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
             ComputeBudgetProgram.setComputeUnitPrice({ microLamports: 1000 }),
             new TransactionInstruction({
                 programId: new PublicKey(MEMO_PROGRAM_ID),
-                data: Buffer.from("this is a simple memo msg", "utf8"),
+                data: Buffer.from("Your registration is being processed...", "utf8"),
                 keys: [],
             })
         );
