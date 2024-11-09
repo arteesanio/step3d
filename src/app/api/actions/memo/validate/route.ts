@@ -1,7 +1,7 @@
 import {  ACTIONS_CORS_HEADERS } from "@solana/actions";
 import { Connection } from "@solana/web3.js";
 import { NextRequest } from "next/server";
-import { createStepUser, getStepUser } from "../../../../../../script/webdk";
+import { createStepUser, getStepUser, getStepUserByAddress, getStepUserByTgId } from "../../../../../../script/webdk";
 
 export async function POST(request: NextRequest) {
     try {
@@ -28,38 +28,65 @@ export async function POST(request: NextRequest) {
         if (status.value?.confirmationStatus === 'confirmed' || 
             status.value?.confirmationStatus === 'finalized') {
             const addr = body.sol_address
-            const user = await getStepUser(addr)
-            if (!user) {
-                const newUser = await createStepUser({
-                    sol_address: addr,
-                    telegram_id: body.telegram_id,
-                    tg_name: body.tg_name,
-                    created_ip: makerIp,
-                    updated_ip: makerIp,
-                    memo_sign: signature,
-                    is_completed: true,
-                    streak_points: 1,
-                    temp_points: 1,
-                    quiz_results: quiz_results,
-                })
-            
-                return Response.json(
-                    { 
-                        valid: true,
-                        message: "Transaction confirmed successfully and user created",
-                        user: newUser
-                    },
-                    { headers: ACTIONS_CORS_HEADERS }
-                );
-            } else {
-                return Response.json(
-                    {
-                        valid:  true,
-                        message: "Transaction confirmed successfully and user already exists",
-                        user: user
-                    },
-                    { headers: ACTIONS_CORS_HEADERS }
-                );
+            const tgid = body.telegram_id
+            // check if address is valid and user exists
+            if (addr) {
+                const userByAddress = await getStepUserByAddress(addr)
+                if (!userByAddress) {
+                    const newUserByAddress = await createStepUser({
+                        sol_address: addr,
+                        telegram_id: body.telegram_id,
+                        tg_name: body.tg_name,
+                        created_ip: makerIp,
+                        updated_ip: makerIp,
+                        memo_sign: signature,
+                        is_completed: true,
+                        streak_points: 1,
+                        temp_points: 1,
+                        quiz_results: quiz_results,
+                    })
+                
+                    return Response.json(
+                        { 
+                            valid: true,
+                            message: "Transaction confirmed successfully and user created newUserByAddress",
+                            user: newUserByAddress
+                        },
+                        { headers: ACTIONS_CORS_HEADERS }
+                    );
+                } else {
+                    return Response.json(
+                        {
+                            valid:  true,
+                            message: "Transaction confirmed successfully and user already exists",
+                            user: userByAddress
+                        },
+                        { headers: ACTIONS_CORS_HEADERS }
+                    );
+                }
+            } else if (tgid) {
+                const userByTgid = await getStepUserByTgId(tgid)
+                if (!userByTgid) {
+                    const newUserByTgid = await createStepUser({
+                        telegram_id: tgid,
+                        tg_name: body.tg_name,
+                        sol_address: addr,
+                        created_ip: makerIp,
+                        updated_ip: makerIp,
+                        is_completed: true,
+                        streak_points: 1,
+                        temp_points: 1,
+                        quiz_results: quiz_results,
+                    })
+                    return Response.json(
+                        { 
+                            valid: true,
+                            message: "Transaction confirmed successfully and user created newUserByTgid",
+                            user: newUserByTgid
+                        },
+                        { headers: ACTIONS_CORS_HEADERS }
+                    );
+                }
             }
         } else {
             return Response.json(

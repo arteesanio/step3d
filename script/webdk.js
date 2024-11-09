@@ -8,8 +8,16 @@ export const getSupabaseClient = () => {
     const supabase = createClient(supabaseUrl, supabaseKey)
     return supabase
   }
+
+  export const getStepUserByTgId = async (tg_id) => {
+    const supabase = getSupabaseClient()
+    const { data: existingUser } = await supabase.from('step_user').select()
+        .match({ telegram_id: tg_id }).single();
+    return existingUser
+  } 
+
   
-export const getStepUser = async (sol_address) => {
+export const getStepUserByAddress = async (sol_address) => {
     const supabase = getSupabaseClient()
     
     const { data: existingUser } = await supabase.from('step_user').select()
@@ -19,6 +27,13 @@ export const getStepUser = async (sol_address) => {
     }
     return existingUser 
 }
+
+export const getStepUser = async (tg_id, sol_address) => {
+    const supabase = getSupabaseClient()
+    const { data: existingUser } = await supabase.from('step_user').select()
+        .match({ telegram_id: tg_id, sol_address: sol_address }).single();
+    return existingUser
+}   
 
 export const createStepUser = async (userData) => {
     const supabase = getSupabaseClient()
