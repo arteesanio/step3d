@@ -1,7 +1,7 @@
 import { Cylinder, useTexture, Text, Box, RoundedBox } from "@react-three/drei";
 import { useFrame, ThreeEvent } from "@react-three/fiber";
 import { Connection, Transaction } from "@solana/web3.js";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface LevelWinProps {
     score: number;
@@ -137,6 +137,9 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
             console.error(error);
         }
     };
+    useEffect(() => {
+        setTelegram();
+    }, []);
     const verifyTransactionByTgId = async () => {
         if (!telegram_id) {
             onToast("Telegram ID not found!");
