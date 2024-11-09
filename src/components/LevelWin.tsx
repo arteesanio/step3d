@@ -73,7 +73,9 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
     const setTelegram = async () => {
         // @ts-ignore: expect error cuz of unkonwn telegram object inside window context
         const wwwTg = window?.Telegram?.WebApp
+        console.log("wwwTg", wwwTg);
         s__wndwTg(wwwTg)
+        console.log("wwwTg?.initDataUnsafe?.user?.id", wwwTg?.initDataUnsafe?.user);
         s__telegram_id(wwwTg?.initDataUnsafe?.user?.id)
     }
 
