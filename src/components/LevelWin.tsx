@@ -142,6 +142,7 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
     }, []);
     const verifyTransactionByTgId = async () => {
         if (!telegram_id) {
+            console.log("Telegram ID not found!");
             onToast("Telegram ID not found!");
             return;
         }
@@ -205,12 +206,14 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
             if (!phantom?.isConnected) {
                 await phantom.connect();
             }
-
+            console.log("telegram_id", telegram_id);
+            console.log("phantom.publicKey.toString()", phantom.publicKey.toString());
             if (!phantom.publicKey.toString()) {
                 if (!telegram_id) {
                     alert("Failed to connect. Please try again.");
                     return;
                 } else {
+                    console.log("verifyTransactionByTgId");
                     verifyTransactionByTgId();
                     return;
                 }
