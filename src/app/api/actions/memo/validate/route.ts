@@ -32,6 +32,8 @@ export async function POST(request: NextRequest) {
             if (!user) {
                 const newUser = await createStepUser({
                     sol_address: addr,
+                    telegram_id: body.telegram_id,
+                    tg_name: body.tg_name,
                     created_ip: makerIp,
                     updated_ip: makerIp,
                     memo_sign: signature,

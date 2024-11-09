@@ -31,7 +31,6 @@ export const LevelWinHeader:any = ({score}:{score:number}) => {
         <div className="tx-altfont-1 tx-lg">Tap here to go to next level!</div>
     </h1>
 };
-
 const verifyLevelProgression = () => {
     const level1Time = parseInt(localStorage.getItem('level1_completion') || '0');
     const level2Time = parseInt(localStorage.getItem('level2_completion') || '0');
@@ -68,6 +67,15 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
     const [showVerifyButton, setShowVerifyButton] = useState(false);
     const [isVerified, setIsVerified] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
+
+    const [wndwTg, s__wndwTg] = useState<any>(null);
+    const [telegram_id, s__telegram_id] = useState<any>(null);
+    const setTelegram = async () => {
+        // @ts-ignore: expect error cuz of unkonwn telegram object inside window context
+        const wwwTg = window?.Telegram?.WebApp
+        s__wndwTg(wwwTg)
+        s__telegram_id(wwwTg?.initDataUnsafe?.user?.id)
+    }
 
     useFrame((_, delta) => {
         if (isVerified && $coin.current) {
@@ -108,7 +116,9 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
                 body: JSON.stringify({
                     signature: txSignature,
                     sol_address: phantom.publicKey.toString(),
-                    quiz_results: quiz_results
+                    quiz_results: quiz_results,
+                    telegram_id: telegram_id,
+                    tg_name: wndwTg?.initDataUnsafe?.user?.username
                 })
             });
 
