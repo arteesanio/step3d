@@ -99,7 +99,7 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
         if (!txSignature) return;
         
         try {
-            const phantom = (window as any).phantom?.solana;
+            const phantom = (window as any)?.phantom?.solana;
             onToast("Verifying transaction...");
             // to make quiz_results join the levels times by  a comma and just send a string
             console.log("txSignature", txSignature);
@@ -222,7 +222,7 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
         
         setIsProcessing(true);
         try {
-            const phantom = (window as any).phantom?.solana;
+            const phantom = (window as any)?.phantom?.solana;
             if (!phantom?.isConnected) {
                 await phantom.connect();
             }
