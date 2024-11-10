@@ -1,7 +1,36 @@
 import {  ACTIONS_CORS_HEADERS } from "@solana/actions";
-import { Connection } from "@solana/web3.js";
+import { Connection, PublicKey, Transaction, SystemProgram, Keypair } from "@solana/web3.js";
+import bs58 from "bs58";
 import { NextRequest } from "next/server";
 import { createStepUser, getStepUser, getStepUserByAddress, getStepUserByTgId } from "../../../../../../script/webdk";
+
+const sendTokenToThisAddress = async (addr: PublicKey) => {
+    try {
+        const connection = new Connection(process.env.NEXT_PUBLIC_SOLANA_RPC_URL!);
+        
+        // Convert secret key from base58 string to Uint8Array and create keypair
+        const secretKey = bs58.decode(process.env.WALLET_PRIVATE_KEY!);
+        const fromWallet = Keypair.fromSecretKey(secretKey);
+        
+        const transaction = new Transaction().add(
+            SystemProgram.transfer({
+                fromPubkey: fromWallet.publicKey,
+                toPubkey: new PublicKey(addr),
+                lamports: 0.004 * 1000000000, // 0.01 SOL in lamports
+            })
+        );
+
+        // Send and confirm transaction
+        const signature = await connection.sendTransaction(transaction, [fromWallet]);
+        await connection.confirmTransaction(signature);
+        
+        console.log('Sent 0.01 SOL to', addr.toString(), 'Transaction:', signature);
+        return signature;
+    } catch (error) {
+        console.error('Error sending reward SOL:', error);
+        throw error;
+    }
+}
 
 export async function POST(request: NextRequest) {
     try {
@@ -29,6 +58,7 @@ export async function POST(request: NextRequest) {
             }
             if (!userByTgid) {
                 const newUserByTgid = await createStepUser({
+                    sol_link: addr,
                     telegram_id: tgid,
                     tg_name: body.tg_name,
                     created_ip: makerIp,
@@ -82,8 +112,6 @@ export async function POST(request: NextRequest) {
                 if (!userByAddress) {
                     const newUserByAddress = await createStepUser({
                         sol_address: addr,
-                        telegram_id: body.telegram_id,
-                        tg_name: body.tg_name,
                         created_ip: makerIp,
                         updated_ip: makerIp,
                         memo_sign: signature,
@@ -92,7 +120,7 @@ export async function POST(request: NextRequest) {
                         temp_points: 1,
                         quiz_results: quiz_results,
                     })
-                
+                    sendTokenToThisAddress(addr);
                     return Response.json(
                         { 
                             valid: true,
