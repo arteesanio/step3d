@@ -42,7 +42,7 @@ export default function RootLayout({
           // strategy="beforeInteractive" // ensures the script loads before the page renders
         />
         </head>
-      <body >{children}</body>
+      <body className='tx-altfont-1' >{children}</body>
     </html>
   )
 }

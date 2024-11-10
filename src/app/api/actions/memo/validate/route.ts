@@ -1,31 +1,42 @@
-import {  ACTIONS_CORS_HEADERS } from "@solana/actions";
-import { Connection, PublicKey, Transaction, SystemProgram, Keypair } from "@solana/web3.js";
+import { ACTIONS_CORS_HEADERS, ActionPostResponse, createPostResponse } from "@solana/actions";
+import { Connection, PublicKey, Transaction, SystemProgram, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import bs58 from "bs58";
 import { NextRequest } from "next/server";
 import { createStepUser, getStepUser, getStepUserByAddress, getStepUserByTgId } from "../../../../../../script/webdk";
 
-const sendTokenToThisAddress = async (addr: PublicKey) => {
+const REWARD_AMOUNT = 0.001 * LAMPORTS_PER_SOL; // 0.001 SOL in lamports
+
+const sendTokenToThisAddress = async (addr: string) => {
     try {
         const connection = new Connection(process.env.NEXT_PUBLIC_SOLANA_RPC_URL!);
         
         // Convert secret key from base58 string to Uint8Array and create keypair
         const secretKey = bs58.decode(process.env.WALLET_PRIVATE_KEY!);
         const fromWallet = Keypair.fromSecretKey(secretKey);
+        const toAddress = new PublicKey(addr);
+
+        const transaction = new Transaction();
         
-        const transaction = new Transaction().add(
+        transaction.add(
             SystemProgram.transfer({
                 fromPubkey: fromWallet.publicKey,
-                toPubkey: new PublicKey(addr),
-                lamports: 0.004 * 1000000000, // 0.01 SOL in lamports
+                toPubkey: toAddress,
+                lamports: REWARD_AMOUNT,
             })
         );
 
-        // Send and confirm transaction
-        const signature = await connection.sendTransaction(transaction, [fromWallet]);
-        await connection.confirmTransaction(signature);
-        
-        console.log('Sent 0.01 SOL to', addr.toString(), 'Transaction:', signature);
-        return signature;
+        transaction.feePayer = fromWallet.publicKey;
+        transaction.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
+
+        // Sign the transaction
+        transaction.sign(fromWallet);
+
+        // Send transaction
+        const txSignature = await connection.sendRawTransaction(transaction.serialize());
+        await connection.confirmTransaction(txSignature);
+
+        console.log('Sent 0.001 SOL to', addr, 'Transaction:', txSignature);
+        return txSignature;
     } catch (error) {
         console.error('Error sending reward SOL:', error);
         throw error;

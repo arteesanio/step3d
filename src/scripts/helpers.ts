@@ -10,7 +10,7 @@ export interface QuizSet {
 
 export const quizSets: QuizSet[] = [
     {
-        question: "What is blockchain?",
+        question: "What is a blockchain?",
         options: [
             { text: "Type of cryptocurrency", correct: false },
             { text: "Trading system", correct: false },

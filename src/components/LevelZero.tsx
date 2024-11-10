@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { Stairs } from "./Stairs";
 import { QuizModal } from "./QuizModal";
 import { levelZero_quizOptions } from "@/scripts/helpers";
+import { BlockchainLink } from "./BlockchainLink";
 
 interface LevelOneProps {
   score: number;
@@ -87,7 +88,8 @@ export const LevelZero = ({ score, s__score = () => { }, onToast = () => { } }: 
   }
 
   return (<>
-    {showQuiz && (
+      <BlockchainLink />
+      {showQuiz && (
       <QuizModal
         quizSet={levelZero_quizOptions}
         onCorrect={handleCorrectAnswer}
