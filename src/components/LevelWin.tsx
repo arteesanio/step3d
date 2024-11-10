@@ -231,7 +231,7 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
             }
             // console.log("WebApp", WebApp);
             console.log("telegram_id", telegram_id);
-            console.log("phantom.publicKey.toString()", phantom.publicKey, phantom.publicKey.toString());
+            console.log("phantom.publicKey.toString()", phantom?.publicKey, phantom?.publicKey?.toString());
             if (!phantom?.publicKey?.toString()) {
                 if (!telegram_id) {
                     alert("Failed to connect. Please try again.");
