@@ -226,7 +226,7 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
         try {
             console.log("check phantom");
             const phantom = (window as any)?.phantom?.solana;
-            if (!phantom?.isConnected) {
+            if (phantom && !phantom?.isConnected) {
                 await phantom.connect();
             }
             // console.log("WebApp", WebApp);
