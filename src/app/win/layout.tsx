@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 import '../globals.css'
 import Script from 'next/script'
 
-const inter = Inter({ subsets: ['latin'] })
+// const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Solana Game Demo',
@@ -43,7 +43,7 @@ export default function RootLayout({
           strategy="beforeInteractive" // ensures the script loads before the page renders
         />
         </head>
-      <body className={inter.className}>{children}</body>
+      <body >{children}</body>
     </html>
   )
 }
