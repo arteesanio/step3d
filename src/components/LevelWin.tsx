@@ -226,13 +226,13 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
         try {
             console.log("check phantom");
             const phantom = (window as any)?.phantom?.solana;
-            if (phantom && !phantom?.isConnected) {
+            if (!telegram_id && !phantom?.isConnected) {
                 await phantom.connect();
             }
             // console.log("WebApp", WebApp);
             console.log("telegram_id", telegram_id);
-            console.log("phantom.publicKey.toString()", phantom.publicKey.toString());
-            if (!phantom.publicKey.toString()) {
+            console.log("phantom.publicKey.toString()", phantom.publicKey, phantom.publicKey.toString());
+            if (!phantom?.publicKey?.toString()) {
                 if (!telegram_id) {
                     alert("Failed to connect. Please try again.");
                     return;
