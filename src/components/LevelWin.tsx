@@ -2,7 +2,7 @@ import { Cylinder, useTexture, Text, Box, RoundedBox } from "@react-three/drei";
 import { useFrame, ThreeEvent } from "@react-three/fiber";
 import { Connection, Transaction } from "@solana/web3.js";
 import { useEffect, useRef, useState } from "react";
-import WebApp from '@twa-dev/sdk'
+// import WebApp from '@twa-dev/sdk'
 
 interface LevelWinProps {
     score: number;
@@ -142,13 +142,13 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
         }
     };
     useEffect(() => {
-        console.log("WebApp", WebApp);
+        // console.log("WebApp", WebApp);
         setTelegram();
 //   WebApp.ready();
 
     }, []);
     const verifyTransactionByTgId = async () => {
-        console.log("WebApp", WebApp);
+        // console.log("WebApp", WebApp);
         if (!telegram_id) {
             console.log("Telegram ID not found!");
             onToast("Telegram ID not found!");
@@ -206,7 +206,7 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
         // s__wndwTg(wwwTg)
         console.log("wwwTg?.initDataUnsafe?.user?.id", wwwTg?.initDataUnsafe?.user);
 
-        console.log("1111111111 WebApp", WebApp);
+        // console.log("1111111111 WebApp", WebApp);
 
         console.log("verifyLevelProgression!");
         if (!verifyLevelProgression()) {
@@ -226,7 +226,7 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
             if (!phantom?.isConnected) {
                 await phantom.connect();
             }
-            console.log("WebApp", WebApp);
+            // console.log("WebApp", WebApp);
             console.log("telegram_id", telegram_id);
             console.log("phantom.publicKey.toString()", phantom.publicKey.toString());
             if (!phantom.publicKey.toString()) {
