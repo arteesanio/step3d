@@ -208,7 +208,7 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
 
         // console.log("1111111111 WebApp", WebApp);
 
-        console.log("verifyLevelProgression!");
+        console.log("verifyLevelProgression! ()");
         if (!verifyLevelProgression()) {
             console.log("Invalid level progression detected!");
             onToast("Invalid level progression detected!");
@@ -216,12 +216,15 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
         }
 
         if (isProcessing || showVerifyButton) {
+            console.log("isProcessing || showVerifyButton!");
             verifyTransaction();
             return;
         };
         
         setIsProcessing(true);
+        console.log("setIsProcessing(true");
         try {
+            console.log("check phantom");
             const phantom = (window as any)?.phantom?.solana;
             if (!phantom?.isConnected) {
                 await phantom.connect();
