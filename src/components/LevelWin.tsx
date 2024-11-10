@@ -144,7 +144,7 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
     useEffect(() => {
         console.log("WebApp", WebApp);
         setTelegram();
-  WebApp.ready();
+//   WebApp.ready();
 
     }, []);
     const verifyTransactionByTgId = async () => {
