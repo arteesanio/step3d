@@ -15,6 +15,18 @@ export async function POST(request: NextRequest) {
         // If no signature, but telegram ID exists, create/return user based on telegram ID
         if (!signature && tgid) {
             const userByTgid = await getStepUserByTgId(tgid);
+            
+            const userByAddress = await getStepUserByAddress(addr)
+            if (!!userByAddress) {
+                return Response.json(
+                    {
+                        valid: false,
+                        message: "User already exists with this address, incorrect creation order",
+                        user: userByAddress
+                    },
+                    { headers: ACTIONS_CORS_HEADERS }
+                );
+            }
             if (!userByTgid) {
                 const newUserByTgid = await createStepUser({
                     telegram_id: tgid,
@@ -22,8 +34,8 @@ export async function POST(request: NextRequest) {
                     created_ip: makerIp,
                     updated_ip: makerIp,
                     is_completed: false,
-                    streak_points: 0,
-                    temp_points: 0,
+                    streak_points: 1,
+                    temp_points: 1,
                     quiz_results: quiz_results,
                 });
                 return Response.json(

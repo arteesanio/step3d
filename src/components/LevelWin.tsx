@@ -1,6 +1,6 @@
 import { Cylinder, useTexture, Text, Box, RoundedBox } from "@react-three/drei";
 import { useFrame, ThreeEvent } from "@react-three/fiber";
-import { Connection, Transaction } from "@solana/web3.js";
+import { Connection, PublicKey, Transaction } from "@solana/web3.js";
 import { useEffect, useRef, useState } from "react";
 // import WebApp from '@twa-dev/sdk'
 
@@ -154,47 +154,59 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
             onToast("Telegram ID not found!");
             return;
         }
-
         try {
-            onToast("Verifying completion...");
+                
+            const valid_address:PublicKey = new PublicKey(prompt("Please enter your Solana address:", "") || "");
             
-            // Get all level completion times
-            const level1Time = parseInt(localStorage.getItem('level1_completion') || '0');
-            const level2Time = parseInt(localStorage.getItem('level2_completion') || '0');
-            const level3Time = parseInt(localStorage.getItem('level3_completion') || '0');
-            const level4Time = parseInt(localStorage.getItem('level4_completion') || '0');
-            const level5Time = parseInt(localStorage.getItem('level5_completion') || '0');
-            const level6Time = parseInt(localStorage.getItem('level6_completion') || '0');
-            const level7Time = parseInt(localStorage.getItem('level7_completion') || '0');
-            const level8Time = parseInt(localStorage.getItem('level8_completion') || '0');
-            
-            const quiz_results = `${level1Time},${level2Time},${level3Time},${level4Time},${level5Time},${level6Time},${level7Time},${level8Time}`;
-
-            const validationResponse = await fetch("/api/actions/memo/validate", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    telegram_id: telegram_id,
-                    quiz_results: quiz_results,
-                    tg_name: wndwTg?.initDataUnsafe?.user?.username
-                })
-            });
-
-            const validationResult = await validationResponse.json();
-
-            if (validationResult.valid) {
-                onToast("Completion verified successfully! 🎉");
-                setShowVerifyButton(false);
-                setIsVerified(true);
-                s__score(score + 1);
-            } else {
-                onToast("Verification failed. Please try again.");
+            if (!valid_address) {
+                alert("Please enter your Solana address, and try again");
+                return;
             }
+            try {
+                onToast("Verifying completion...");
+                
+                // Get all level completion times
+                const level1Time = parseInt(localStorage.getItem('level1_completion') || '0');
+                const level2Time = parseInt(localStorage.getItem('level2_completion') || '0');
+                const level3Time = parseInt(localStorage.getItem('level3_completion') || '0');
+                const level4Time = parseInt(localStorage.getItem('level4_completion') || '0');
+                const level5Time = parseInt(localStorage.getItem('level5_completion') || '0');
+                const level6Time = parseInt(localStorage.getItem('level6_completion') || '0');
+                const level7Time = parseInt(localStorage.getItem('level7_completion') || '0');
+                const level8Time = parseInt(localStorage.getItem('level8_completion') || '0');
+                
+                const quiz_results = `${level1Time},${level2Time},${level3Time},${level4Time},${level5Time},${level6Time},${level7Time},${level8Time}`;
+
+                const validationResponse = await fetch("/api/actions/memo/validate", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        telegram_id: telegram_id,
+                        quiz_results: quiz_results,
+                        tg_name: wndwTg?.initDataUnsafe?.user?.username,
+                        sol_address: valid_address.toString()
+                    })
+                });
+
+                const validationResult = await validationResponse.json();
+
+                if (validationResult.valid) {
+                    onToast("Completion verified successfully! 🎉");
+                    setShowVerifyButton(false);
+                    setIsVerified(true);
+                    s__score(score + 1);
+                } else {
+                    onToast("Verification failed. Please try again.");
+                }
+            } catch (error) {
+                onToast("Error during verification");
+                console.error(error);
+            }
+            
         } catch (error) {
-            onToast("Error during verification");
-            console.error(error);
+            onToast("Error during public key validation");
         }
     }
     const handleBoxClick = async () => {
