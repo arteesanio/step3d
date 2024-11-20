@@ -3,6 +3,7 @@ import { useFrame, ThreeEvent } from "@react-three/fiber";
 import { Connection, PublicKey, Transaction } from "@solana/web3.js";
 import { useEffect, useRef, useState } from "react";
 // import WebApp from '@twa-dev/sdk'
+import { verifyLevelProgression } from "@/scripts/helpers";
 
 interface LevelWinProps {
     score: number;
@@ -11,11 +12,23 @@ interface LevelWinProps {
 }
 
 export const LevelWinHeader:any = ({score}:{score:number}) => {
+    const isStageOne = window.location.pathname === "/";
+    const hasCompletedStageOne = verifyLevelProgression();
+
     if (score == 0) {
         return <>
             <h1 className="flex-col">
                 <div className="tx-altfont-2 tx-xxl">Congrats!</div>
                 <div className="tx-altfont-1">You&apos;ve Won!</div>
+                {isStageOne && hasCompletedStageOne && (
+                    <div 
+                        className="tx-altfont-1 tx-lg opaci-chov--50"
+                        onClick={() => window.location.href = "/learn?lvl=0"}
+                        style={{ cursor: "pointer", marginTop: "1rem" }}
+                    >
+                        Go to Stage 2
+                    </div>
+                )}
             </h1>
         </>;
     }
@@ -27,37 +40,23 @@ export const LevelWinHeader:any = ({score}:{score:number}) => {
             </h1>
         </>;
     }
-    return <h1 className="flex-col opaci-chov--50 z-100">
+    return <h1 
+        className="flex-col opaci-chov--50 z-100" 
+        onClick={() => {
+            const isStageOne = window.location.pathname === "/win";
+            if (isStageOne && verifyLevelProgression()) {
+                window.location.href = "/learn?lvl=0";
+            }
+        }}
+    >
         <div className="tx-altfont-2 tx-xxl">Congrats!</div>
-        <div className="tx-altfont-1 tx-lg">Tap here to go to next level!</div>
+        <div className="tx-altfont-1 tx-lg">
+            {isStageOne && hasCompletedStageOne 
+                ? "Tap here to go to Stage 2!"
+                : "Tap here to go to next stage!"
+            }
+        </div>
     </h1>
-};
-const verifyLevelProgression = () => {
-    const level1Time = parseInt(localStorage.getItem('level1_completion') || '0');
-    const level2Time = parseInt(localStorage.getItem('level2_completion') || '0');
-    const level3Time = parseInt(localStorage.getItem('level3_completion') || '0');
-    const level4Time = parseInt(localStorage.getItem('level4_completion') || '0');
-    const level5Time = parseInt(localStorage.getItem('level5_completion') || '0');
-    const level6Time = parseInt(localStorage.getItem('level6_completion') || '0');
-    const level7Time = parseInt(localStorage.getItem('level7_completion') || '0');
-    const level8Time = parseInt(localStorage.getItem('level8_completion') || '0');
-
-    // Verify timestamps are in chronological order
-    if (level1Time === 0 || level2Time === 0 || level3Time === 0 || 
-        level4Time === 0 || level5Time === 0 || level6Time === 0 || 
-        level7Time === 0 || level8Time === 0) {
-        return false;
-    }
-
-    return (
-        level1Time < level2Time &&
-        level2Time < level3Time &&
-        level3Time < level4Time &&
-        level4Time < level5Time &&
-        level5Time < level6Time &&
-        level6Time < level7Time &&
-        level7Time < level8Time
-    );
 };
 
 export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
@@ -210,17 +209,6 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
         }
     }
     const handleBoxClick = async () => {
-
-        
-        // @ts-ignore: expect error cuz of unkonwn telegram object inside window context
-        const wwwTg = window?.Telegram?.WebApp
-        console.log("wwwTg", wwwTg);
-        // s__wndwTg(wwwTg)
-        console.log("wwwTg?.initDataUnsafe?.user?.id", wwwTg?.initDataUnsafe?.user);
-
-        // console.log("1111111111 WebApp", WebApp);
-
-        console.log("verifyLevelProgression! ()");
         if (!verifyLevelProgression()) {
             console.log("Invalid level progression detected!");
             onToast("Invalid level progression detected!");
@@ -232,6 +220,13 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
             verifyTransaction();
             return;
         };
+
+        // Check if stage 1 is completed and we're in stage 1
+        const isStageOne = window.location.pathname === "/";
+        if (isStageOne && verifyLevelProgression()) {
+            window.location.href = "/learn?lvl=0";
+            return;
+        }
         
         setIsProcessing(true);
         console.log("setIsProcessing(true");

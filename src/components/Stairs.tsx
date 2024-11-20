@@ -19,7 +19,7 @@ export const Stairs = ({ brightColors = true, activatedSteps = [] }: StairsProps
                 <Box 
                     key={index}
                     position={[0, (0.2 + index * 0.2) / 2, index * -0.2]} 
-                    args={[2, 0.2 + index * 0.2, 0.2]}
+                    args={[1.25, 0.2 + index * 0.2, 0.2]}
                     castShadow
                     receiveShadow
                 >

@@ -29,6 +29,7 @@ export const LevelTwo = ({ score, s__score = () => { }, onToast = () => { } }: L
     const miniHdri = useTexture("./miniHdri.jpg");
     const [vel, s__vel] = useState(MAX_VEL);
     const [showQuiz, s__showQuiz] = useState(false);
+    const [completedQuiz, s__completedQuiz] = useState(false);
     const $box: any = useRef(null);
 
     const finishGame = () => {
@@ -45,6 +46,7 @@ export const LevelTwo = ({ score, s__score = () => { }, onToast = () => { } }: L
 
         s__vel((velocity) => (velocity + 0.04))
         if (score >= SCORE_CONDITIONS.SHOW_QUIZ_THRESHOLD) {
+            if (completedQuiz) { return }
             s__showQuiz(true);
             return;
         }
@@ -61,6 +63,7 @@ export const LevelTwo = ({ score, s__score = () => { }, onToast = () => { } }: L
         s__showQuiz(false);
         onToast("Correct! Keep going!");
         s__score(score + SCORE_CONDITIONS.POINTS_PER_CLICK);
+        s__completedQuiz(true);
         if ($box.current) {
             $box.current.position.z += (0.2)*4;
         }

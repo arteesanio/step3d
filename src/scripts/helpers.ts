@@ -8,13 +8,13 @@ export interface QuizSet {
     options: QuizOption[];
 }
 
-export const quizSets: QuizSet[] = [
+export const firstStageQuizSets: QuizSet[] = [
     {
         question: "What is a blockchain?",
         options: [
-            { text: "Type of cryptocurrency", correct: false },
+            { text: "Type of token", correct: false },
             { text: "Trading system", correct: false },
-            { text: "Decentralized notebook", correct: true },
+            { text: "Decentralized bank", correct: true },
             { text: "Social media", correct: false },
             { text: "All of the above", correct: false }
         ]
@@ -101,16 +101,119 @@ export const quizSets: QuizSet[] = [
     },
 ];
 
+export const secondStageQuizSets: QuizSet[] = [
+    {
+        question: "What is a Layer 2 blockchain solution?",
+        options: [
+            { text: "Secondary processing network", correct: true },
+            { text: "Backup blockchain", correct: false },
+            { text: "Scaling solution", correct: true },
+            { text: "New cryptocurrency", correct: false },
+            { text: "All of the above", correct: false }
+        ]
+    },
+    {
+        question: "What is a blockchain oracle?",
+        options: [
+            { text: "Price predictor", correct: false },
+            { text: "External data provider", correct: true },
+            { text: "Smart contract helper", correct: true },
+            { text: "Network validator", correct: false },
+            { text: "All of the above", correct: false }
+        ]
+    },
+    {
+        question: "What is DeFi (Decentralized Finance)?",
+        options: [
+            { text: "Financial services on blockchain", correct: true },
+            { text: "Cryptocurrency trading", correct: false },
+            { text: "No intermediaries needed", correct: true },
+            { text: "Digital banking", correct: false },
+            { text: "All of the above", correct: false }
+        ]
+    },
+    {
+        question: "What is a DAO?",
+        options: [
+            { text: "Decentralized organization", correct: true },
+            { text: "Blockchain company", correct: false },
+            { text: "Community governance", correct: true },
+            { text: "Investment group", correct: false },
+            { text: "All of the above", correct: false }
+        ]
+    },
+    {
+        question: "What are NFTs used for?",
+        options: [
+            { text: "Digital ownership proof", correct: true },
+            { text: "Just digital art", correct: false },
+            { text: "Access rights", correct: true },
+            { text: "Gaming assets", correct: true },
+            { text: "All of the above", correct: true }
+        ]
+    },
+    {
+        question: "What is proof of stake?",
+        options: [
+            { text: "Consensus mechanism", correct: true },
+            { text: "Mining method", correct: false },
+            { text: "Token locking system", correct: true },
+            { text: "Reward program", correct: false },
+            { text: "All of the above", correct: false }
+        ]
+    },
+    {
+        question: "What is a DEX?",
+        options: [
+            { text: "Decentralized exchange", correct: true },
+            { text: "Trading platform", correct: true },
+            { text: "No intermediary needed", correct: true },
+            { text: "Cryptocurrency wallet", correct: false },
+            { text: "All of the above", correct: false }
+        ]
+    },
+    {
+        question: "What is token bridging?",
+        options: [
+            { text: "Cross-chain transfer", correct: true },
+            { text: "Token swapping", correct: false },
+            { text: "Asset migration", correct: true },
+            { text: "Network connection", correct: true },
+            { text: "All of the above", correct: true }
+        ]
+    },
+    {
+        question: "What is a blockchain fork?",
+        options: [
+            { text: "Protocol change", correct: true },
+            { text: "Network split", correct: true },
+            { text: "New blockchain", correct: true },
+            { text: "Software update", correct: false },
+            { text: "All of the above", correct: false }
+        ]
+    }
+];
+
 // Quiz options for each level
-export const levelZero_quizOptions = quizSets[0];
-export const levelOne_quizOptions = quizSets[1];
-export const levelTwo_quizOptions = quizSets[2];
-export const levelThree_quizOptions = quizSets[3];
-export const levelFour_quizOptions = quizSets[4];
-export const levelFive_quizOptions = quizSets[5];
-export const levelSix_quizOptions = quizSets[6];
-export const levelSeven_quizOptions = quizSets[7];
-export const levelEight_quizOptions = quizSets[8]
+export const levelZero_quizOptions = firstStageQuizSets[0];
+export const levelOne_quizOptions = firstStageQuizSets[1];
+export const levelTwo_quizOptions = firstStageQuizSets[2];
+export const levelThree_quizOptions = firstStageQuizSets[3];
+export const levelFour_quizOptions = firstStageQuizSets[4];
+export const levelFive_quizOptions = firstStageQuizSets[5];
+export const levelSix_quizOptions = firstStageQuizSets[6];
+export const levelSeven_quizOptions = firstStageQuizSets[7];
+export const levelEight_quizOptions = firstStageQuizSets[8]
+
+export const secondStage_levelZero = secondStageQuizSets[0];
+export const secondStage_levelOne = secondStageQuizSets[1];
+export const secondStage_levelTwo = secondStageQuizSets[2];
+export const secondStage_levelThree = secondStageQuizSets[3];
+export const secondStage_levelFour = secondStageQuizSets[4];
+export const secondStage_levelFive = secondStageQuizSets[5];
+export const secondStage_levelSix = secondStageQuizSets[6];
+export const secondStage_levelSeven = secondStageQuizSets[7];
+export const secondStage_levelEight = secondStageQuizSets[8];
 
 export const shuffleArray = <T>(array: T[]): T[] => {
     const shuffled = [...array];
@@ -145,7 +248,7 @@ export const shuffleArray = <T>(array: T[]): T[] => {
 };
 
 export const getQuizByIndex = (index: number): QuizSet => {
-    return quizSets[index % quizSets.length];
+    return firstStageQuizSets[index % firstStageQuizSets.length];
 };
 
 // Helper to get quiz options by level name
@@ -161,4 +264,32 @@ export const getQuizByLevel = (level: string): QuizSet => {
         case "seven": return levelSeven_quizOptions;
         default: return levelZero_quizOptions;
     }
+};
+
+export const verifyLevelProgression = () => {
+    const level1Time = parseInt(localStorage.getItem('level1_completion') || '0');
+    const level2Time = parseInt(localStorage.getItem('level2_completion') || '0');
+    const level3Time = parseInt(localStorage.getItem('level3_completion') || '0');
+    const level4Time = parseInt(localStorage.getItem('level4_completion') || '0');
+    const level5Time = parseInt(localStorage.getItem('level5_completion') || '0');
+    const level6Time = parseInt(localStorage.getItem('level6_completion') || '0');
+    const level7Time = parseInt(localStorage.getItem('level7_completion') || '0');
+    const level8Time = parseInt(localStorage.getItem('level8_completion') || '0');
+
+    // Verify timestamps are in chronological order
+    if (level1Time === 0 || level2Time === 0 || level3Time === 0 || 
+        level4Time === 0 || level5Time === 0 || level6Time === 0 || 
+        level7Time === 0 || level8Time === 0) {
+        return false;
+    }
+
+    return (
+        level1Time < level2Time &&
+        level2Time < level3Time &&
+        level3Time < level4Time &&
+        level4Time < level5Time &&
+        level5Time < level6Time &&
+        level6Time < level7Time &&
+        level7Time < level8Time
+    );
 }; 

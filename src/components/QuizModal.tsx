@@ -31,9 +31,9 @@ export const QuizModal = ({ quizSet, onCorrect, onIncorrect, levelName = "" }: Q
                 style={{
                     width: '300px',
                     background: 'rgba(255,255,255,0.25)',
-                    boxShadow: '0 0 10px 0 #00a0ff55',
+                    boxShadow: '0 0 10px 0 #ffa00055',
                     backdropFilter: 'blur(5px)',
-                    border: '1px solid #00a0ff',
+                    border: '1px solid #ffa000',
                 }}>
                 <h3 className="tx-lg tx-bold py-2 tx-altfont-1 tx-center">
                     {!!levelName && <div className="tx-sm pb-2 tx-shadow-1 tx-ls-2" style={{ color: "#ffaa00" }}>{levelName}</div>}

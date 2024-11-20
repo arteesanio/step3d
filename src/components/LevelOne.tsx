@@ -1,10 +1,11 @@
 import { Html, Cylinder, Box, useTexture, Plane } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Stairs } from "./Stairs";
 import { QuizModal } from "./QuizModal";
 import { levelOne_quizOptions } from "@/scripts/helpers";
 import { BlockchainLink } from "./BlockchainLink";
+import { GameContext } from "../../script/state/GameContext";
 
 interface LevelOneProps {
     score: number;
@@ -12,7 +13,7 @@ interface LevelOneProps {
     onToast: (message: string) => void;
 }
 
-const MAX_VEL = -0.02;
+const MAX_VEL = -0.01;
 const SCORE_CONDITIONS = {
     GAME_OVER: -1,
     PROCEED_TO_LEVEL_TWO: -3,
@@ -26,9 +27,12 @@ const ROUTES = {
 } as const;
 
 export const LevelOne = ({ score, s__score = () => { }, onToast = () => { } }: LevelOneProps) => {
+  const { hasCompletedAllLevels } = useContext(GameContext);
+
     const solanaLogo = useTexture("./solana.png");
     const miniHdri = useTexture("./miniHdri.jpg");
     const [vel, s__vel] = useState(MAX_VEL);
+    const [completedQuiz, s__completedQuiz] = useState(false);
     const [showQuiz, s__showQuiz] = useState(false);
     const $box: any = useRef(null);
 
@@ -47,6 +51,7 @@ export const LevelOne = ({ score, s__score = () => { }, onToast = () => { } }: L
 
         s__vel((velocity) => (velocity + 0.04))
         if (score > SCORE_CONDITIONS.SHOW_QUIZ_THRESHOLD) {
+            if (completedQuiz) { return }
             s__showQuiz(true);
             return;
         }
@@ -63,6 +68,7 @@ export const LevelOne = ({ score, s__score = () => { }, onToast = () => { } }: L
         s__showQuiz(false);
         onToast("Correct! Keep going!");
         s__score(score + SCORE_CONDITIONS.POINTS_PER_CLICK);
+        s__completedQuiz(true);
         if ($box.current) {
             $box.current.position.z += (0.2)*5;
         }
@@ -127,9 +133,9 @@ export const LevelOne = ({ score, s__score = () => { }, onToast = () => { } }: L
                 <meshMatcapMaterial matcap={miniHdri} color={"#ffee00"} />
             </Cylinder>
         }
-        <group position={[0, -0.5, 1]}>
+        {/* <group position={[0, -0.5, 1]}>
             <Stairs brightColors={false} activatedSteps={[0]} />
-        </group>
+        </group> */}
 
 
         <Box args={[0.5, 0.75, 0.5]} position={[0, -2.82, 0]}
@@ -137,9 +143,9 @@ export const LevelOne = ({ score, s__score = () => { }, onToast = () => { } }: L
             scale={[15.52, 1, 15.7]}>
             <meshStandardMaterial color="#aaaaaa" />
         </Box>
-
-        <Plane
-            args={[5, 5]}
+        {!!hasCompletedAllLevels && (
+            <Plane
+                args={[5, 5]}
             position={[0, -2.44, -1.75]}
             rotation={[-Math.PI / 2, 0, 0]}
             receiveShadow scale={[0.5, 0.5, 1]}
@@ -148,8 +154,9 @@ export const LevelOne = ({ score, s__score = () => { }, onToast = () => { } }: L
                 map={solanaLogo}
                 transparent={true}
                 opacity={0.15}
-            />
-        </Plane>
+                />
+            </Plane>
+        )}
 
         <Box args={[0.5, 0.2, 0.5]} position={[0, -2.44, 0]}
             receiveShadow castShadow scale={[2.04, 1, 0.46]}>

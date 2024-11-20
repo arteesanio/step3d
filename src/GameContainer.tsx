@@ -14,6 +14,7 @@ import { LevelEight } from "./components/LevelEight";
 import { LevelFive } from "./components/LevelFive";
 import { LevelSeven } from "./components/LevelSeven";
 import { LevelSix } from "./components/LevelSix";
+import { HomeScreenGroup } from "./HomeScreenGroup";
 
 interface GameContainerProps {
     initialLevel?: string;
@@ -34,7 +35,7 @@ export const GameContainer = ({ initialLevel = "start" }: GameContainerProps) =>
     const [score, s__score] = useState(0);
     const [toast, _s__toast] = useState("");
     const [toastCount, s__toastCount] = useState(0);
-    const [currentLevel, s__currentLevel] = useState("zero");
+    const [currentLevel, s__currentLevel] = useState("");
     
     const s__toast = (v:any) => {
         s__toastCount((prev)=>prev+1)
@@ -66,15 +67,17 @@ const defaultLevelHeader = () => {
     </>)
 }
     const getLevelName = () => {
+        if (!currentLevel) {
+            return "Welcome!"
+        }
+
         const HeaderlevelMap: { [key: string]: any } = {
             "zero": <>
-                <div className="tx-altfont-2 tx-xl">Tap</div>
+                <div className="tx-altfont-2 tx-xl" style={{color: "#ff5500"}}>Tap</div>
                 <div className="tx-altfont-1 tx-mdl">the Coin!</div>
             </>,
             "one": <>
-                <div className="tx-altfont-2 tx-lg">Tap the coin Twice!</div>
-                <div className="tx-altfont-1 tx-mdl">Level</div>
-                <div className="tx-altfont-2 tx-xl">One</div>
+                <div className="tx-altfont-2 tx-lg">Tap Twice!</div>
             </>,
             "two": <>
             <div className="tx-altfont-1 tx-mdl">Level</div>
@@ -105,7 +108,7 @@ const defaultLevelHeader = () => {
             </>,
             "win": <>
                 <div className="tx-altfont-2 tx-xl">Victory!</div>
-            </>
+            </>,
         };
         
         const levelKey = lookup_levelMap[currentLevel]
@@ -191,6 +194,27 @@ const defaultLevelHeader = () => {
         }
     };
 
+    // const onStepClick = () => {
+    //     const params = new URLSearchParams(window.location.search);
+    //     const currentLvl = params.get('lvl');
+        
+    //     // If completed all levels of stage 1, go to stage 2
+    //     if (verifyLevelProgression()) {
+    //         return window.location.href = "/learn?lvl=0";
+    //     }
+        
+    //     // Otherwise continue with stage 1 progression
+    //     if (!currentLvl) {
+    //         return window.location.href = "/?lvl=1";
+    //     }
+    //     const nextLevel = parseInt(currentLvl) + 1;
+    //     return window.location.href = `/?lvl=${nextLevel}`;
+    // }
+
+    if (!currentLevel) {
+        return <HomeScreenStage />;
+    }
+
     return (<>
         <div className="flex-col">
             {renderHeader()}
@@ -212,3 +236,25 @@ const defaultLevelHeader = () => {
         </div>
     </>)
 }
+
+const HomeScreenStage = () => {
+    return (<>
+    
+        <div className="flex-col z-100" 
+            onClick={()=>{window.location.href = "/?lvl=0"}}
+        >
+            <div className="tx-altfont-1 tx-xl opaci-chov--50 hover-4">
+                <div style={{
+                    color: "#ff3300",
+                    textShadow: "0 0 10px #ff7700aa, -1px -1px 0 #ffcc77, 2px -2px 0 #ffcc77"
+                }}>Start Game!</div>
+            </div>
+        </div>
+        <div style={{ position: "absolute", top: "0", left: "0", width: "100%", height: "100%" }}>
+            <Canvas shadows camera={{ position: [5, 5, 5] }}>
+                <HomeScreenGroup  />
+        </Canvas>
+        </div>
+    </>)
+}
+
