@@ -1,9 +1,10 @@
 import { Html, Cylinder, Box, useTexture, Plane } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Stairs } from "./Stairs";
 import { QuizModal } from "./QuizModal";
 import { levelEight_quizOptions } from "@/scripts/helpers";
+import { GameContext } from "../../script/state/GameContext";
 
 interface LevelEightProps {
     score: number;
@@ -30,6 +31,7 @@ export const LevelEight = ({ score, s__score = () => { }, onToast = () => { } }:
     const [vel, s__vel] = useState(MAX_VEL);
     const [showQuiz, s__showQuiz] = useState(false);
     const $box: any = useRef(null);
+    const { completedQuiz, s__completedQuiz } = useContext(GameContext);
 
     const calculateCompletionTime = () => {
         const startTime = localStorage.getItem('gameStartTime');
@@ -68,6 +70,10 @@ export const LevelEight = ({ score, s__score = () => { }, onToast = () => { } }:
 
         s__vel((velocity) => (velocity + 0.04))
         if (score >= SCORE_CONDITIONS.SHOW_QUIZ_THRESHOLD) {
+            if (completedQuiz) {
+                finishGame();
+                return
+            }
             s__showQuiz(true);
             return;
         }
@@ -85,8 +91,9 @@ export const LevelEight = ({ score, s__score = () => { }, onToast = () => { } }:
         onToast("Correct! Keep going!");
         s__score(score + SCORE_CONDITIONS.POINTS_PER_CLICK);
         if ($box.current) {
-            $box.current.position.z += 0.2;
+            // $box.current.position.z += 0.2;
         }
+        s__completedQuiz(true);
     };
 
     const handleIncorrectAnswer = () => {

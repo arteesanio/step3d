@@ -1,9 +1,10 @@
 import { Html, Cylinder, Box, useTexture, Plane } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Stairs } from "./Stairs";
 import { QuizModal } from "./QuizModal";
 import { levelSix_quizOptions } from "@/scripts/helpers";
+import { GameContext } from "../../script/state/GameContext";
 
 interface LevelSixProps {
     score: number;
@@ -30,6 +31,7 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: L
     const [vel, s__vel] = useState(MAX_VEL);
     const [showQuiz, s__showQuiz] = useState(false);
     const $box: any = useRef(null);
+    const { completedQuiz, s__completedQuiz } = useContext(GameContext);
 
     const finishGame = () => {
         if (score == 0) { s__score(-1) } else { s__score(-score) }
@@ -45,6 +47,10 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: L
 
         s__vel((velocity) => (velocity + 0.04))
         if (score >= SCORE_CONDITIONS.SHOW_QUIZ_THRESHOLD) {
+            if (completedQuiz) {
+                finishGame();
+                return
+            }
             s__showQuiz(true);
             return;
         }
@@ -62,8 +68,9 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: L
         onToast("Correct! Keep going!");
         s__score(score + SCORE_CONDITIONS.POINTS_PER_CLICK);
         if ($box.current) {
-            $box.current.position.z += 0.2;
+            // $box.current.position.z += 0.2;
         }
+        s__completedQuiz(true);
     };
 
     const handleIncorrectAnswer = () => {

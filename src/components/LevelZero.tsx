@@ -21,7 +21,6 @@ export const LevelZero = ({ score, s__score = () => { }, onToast = () => { } }: 
   const MAX_VEL = -0.005;
   const [vel, s__vel] = useState(MAX_VEL);
   const [rotSpeed] = useState((Math.random() - 0.5) * 0.05);
-  console.log(rotSpeed)
   const [showQuiz, s__showQuiz] = useState(false);
   const $box: any = useRef(null);
 

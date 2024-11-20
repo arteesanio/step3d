@@ -77,11 +77,14 @@ const defaultLevelHeader = () => {
                 <div className="tx-altfont-1 tx-mdl">the Coin!</div>
             </>,
             "one": <>
-                <div className="tx-altfont-2 tx-lg">Tap Twice!</div>
+                <div className="tx-altfont-2 tx-xl" style={{color: "#ff5500"}}>Tap</div>
+                <div className="tx-altfont-2 tx-lg">Twice!</div>
             </>,
             "two": <>
-            <div className="tx-altfont-1 tx-mdl">Level</div>
-                <div className="tx-altfont-2 tx-xl">Two</div>
+                <div className="tx-altfont-2 tx-xl" style={{color: "#ff5500"}}>Tap</div>
+                <div className="tx-altfont-2 tx-lg">3 Times!</div>
+                {/* <div className="tx-altfont-1 tx-mdl">Level</div> */}
+                {/* <div className="tx-altfont-2 tx-xl">Two</div> */}
             </>,
             "three": <>
             <div className="tx-altfont-1 tx-mdl">Level</div>

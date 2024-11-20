@@ -51,7 +51,10 @@ export const LevelOne = ({ score, s__score = () => { }, onToast = () => { } }: L
 
         s__vel((velocity) => (velocity + 0.04))
         if (score > SCORE_CONDITIONS.SHOW_QUIZ_THRESHOLD) {
-            if (completedQuiz) { return }
+            if (completedQuiz) {
+                finishGame();
+                return
+            }
             s__showQuiz(true);
             return;
         }
@@ -70,7 +73,7 @@ export const LevelOne = ({ score, s__score = () => { }, onToast = () => { } }: L
         s__score(score + SCORE_CONDITIONS.POINTS_PER_CLICK);
         s__completedQuiz(true);
         if ($box.current) {
-            $box.current.position.z += (0.2)*5;
+            // $box.current.position.z += (0.2)*5;
         }
     };
 
