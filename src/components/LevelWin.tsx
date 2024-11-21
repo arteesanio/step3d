@@ -219,17 +219,35 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
             }
             const publicKey = new PublicKey(address);
             localStorage.setItem('solana_address', publicKey.toString());
+            
+                // Get all level completion times
+                const level1Time = parseInt(localStorage.getItem('level1_completion') || '0');
+                const level2Time = parseInt(localStorage.getItem('level2_completion') || '0');
+                const level3Time = parseInt(localStorage.getItem('level3_completion') || '0');
+                const level4Time = parseInt(localStorage.getItem('level4_completion') || '0');
+                const level5Time = parseInt(localStorage.getItem('level5_completion') || '0');
+                const level6Time = parseInt(localStorage.getItem('level6_completion') || '0');
+                const level7Time = parseInt(localStorage.getItem('level7_completion') || '0');
+                const level8Time = parseInt(localStorage.getItem('level8_completion') || '0');
+                
+                const quiz_results = `${level1Time},${level2Time},${level3Time},${level4Time},${level5Time},${level6Time},${level7Time},${level8Time}`;
+
             const callToEndpoint = await fetch("/api/requests", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    sol_address: publicKey.toString()
+                    sol_address: publicKey.toString(),
+                    quiz_results: quiz_results
                 })
             });
             console.log("callToEndpoint", callToEndpoint);
-            onToast("Request sent! Please proceed with wallet for confirmation.");
+            if ((await callToEndpoint.json()).valid) {
+                onToast("Request sent! Please proceed with wallet for confirmation.");
+            } else {
+                onToast("Error sending request. Please try again.");
+            }
             return;
         }
         if (!verifyLevelProgression()) {

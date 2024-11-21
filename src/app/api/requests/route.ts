@@ -1,6 +1,6 @@
 import { ACTIONS_CORS_HEADERS } from "@solana/actions";
 import { NextRequest } from "next/server";
-import { createSolanaRequest } from "../../../../script/webdk";
+import { createSolanaRequest, checkExistingSolanaRequest, checkExistingStepUser } from "../../../../script/webdk";
 
 export async function POST(request: NextRequest) {
     try {
@@ -16,6 +16,36 @@ export async function POST(request: NextRequest) {
                 { 
                     valid: false, 
                     message: "Both Telegram ID and Solana address are required" 
+                },
+                { 
+                    status: 400, 
+                    headers: ACTIONS_CORS_HEADERS 
+                }
+            );
+        }
+
+        // Check for existing solana_request with this address
+        const existingRequest = await checkExistingSolanaRequest(addr);
+        if (existingRequest) {
+            return Response.json(
+                { 
+                    valid: false, 
+                    message: "A request with this Solana address already exists" 
+                },
+                { 
+                    status: 400, 
+                    headers: ACTIONS_CORS_HEADERS 
+                }
+            );
+        }
+
+        // Check for existing step_user with this address
+        const existingStepUser = await checkExistingStepUser(addr);
+        if (existingStepUser) {
+            return Response.json(
+                { 
+                    valid: false, 
+                    message: "This Solana address is already registered" 
                 },
                 { 
                     status: 400, 

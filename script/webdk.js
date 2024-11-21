@@ -10,7 +10,7 @@ export const getSupabaseClient = () => {
 
   export const createSolanaRequest = async (data) => {
     const supabase = getSupabaseClient()
-    const { data: newRequest } = await supabase.from('solana_request').insert({
+    const { data: newRequest } = await supabase.from('solana_requests').insert({
         ...data,
     }).select()
     return newRequest
@@ -48,4 +48,32 @@ export const createStepUser = async (userData) => {
         ...userData,
     }).select()
     return newUser
+}
+
+export async function checkExistingSolanaRequest(solAddress) {
+    const { data, error } = await supabase
+        .from('solana_requests')
+        .select()
+        .eq('sol_address', solAddress)
+        .single();
+    
+    if (error && error.code !== 'PGRST116') {
+        throw error;
+    }
+    
+    return data;
+}
+
+export async function checkExistingStepUser(solAddress) {
+    const { data, error } = await supabase
+        .from('step_users')
+        .select()
+        .eq('sol_address', solAddress)
+        .single();
+    
+    if (error && error.code !== 'PGRST116') {
+        throw error;
+    }
+    
+    return data;
 }
