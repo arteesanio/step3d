@@ -1,7 +1,6 @@
 import { createClient } from "@supabase/supabase-js"
 
 
-
 export const getSupabaseClient = () => {
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
     const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -9,6 +8,13 @@ export const getSupabaseClient = () => {
     return supabase
   }
 
+  export const createSolanaRequest = async (data) => {
+    const supabase = getSupabaseClient()
+    const { data: newRequest } = await supabase.from('solana_request').insert({
+        ...data,
+    }).select()
+    return newRequest
+}
   export const getStepUserByTgId = async (tg_id) => {
     const supabase = getSupabaseClient()
     const { data: existingUser } = await supabase.from('step_user').select()

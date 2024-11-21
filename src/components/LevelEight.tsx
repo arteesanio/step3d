@@ -16,7 +16,7 @@ const MAX_VEL = -0.02;
 const SCORE_CONDITIONS = {
     GAME_OVER: -1,
     PROCEED_TO_WIN: -2,
-    SHOW_QUIZ_THRESHOLD: 0,
+    SHOW_QUIZ_THRESHOLD: 5,
     WIN_THRESHOLD: 7,
     POINTS_PER_CLICK: 2,
 } as const;
@@ -25,13 +25,13 @@ const ROUTES = {
     WIN_PAGE: (time: string) => `/win?time=${time || '0:00'}`,
 } as const;
 
-export const LevelEight = ({ score, s__score = () => { }, onToast = () => { } }: LevelEightProps) => {
+export const LevelEight = ({ score, s__score = () => { }, onToast = (arg1) => { } }: LevelEightProps) => {
     const solanaLogo = useTexture("./solana.png");
     const miniHdri = useTexture("./miniHdri.jpg");
     const [vel, s__vel] = useState(MAX_VEL);
     const [showQuiz, s__showQuiz] = useState(false);
     const $box: any = useRef(null);
-    const { completedQuiz, s__completedQuiz } = useContext(GameContext);
+    const [completedQuiz, s__completedQuiz] = useState(false);
 
     const calculateCompletionTime = () => {
         const startTime = localStorage.getItem('gameStartTime');
@@ -109,8 +109,14 @@ export const LevelEight = ({ score, s__score = () => { }, onToast = () => { } }:
         if ($box.current.position.y > -2) {
             $box.current.position.y += vel
         }
+        
         if ($box.current.position.y < -2 && score >= SCORE_CONDITIONS.WIN_THRESHOLD) { 
+            console.log("You Lose!"); 
             onToast("You Lose!"); 
+            finishGame() 
+        }
+        
+        if ($box.current.position.y < -2 && score >= 0) { 
             finishGame() 
         }
         if (vel <= MAX_VEL) { return }

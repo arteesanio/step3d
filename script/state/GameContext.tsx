@@ -7,6 +7,8 @@ export const GameContext = createContext<any>({
 });
 
 export function GameProvider({ children }: any) {
+    const [toast, _s__toast] = useState("");
+
     const [sessionData, s__sessionData] = useState<any>({});
     const [hasCompletedAllLevels, s__hasCompletedAllLevels] = useState(false);
 

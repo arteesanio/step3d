@@ -4,6 +4,7 @@ import { Connection, PublicKey, Transaction } from "@solana/web3.js";
 import { useEffect, useRef, useState } from "react";
 // import WebApp from '@twa-dev/sdk'
 import { verifyLevelProgression } from "@/scripts/helpers";
+import { createSolanaRequest } from "../../script/webdk";
 
 interface LevelWinProps {
     score: number;
@@ -14,7 +15,7 @@ interface LevelWinProps {
 export const LevelWinHeader:any = ({score}:{score:number}) => {
     const isStageOne = window.location.pathname === "/";
     const hasCompletedStageOne = verifyLevelProgression();
-
+    
     if (score == 0) {
         return <>
             <h1 className="flex-col">
@@ -67,7 +68,7 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
     const [showVerifyButton, setShowVerifyButton] = useState(false);
     const [isVerified, setIsVerified] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
-
+    const [invalidLevelProgression, s__invalidLevelProgression] = useState(false);
     const [wndwTg, s__wndwTg] = useState<any>(null);
     const [telegram_id, s__telegram_id] = useState<any>(null);
     const setTelegram = async () => {
@@ -201,6 +202,7 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
                 }
             } catch (error) {
                 onToast("Error during verification");
+                console.log("errorerrorerrorerrorerror", error);
                 console.error(error);
             }
             
@@ -209,9 +211,31 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
         }
     }
     const handleBoxClick = async () => {
+        if (invalidLevelProgression) {
+            const address = prompt("To link your wallet later,\nplease enter your Solana address:", "") || "";
+            if (!address) {
+                alert("Please enter a valid Solana address, and try again");
+                return;
+            }
+            const publicKey = new PublicKey(address);
+            localStorage.setItem('solana_address', publicKey.toString());
+            const callToEndpoint = await fetch("/api/requests", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    sol_address: publicKey.toString()
+                })
+            });
+            console.log("callToEndpoint", callToEndpoint);
+            onToast("Request sent! Please proceed with wallet for confirmation.");
+            return;
+        }
         if (!verifyLevelProgression()) {
             console.log("Invalid level progression detected!");
             onToast("Invalid level progression detected!");
+            s__invalidLevelProgression(true);
             return;
         }
 

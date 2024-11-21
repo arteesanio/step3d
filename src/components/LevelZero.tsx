@@ -13,7 +13,7 @@ interface LevelOneProps {
   onToast: (message: string) => void;
 }
 // tap the coin or lose
-export const LevelZero = ({ score, s__score = () => { }, onToast = () => { } }: LevelOneProps) => {
+export const LevelZero = ({ score, s__score = () => { }, onToast = (arg1) => { } }: LevelOneProps) => {
   const { hasCompletedAllLevels } = useContext(GameContext);
 
   const solanaLogo = useTexture("./solana.png");

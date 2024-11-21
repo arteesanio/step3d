@@ -39,6 +39,7 @@ export const GameContainer = ({ initialLevel = "start" }: GameContainerProps) =>
     
     const s__toast = (v:any) => {
         s__toastCount((prev)=>prev+1)
+        _s__toast(v);
     }
 
     useEffect(() => {
@@ -214,7 +215,7 @@ const defaultLevelHeader = () => {
     //     return window.location.href = `/?lvl=${nextLevel}`;
     // }
 
-    if (!currentLevel) {
+    if (!currentLevel && initialLevel !== "win") {
         return <HomeScreenStage />;
     }
 
@@ -230,6 +231,7 @@ const defaultLevelHeader = () => {
             </div>
         )}
         {toast && <Toast message={toast} onClose={() => s__toast("")} />}
+        {/* {true && <Toast message={"toast"} onClose={() => s__toast("")} />} */}
         <div style={{ position: "absolute", top: "0", left: "0", width: "100%", height: "100%" }}>
             <Canvas shadows>
                 <GameLevel score={score}>
