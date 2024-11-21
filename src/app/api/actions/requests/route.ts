@@ -1,6 +1,6 @@
 import { ACTIONS_CORS_HEADERS } from "@solana/actions";
 import { NextRequest } from "next/server";
-import { createSolanaRequest } from "../../../../script/webdk";
+import { createSolanaRequest } from "@/../script/webdk";
 
 export async function POST(request: NextRequest) {
     try {
