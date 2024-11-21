@@ -15,7 +15,7 @@ interface LevelTwoProps {
 const MAX_VEL = -0.02;
 const SCORE_CONDITIONS = {
     GAME_OVER: -1,
-    PROCEED_TO_LEVEL_THREE: -5,
+    PROCEED_TO_NEXT_LEVEL: -5,
     SHOW_QUIZ_THRESHOLD: 3,
     WIN_THRESHOLD: 5,
     POINTS_PER_CLICK: 2,
@@ -36,13 +36,11 @@ export const LevelTwo = ({ score, s__score = () => { }, onToast = () => { } }: L
 
     const finishGame = () => {
         if (score == 0) { s__score(-1) } else {
-        // console.log ("score, SCORE_CONDITIONS.PROCEED_TO_LEVEL_THREE") 
-        // console.log (score, SCORE_CONDITIONS.PROCEED_TO_LEVEL_THREE) 
-            if (-score < SCORE_CONDITIONS.PROCEED_TO_LEVEL_THREE) {
-            s__score(-score)
-        } else {
-            s__score(-1)
-        }
+            if (-score < SCORE_CONDITIONS.PROCEED_TO_NEXT_LEVEL) {
+                s__score(-score)
+            } else {
+                s__score(-1)
+            }
         }
     }
 
@@ -50,7 +48,7 @@ export const LevelTwo = ({ score, s__score = () => { }, onToast = () => { } }: L
         if (score === SCORE_CONDITIONS.GAME_OVER) {
             return window.location.reload()
         }
-        if (score < SCORE_CONDITIONS.PROCEED_TO_LEVEL_THREE) {
+        if (score < SCORE_CONDITIONS.PROCEED_TO_NEXT_LEVEL) {
             return window.location.href = ROUTES.NEXT_LEVEL
         }
         // if (score >= SCORE_CONDITIONS.PROCEED_TO_LEVEL_THREE && score <= -1) {
@@ -121,7 +119,7 @@ export const LevelTwo = ({ score, s__score = () => { }, onToast = () => { } }: L
                 levelName="Level Two"
             />
         )}
-        {score < SCORE_CONDITIONS.PROCEED_TO_LEVEL_THREE &&
+        {score < SCORE_CONDITIONS.PROCEED_TO_NEXT_LEVEL &&
             <Html position={[0, -1, 0]}>
                 <h1 className="nowrap flex-col opaci-chov--50" onClick={onStepClick}
                     style={{ textShadow: "-2px 2px 2px #110700", color: "#ffaa00" }}>
@@ -130,7 +128,7 @@ export const LevelTwo = ({ score, s__score = () => { }, onToast = () => { } }: L
                 </h1>
             </Html>
         }
-        {score > SCORE_CONDITIONS.PROCEED_TO_LEVEL_THREE &&
+        {score > SCORE_CONDITIONS.PROCEED_TO_NEXT_LEVEL &&
             <Cylinder args={[0.5, 0.5, 0.1]} onClick={boxClick} ref={$box} rotation={[Math.PI / 2, 0, 0]}>
                 <meshMatcapMaterial matcap={miniHdri} color={"#ffdd00"} />
             </Cylinder>

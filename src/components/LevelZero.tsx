@@ -104,8 +104,8 @@ export const LevelZero = ({ score, s__score = () => { }, onToast = () => { } }: 
       <Html position={[0, -1, 0]}>
         <h1 className="nowrap flex-col opaci-chov--50" onClick={onStepClick}
           style={{ textShadow: "-1px 1px 1px #110700", color: "#14B7E7" }}>
-          <div>+1 Step!</div>
-          <div style={{color: "#ff9900"}} className="tx-altfont-1 tx-md">Tap to claim!</div>
+          <div className="tx-altfont-2 ">+1 Point!</div>
+          <div style={{color: "#ff9900"}} className="tx-altfont-1 tx-md">Tap to continue!</div>
         </h1>
       </Html>
       
@@ -163,10 +163,10 @@ export const LevelZero = ({ score, s__score = () => { }, onToast = () => { } }: 
 
 
     {/* <BlockchainLink /> */}
-    <Box args={[0.5, 0.2, 0.5]} position={[0, -2.44, 0]}
-      receiveShadow castShadow scale={[2, 1, 2]}>
+    <Cylinder args={[0.5, 0.6, 0.2, 12, 1]} position={[0, -2.44, 0]}
+      receiveShadow castShadow scale={[1, 1, 1]}>
       <meshStandardMaterial color="#666666" />
-    </Box>
+    </Cylinder>
 
 
 

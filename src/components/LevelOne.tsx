@@ -35,7 +35,7 @@ export const LevelOne = ({ score, s__score = () => { }, onToast = () => { } }: L
     const [completedQuiz, s__completedQuiz] = useState(false);
     const [showQuiz, s__showQuiz] = useState(false);
     const $box: any = useRef(null);
-
+    const [rotSpeed] = useState((Math.random() - 0.5) * 0.05);
     const finishGame = () => {
         if (score == 0) { s__score(-1) } else { s__score(-score) }
     }
@@ -89,6 +89,7 @@ export const LevelOne = ({ score, s__score = () => { }, onToast = () => { } }: L
         if (!$box.current) { return }
         if ($box.current.position.y > -2) {
             $box.current.position.y += vel
+            $box.current.rotation.z += rotSpeed
         }
         if ($box.current.position.y < -2 && score >= 0) { 
             onToast("You Lose!"); 
@@ -124,10 +125,9 @@ export const LevelOne = ({ score, s__score = () => { }, onToast = () => { } }: L
         {score < SCORE_CONDITIONS.PROCEED_TO_LEVEL_TWO &&
             <Html position={[0, -1, 0]}>
                 <h1 className="nowrap flex-col opaci-chov--50" onClick={onStepClick}
-                    style={{ textShadow: "-2px 2px 2px #110700", color: "#ffaa00" }}>
-                    <div>Next, Level 2!</div>
-                    
-                    <div className="tx-altfont-1 tx-md">Tap to continue!</div>
+                    style={{ textShadow: "-1px 1px 1px #110700", color: "#ffaa00" }}>
+                    <div className="tx-altfont-2 " style={{color: "#14B7E7"}}>+1 Point!</div>
+                    <div style={{color: "#ff9900"}} className="tx-altfont-1 tx-ls-1 tx-md">Tap to continue!</div>
                 </h1>
             </Html>
         }
@@ -160,11 +160,10 @@ export const LevelOne = ({ score, s__score = () => { }, onToast = () => { } }: L
                 />
             </Plane>
         )}
-
-        <Box args={[0.5, 0.2, 0.5]} position={[0, -2.44, 0]}
-            receiveShadow castShadow scale={[2.04, 1, 0.46]}>
-            <meshStandardMaterial color="#666666" />
-        </Box>
+<Cylinder args={[0.5, 0.6, 0.2, 12, 1]} position={[0, -2.44, 0]}
+      receiveShadow castShadow scale={[1, 1, 1]}>
+      <meshStandardMaterial color="#666666" />
+    </Cylinder>
         <pointLight receiveShadow castShadow
             position={[2.9, -0.8, -3.28]} distance={20} intensity={80} />
         <pointLight receiveShadow castShadow
