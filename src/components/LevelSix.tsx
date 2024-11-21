@@ -15,9 +15,9 @@ interface LevelSixProps {
 const MAX_VEL = -0.02;
 const SCORE_CONDITIONS = {
     GAME_OVER: -1,
-    PROCEED_TO_LEVEL_SEVEN: -1,
-    SHOW_QUIZ_THRESHOLD: 5,
-    WIN_THRESHOLD: 1,
+    PROCEED_TO_NEXT_LEVEL: -9,
+    SHOW_QUIZ_THRESHOLD: 7,
+    WIN_THRESHOLD: 9,
     POINTS_PER_CLICK: 2,
 } as const;
 
@@ -30,18 +30,25 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: L
     const miniHdri = useTexture("./miniHdri.jpg");
     const [vel, s__vel] = useState(MAX_VEL);
     const [showQuiz, s__showQuiz] = useState(false);
+    const [completedQuiz, s__completedQuiz] = useState(false);
     const $box: any = useRef(null);
-    const { completedQuiz, s__completedQuiz } = useContext(GameContext);
-
+    const { hasCompletedAllLevels } = useContext(GameContext);
+    const [rotSpeed] = useState((Math.random() - 0.5) * 0.05);
     const finishGame = () => {
-        if (score == 0) { s__score(-1) } else { s__score(-score) }
+        if (score == 0) { s__score(-1) } else {
+            if (-score < SCORE_CONDITIONS.PROCEED_TO_NEXT_LEVEL) {
+                s__score(-score)
+            } else {
+                s__score(-1)
+            }
+        }
     }
 
     const boxClick = () => {
         if (score === SCORE_CONDITIONS.GAME_OVER) {
             return window.location.reload()
         }
-        if (score < SCORE_CONDITIONS.PROCEED_TO_LEVEL_SEVEN) {
+        if (score < SCORE_CONDITIONS.PROCEED_TO_NEXT_LEVEL) {
             return window.location.href = ROUTES.NEXT_LEVEL
         }
 
@@ -67,10 +74,10 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: L
         s__showQuiz(false);
         onToast("Correct! Keep going!");
         s__score(score + SCORE_CONDITIONS.POINTS_PER_CLICK);
-        if ($box.current) {
-            // $box.current.position.z += 0.2;
-        }
         s__completedQuiz(true);
+        if ($box.current) {
+            // $box.current.position.z += (0.2)*4;
+        }
     };
 
     const handleIncorrectAnswer = () => {
@@ -85,6 +92,7 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: L
         if (!$box.current) { return }
         if ($box.current.position.y > -2) {
             $box.current.position.y += vel
+            $box.current.rotation.z += rotSpeed
         }
         if ($box.current.position.y < -2 && score >= 0) { 
             onToast("You Lose!"); 
@@ -108,7 +116,7 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: L
                 levelName="Level Six"
             />
         )}
-        {score < SCORE_CONDITIONS.PROCEED_TO_LEVEL_SEVEN &&
+        {score < SCORE_CONDITIONS.PROCEED_TO_NEXT_LEVEL &&
             <Html position={[0, -1, 0]}>
                 <h1 className="nowrap flex-col opaci-chov--50" onClick={onStepClick}
                     style={{ textShadow: "-2px 2px 2px #110700", color: "#ffaa00" }}>
@@ -117,14 +125,14 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: L
                 </h1>
             </Html>
         }
-        {score > -2 &&
+        {score > SCORE_CONDITIONS.PROCEED_TO_NEXT_LEVEL &&
             <Cylinder args={[0.5, 0.5, 0.1]} onClick={boxClick} ref={$box} rotation={[Math.PI / 2, 0, 0]}>
-                <meshMatcapMaterial matcap={miniHdri} color={"#ffbb00"} />
+                <meshMatcapMaterial matcap={miniHdri} color={"#ffdd00"} />
             </Cylinder>
         }
-        {/* <group position={[0, -0.5, 1]}>
-            <Stairs brightColors={false} activatedSteps={[0, 1, 2, 3, 4, 5]} />
-        </group> */}
+        <group position={[0, -0.5, 1]}>
+            <Stairs brightColors={false} activatedSteps={[0,1,2]} />
+        </group>
 
         <Box args={[0.5, 0.75, 0.5]} position={[0, -2.82, 0]}
             receiveShadow castShadow
@@ -132,7 +140,7 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: L
             <meshStandardMaterial color="#aaaaaa" />
         </Box>
 
-        <Plane
+        {!!hasCompletedAllLevels && <Plane
             args={[5, 5]}
             position={[0, -2.44, -1.75]}
             rotation={[-Math.PI / 2, 0, 0]}
@@ -141,14 +149,14 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: L
             <meshBasicMaterial
                 map={solanaLogo}
                 transparent={true}
-                opacity={0.45}
+                opacity={0.25}
             />
-        </Plane>
+        </Plane>}
 
-        <Box args={[0.5, 0.2, 0.5]} position={[0, -2.44, 0]}
-            receiveShadow castShadow scale={[2.04, 1, 0.46]}>
-            <meshStandardMaterial color="#666666" />
-        </Box>
+        <Cylinder args={[0.5, 0.6, 0.2, 12, 1]} position={[0, -2.44, 0]}
+      receiveShadow castShadow scale={[1, 1, 1]}>
+      <meshStandardMaterial color="#666666" />
+    </Cylinder>
         <pointLight receiveShadow castShadow
             position={[2.9, -0.8, -3.28]} distance={20} intensity={80} />
         <pointLight receiveShadow castShadow

@@ -40,12 +40,12 @@ export const firstStageQuizSets: QuizSet[] = [
         ]
     },
     {
-        question: "How to avoid crypto scams?",
+        question: "How to avoid theft?",
         options: [
             { text: "Trust all links", correct: false },
-            { text: "Share secret phrase or keys", correct: false },
-            { text: "Verify all links sources", correct: true },
-            { text: "Avoid clicking all popups", correct: true },
+            { text: "Share keys / secret phrase", correct: false },
+            { text: "Check for official urls", correct: true },
+            { text: "Click any wallet popups", correct: false },
             { text: "All of the above", correct: false }
         ]
     },
@@ -53,9 +53,9 @@ export const firstStageQuizSets: QuizSet[] = [
         question: "How to earn rewards?",
         options: [
             { text: "Staking assets", correct: true },
-            { text: "Share links", correct: false },
+            { text: "Sharing links", correct: false },
             { text: "Community Engagement", correct: true },
-            { text: "Send emails", correct: false },
+            { text: "Send private messages", correct: false },
             { text: "All of the above", correct: false }
         ]
     },
@@ -72,21 +72,21 @@ export const firstStageQuizSets: QuizSet[] = [
     {
         question: "What does a smart contract do?",
         options: [
-            { text: "Legal document", correct: false },
-            { text: "Auto-executing code", correct: false },
-            { text: "Blockchain mini apps", correct: true },
+            { text: "Upload legal document", correct: false },
+            { text: "Auto-execute code", correct: false },
+            { text: "Run decentralized apps", correct: true },
             { text: "Send emails", correct: false },
             { text: "All of the above", correct: false }
         ]
     },
     {
-        question: "How to avoid crypto scams (Advanced)?",
+        question: "What is blockchain gas?",
         options: [
-            { text: "Check contract code", correct: true },
-            { text: "Trust influencers links", correct: false },
-            { text: "Google and research source", correct: true },
-            { text: "Invest for quick returns", correct: false },
-            { text: "Protect secret wallet info", correct: false },
+            { text: "Transaction processing fee", correct: true },
+            { text: "Bribe for trading", correct: false },
+            { text: "Network computation cost", correct: true },
+            { text: "Cryptocurrency mining", correct: false },
+            { text: "All of the above", correct: false },
         ]
     },
     {

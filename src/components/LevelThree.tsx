@@ -15,7 +15,7 @@ interface LevelThreeProps {
 const MAX_VEL = -0.02;
 const SCORE_CONDITIONS = {
     GAME_OVER: -1,
-    PROCEED_TO_LEVEL_FOUR: -5,
+    PROCEED_TO_NEXT_LEVEL: -5,
     SHOW_QUIZ_THRESHOLD: 3,
     WIN_THRESHOLD: 5,
     POINTS_PER_CLICK: 2,
@@ -30,20 +30,31 @@ export const LevelThree = ({ score, s__score = () => { }, onToast = () => { } }:
     const miniHdri = useTexture("./miniHdri.jpg");
     const [vel, s__vel] = useState(MAX_VEL);
     const [showQuiz, s__showQuiz] = useState(false);
+    const [completedQuiz, s__completedQuiz] = useState(false);
     const $box: any = useRef(null);
-    const { completedQuiz, s__completedQuiz } = useContext(GameContext);
+    const { hasCompletedAllLevels } = useContext(GameContext);
+
     const finishGame = () => {
-        if (score == 0) { s__score(-1) } else { s__score(-score) }
+        if (score == 0) { s__score(-1) } else {
+            if (-score < SCORE_CONDITIONS.PROCEED_TO_NEXT_LEVEL) {
+                s__score(-score)
+            } else {
+                s__score(-1)
+            }
+        }
     }
 
     const boxClick = () => {
         if (score === SCORE_CONDITIONS.GAME_OVER) {
             return window.location.reload()
         }
-        if (score < SCORE_CONDITIONS.PROCEED_TO_LEVEL_FOUR) {
-            localStorage.setItem('level3_completion', Date.now().toString());
+        if (score < SCORE_CONDITIONS.PROCEED_TO_NEXT_LEVEL) {
             return window.location.href = ROUTES.NEXT_LEVEL
         }
+        // if (score >= SCORE_CONDITIONS.PROCEED_TO_LEVEL_THREE && score <= -1) {
+        //     finishGame();
+        //     return
+        // }
 
         s__vel((velocity) => (velocity + 0.04))
         if (score >= SCORE_CONDITIONS.SHOW_QUIZ_THRESHOLD) {
@@ -67,10 +78,10 @@ export const LevelThree = ({ score, s__score = () => { }, onToast = () => { } }:
         s__showQuiz(false);
         onToast("Correct! Keep going!");
         s__score(score + SCORE_CONDITIONS.POINTS_PER_CLICK);
-        if ($box.current) {
-            // $box.current.position.z += (0.2)*3;
-        }
         s__completedQuiz(true);
+        if ($box.current) {
+            // $box.current.position.z += (0.2)*4;
+        }
     };
 
     const handleIncorrectAnswer = () => {
@@ -95,7 +106,7 @@ export const LevelThree = ({ score, s__score = () => { }, onToast = () => { } }:
     })
 
     const onStepClick = () => {
-        localStorage.setItem('level3_completion', Date.now().toString());
+        localStorage.setItem('level2_completion', Date.now().toString());
         return window.location.href = ROUTES.NEXT_LEVEL
     }
 
@@ -108,7 +119,7 @@ export const LevelThree = ({ score, s__score = () => { }, onToast = () => { } }:
                 levelName="Level Three"
             />
         )}
-        {score < SCORE_CONDITIONS.PROCEED_TO_LEVEL_FOUR &&
+        {score < SCORE_CONDITIONS.PROCEED_TO_NEXT_LEVEL &&
             <Html position={[0, -1, 0]}>
                 <h1 className="nowrap flex-col opaci-chov--50" onClick={onStepClick}
                     style={{ textShadow: "-2px 2px 2px #110700", color: "#ffaa00" }}>
@@ -117,14 +128,14 @@ export const LevelThree = ({ score, s__score = () => { }, onToast = () => { } }:
                 </h1>
             </Html>
         }
-        {score > -2 &&
+        {score > SCORE_CONDITIONS.PROCEED_TO_NEXT_LEVEL &&
             <Cylinder args={[0.5, 0.5, 0.1]} onClick={boxClick} ref={$box} rotation={[Math.PI / 2, 0, 0]}>
-                <meshMatcapMaterial matcap={miniHdri} color={"#ffcc00"} />
+                <meshMatcapMaterial matcap={miniHdri} color={"#ffdd00"} />
             </Cylinder>
         }
-        <group position={[0, -0.5, 1]}>
-            <Stairs brightColors={false} activatedSteps={[0, 1, 2]} />
-        </group>
+        {/* <group position={[0, -0.5, 1]}>
+            <Stairs brightColors={false} activatedSteps={[0,1]} />
+        </group> */}
 
         <Box args={[0.5, 0.75, 0.5]} position={[0, -2.82, 0]}
             receiveShadow castShadow
@@ -132,7 +143,7 @@ export const LevelThree = ({ score, s__score = () => { }, onToast = () => { } }:
             <meshStandardMaterial color="#aaaaaa" />
         </Box>
 
-        <Plane
+        {!!hasCompletedAllLevels && <Plane
             args={[5, 5]}
             position={[0, -2.44, -1.75]}
             rotation={[-Math.PI / 2, 0, 0]}
@@ -141,9 +152,9 @@ export const LevelThree = ({ score, s__score = () => { }, onToast = () => { } }:
             <meshBasicMaterial
                 map={solanaLogo}
                 transparent={true}
-                opacity={0.35}
+                opacity={0.25}
             />
-        </Plane>
+        </Plane>}
 
         <Box args={[0.5, 0.2, 0.5]} position={[0, -2.44, 0]}
             receiveShadow castShadow scale={[2.04, 1, 0.46]}>

@@ -87,30 +87,30 @@ const defaultLevelHeader = () => {
                 {/* <div className="tx-altfont-2 tx-xl">Two</div> */}
             </>,
             "three": <>
-            <div className="tx-altfont-1 tx-mdl">Level</div>
-                <div className="tx-altfont-2 tx-xl">Three</div>
+            <div className="tx-altfont-1 tx-mdl">Level Three</div>
+                <div className="tx-altfont-2 tx-xl">Avoid <br /> Theft</div>
             </>,
             "four": <>
-            <div className="tx-altfont-1 tx-mdl">Level</div>
-                <div className="tx-altfont-2 tx-xl">Four</div>
+            <div className="tx-altfont-1 tx-mdl">Level Four</div>
+                <div className="tx-altfont-2 tx-xl tx-center">Earn <br /> Rewards!</div>
             </>,
             "five": <>
-            <div className="tx-altfont-1 tx-mdl">Level</div>
-                <div className="tx-altfont-2 tx-xl">Five</div>
+            <div className="tx-altfont-1 tx-mdl">Level Five</div>
+                <div className="tx-altfont-2 tx-xl tx-center">Liquidity <br /> Pools!</div>
             </>,
             "six": <>
-            <div className="tx-altfont-1 tx-mdl">Level</div>
-                <div className="tx-altfont-2 tx-xl">Six</div>
+            <div className="tx-altfont-1 tx-mdl">Level Six</div>
+                <div className="tx-altfont-2 tx-xl tx-center">Smart <br /> Contracts!</div>
             </>,
             "seven": <>
-            <div className="tx-altfont-1 tx-mdl">Level</div>
-                <div className="tx-altfont-2 tx-xl">Seven</div>
+            <div className="tx-altfont-1 tx-mdl">Level Seven</div>
+                <div className="tx-altfont-2 tx-xl tx-center">Blockchain <br /> Gas!</div>
             </>,
             "eight": <>
-                <div className="tx-altfont-2 tx-xl">Level Eight</div>
+                <div className="tx-altfont-2 tx-xl tx-center">What is <br /> Solana?</div>
             </>,
             "win": <>
-                <div className="tx-altfont-2 tx-xl">Victory!</div>
+                <div className="tx-altfont-2 tx-xl tx-center">Victory!</div>
             </>,
         };
         
