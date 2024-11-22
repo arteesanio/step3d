@@ -1,0 +1,270 @@
+[
+    {
+        "a0": {
+            "symbol": "Blockchain",
+            "floor": "37500",
+            "roof": "46200"
+        },
+        
+        "b0": {
+            "symbol": "Wallet",
+            "floor": "11.9",
+            "roof": "17.5"
+        },
+        "b1": {
+            "symbol": "Keys",
+            "floor": "90",
+            "roof": "112"
+        },
+        "c0": {
+            "symbol": "Rewards",
+            "floor": "3.7",
+            "roof": "6.3"
+        },
+        "c1": {
+            "symbol": "Gas",
+            "floor": "23",
+            "roof": "38"
+        },
+        "d0": {
+            "symbol": "Liquidity",
+            "floor": "55",
+            "roof": "125"
+        },
+        "e1": {
+            "symbol": "Scams",
+            "floor": "2.6",
+            "roof": "4.5"
+        },
+        "e2": {
+            "symbol": "Security",
+            "floor": "9.5",
+            "roof": "18"
+        }
+    },
+    {
+        "a0": {
+            "symbol": "SOLUSDT"
+        },
+        "a1": {
+            "symbol": "BONKUSDT"
+        },
+        "b0": {
+            "symbol": "JTOUSDT"
+        },
+        "b1": {
+            "symbol": "RAYUSDT"
+        },
+        "c0": {
+            "symbol": "WIFUSDT"
+        }
+    },
+    {
+        "a0": {
+            "symbol": "RNDRUSDT"
+        },
+        "b1": {
+            "symbol": "AGIXUSDT"
+        },
+        "b0": {
+            "symbol": "FETUSDT"
+        },
+        "c0": {
+            "symbol": "OCEANUSDT"
+        },
+        "d0": {
+            "symbol": "LINKUSDT"
+        }
+    },
+    {
+        "a0": {
+            "symbol": "MATICUSDT"
+        },
+        "a1": {
+            "symbol": "UNIUSDT"
+        },
+        "b0": {
+            "symbol": "NEARUSDT"
+        },
+        "b1": {
+            "symbol": "SEIUSDT"
+        },
+        "c3": {
+            "symbol": "GRTUSDT"
+        },
+        "c0": {
+            "symbol": "SUIUSDT"
+        },
+        "e0": {
+            "symbol": "MINAUSDT"
+        },
+        "c2": {
+            "symbol": "FLOWUSDT"
+        },
+        "d0": {
+            "symbol": "SNXUSDT"
+        }
+    },
+    {
+        "a0": {
+            "symbol": "XRPUSDT"
+        },
+        "a1": {
+            "symbol": "ICPUSDT"
+        },
+        "b0": {
+            "symbol": "UNIUSDT"
+        },
+        "b1": {
+            "symbol": "FILUSDT"
+        },
+        "c0": {
+            "symbol": "MKRUSDT"
+        },
+        "c1": {
+            "symbol": "SUIUSDT"
+        },
+        "d0": {
+            "symbol": "FLOWUSDT"
+        },
+        "d1": {
+            "symbol": "ROSEUSDT"
+        },
+        "e0": {
+            "symbol": "ARUSDT"
+        },
+        "e1": {
+            "symbol": "COMPUSDT"
+        },
+        "e2": {
+            "symbol": "WLDUSDT"
+        }
+    },
+    {
+        "a0": {
+            "symbol": "UNIUSDT"
+        },
+        "a1": {
+            "symbol": "ATOMUSDT"
+        },
+        "b0": {
+            "symbol": "LDOUSDT"
+        },
+        "b1": {
+            "symbol": "MKRUSDT"
+        },
+        "c0": {
+            "symbol": "SCUSDT"
+        },
+        "c1": {
+            "symbol": "COMPUSDT"
+        },
+        "d0": {
+            "symbol": "NMRUSDT"
+        },
+        "d1": {
+            "symbol": "GTCUSDT"
+        }
+    },
+    {
+        "a0": {
+            "symbol": "BTCUSDT"
+        },
+        "a1": {
+            "symbol": "ETHUSDT"
+        },
+        "b0": {
+            "symbol": "FILUSDT"
+        },
+        "b1": {
+            "symbol": "XTZUSDT"
+        },
+        "c0": {
+            "symbol": "ROSEUSDT"
+        },
+        "c1": {
+            "symbol": "ZECUSDT"
+        }
+    },
+    {
+        "a0": {
+            "symbol": "BCHUSDT"
+        },
+        "a1": {
+            "symbol": "STXUSDT"
+        },
+        "b0": {
+            "symbol": "BSVUSDT"
+        },
+        "b1": {
+            "symbol": "ORDIUSDT"
+        },
+        "c0": {
+            "symbol": "TUSDT"
+        },
+        "c1": {
+            "symbol": "QTUMUSDT"
+        },
+        "d0": {
+            "symbol": "BADGERUSDT"
+        }
+    },
+    {
+        "a0": {
+            "symbol": "ETHUSDT"
+        },
+        "a1": {
+            "symbol": "BNBUSDT"
+        },
+        "b0": {
+            "symbol": "SOLUSDT"
+        },
+        "b1": {
+            "symbol": "ADAUSDT"
+        },
+        "c0": {
+            "symbol": "AVAXUSDT"
+        },
+        "c1": {
+            "symbol": "TRXUSDT"
+        },
+        "d0": {
+            "symbol": "DOTUSDT"
+        },
+        "d1": {
+            "symbol": "ICPUSDT"
+        },
+        "e0": {
+            "symbol": "ATOMUSDT"
+        },
+        "e1": {
+            "symbol": "FTMUSDT"
+        }
+    },    
+    {
+        "a0": {
+            "symbol": "XMRUSDT"
+        },
+        "a1": {
+            "symbol": "BTCUSDT"
+        },
+        "b0": {
+            "symbol": "ETHUSDT"
+        },
+        "b1": {
+            "symbol": "SOLUSDT"
+        },
+        "c0": {
+            "symbol": "LINKUSDT"
+        },
+        "c1": {
+            "symbol": "ARBUSDT"
+        },
+        "d0": {
+            "symbol": "LTCUSDT"
+        },
+        "e0": {
+            "symbol": "SANDUSDT"
+        }
+    }
+]

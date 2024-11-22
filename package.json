@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@dialectlabs/blinks": "^0.15.1",
-    "@react-three/drei": "^9.99.4",
+    "@react-three/drei": "^9.90.0",
     "@react-three/fiber": "^8.15.16",
     "@solana/actions": "^1.6.6",
     "@solana/wallet-adapter-phantom": "^0.9.24",
@@ -21,7 +21,8 @@
     "next": "13.5.6",
     "react": "^18",
     "react-dom": "^18",
-    "three": "^0.161.0"
+    "three": "^0.159.0",
+    "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {
     "@types/node": "^20",
