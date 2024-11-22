@@ -3,7 +3,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { Group, PointLight } from "three";
 
-export const FixedScrollingCamera = ({dimensionThreshold=24}:{dimensionThreshold?:number}) => {
+export const FixedScrollingCamera = ({dimensionThreshold=24, scrollAxis="z"}:{dimensionThreshold?:number, scrollAxis?:string  }) => {
   const { camera } = useThree();
   const lightRef = useRef<PointLight>(null); 
   const velocity = useRef(0);
