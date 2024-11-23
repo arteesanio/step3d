@@ -140,12 +140,12 @@ export const LevelEight = ({ score, s__score = () => { }, onToast = (arg1) => { 
         )}
         {score < SCORE_CONDITIONS.PROCEED_TO_WIN &&
             <Html position={[0, -1, 0]}>
-                <h1 className="nowrap flex-col opaci-chov--50" onClick={onStepClick}
+                <button className=" tx-lgx nowrap flex-col opaci-chov--50" onClick={onStepClick}
                     style={{ textShadow: "-2px 2px 2px #110700", color: "#ffaa00" }}>
                     <div>You Win!</div>
                     <div className="tx-altfont-1 tx-md">Time: {localStorage.getItem('gameCompletionTime') || '0:00'}</div>
                     <div className="tx-altfont-1 tx-sm">Tap to continue!</div>
-                </h1>
+                </button>
             </Html>
         }
         {score > -2 &&

@@ -121,11 +121,11 @@ export const LevelThree = ({ score, s__score = () => { }, onToast = () => { } }:
         )}
         {score < SCORE_CONDITIONS.PROCEED_TO_NEXT_LEVEL &&
             <Html position={[0, -1, 0]}>
-                <h1 className="nowrap flex-col opaci-chov--50" onClick={onStepClick}
-                    style={{ textShadow: "-2px 2px 2px #110700", color: "#ffaa00" }}>
-                    <div>Next, Level 4!</div>
-                    <div className="tx-altfont-1 tx-md">Tap to continue!</div>
-                </h1>
+                <button className="tx-lgx nowrap flex-col opaci-chov--50" onClick={onStepClick}
+                style={{ textShadow: "-1px 1px 1px #110700", color: "#14B7E7" }}>
+                <div className="tx-altfont-2 ">+1 Point!</div>
+                <div style={{color: "#ff9900"}} className="tx-altfont-1 tx-md">Tap to continue!</div>
+                </button>
             </Html>
         }
         {score > SCORE_CONDITIONS.PROCEED_TO_NEXT_LEVEL &&

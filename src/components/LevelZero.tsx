@@ -102,11 +102,11 @@ export const LevelZero = ({ score, s__score = () => { }, onToast = (arg1) => { }
     )}
     {score < -1 && <>
       <Html position={[0, -1, 0]}>
-        <h1 className="nowrap flex-col opaci-chov--50" onClick={onStepClick}
+        <button className="tx-lgx nowrap flex-col opaci-chov--50" onClick={onStepClick}
           style={{ textShadow: "-1px 1px 1px #110700", color: "#14B7E7" }}>
           <div className="tx-altfont-2 ">+1 Point!</div>
           <div style={{color: "#ff9900"}} className="tx-altfont-1 tx-md">Tap to continue!</div>
-        </h1>
+        </button>
       </Html>
       
       {/* <group position={[0, -0.5, 1]} >

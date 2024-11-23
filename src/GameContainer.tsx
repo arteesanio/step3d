@@ -138,11 +138,11 @@ const defaultLevelHeader = () => {
                     {getLevelName()}
                 </h1>
             {currentLevel != "zero" && 
-                <div className="z-100 opaci-75 opaci-chov--50" style={{ position: "absolute", bottom: "10%",  left: "25%" }}
+                <button className="z-100 opaci-75 opaci-chov--50" style={{ position: "absolute", bottom: "10%",  left: "25%" }}
                 onClick={()=>{window.location.href = "/"}}
             >
                 <h3 className="tx-altfont-1 tx-center">Go to Home</h3>
-            </div>}
+            </button>}
             </>);
         }
 
@@ -289,7 +289,7 @@ const HomeScreenStage = () => {
 
     return (<>
         {!!clientLoaded && !allValid && (
-            <div className="flex-col z-100" 
+            <button className="flex-col z-100" 
                 onClick={()=>{window.location.href = "/?lvl=0"}}
             >
                 <div className="tx-altfont-1 tx-xl opaci-chov--50 hover-4">
@@ -300,7 +300,7 @@ const HomeScreenStage = () => {
                         Start Game!
                     </div>
                 </div>
-            </div>
+            </button    >
         )}
         
         {!!clientLoaded && !!allValid && (<>

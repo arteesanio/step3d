@@ -112,3 +112,14 @@ a {
     color-scheme: dark;
   }
 }
+/* reset button styles */
+button {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+}

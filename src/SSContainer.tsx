@@ -132,12 +132,12 @@ export const SSContainer = ({ initialLevel = "start" }: SSContainerProps) => {
                 <h1 className="flex-col">
                     {getLevelName()}
                 </h1>
-                <div className="z-100 opaci-75 opaci-chov--50" 
+                <button className="z-100 opaci-75 opaci-chov--50" 
                     style={{ position: "absolute", bottom: "10%",  left: "25%" }}
                     onClick={()=>{window.location.href = "/"}}
                 >
                     <h3 className="tx-altfont-1 tx-center">Go to Home</h3>
-                </div>
+                </button>
             </>);
         }
 

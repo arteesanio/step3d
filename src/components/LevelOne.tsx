@@ -124,12 +124,12 @@ export const LevelOne = ({ score, s__score = () => { }, onToast = () => { } }: L
         }
         {score < SCORE_CONDITIONS.PROCEED_TO_LEVEL_TWO &&
             <Html position={[0, -1, 0]}>
-                <h1 className="nowrap flex-col opaci-chov--50" onClick={onStepClick}
-                    style={{ textShadow: "-1px 1px 1px #110700", color: "#ffaa00" }}>
-                    <div className="tx-altfont-2 " style={{color: "#14B7E7"}}>+1 Point!</div>
-                    <div style={{color: "#ff9900"}} className="tx-altfont-1 tx-ls-1 tx-md">Tap to continue!</div>
-                </h1>
-            </Html>
+            <button className="tx-lgx nowrap flex-col opaci-chov--50" onClick={onStepClick}
+              style={{ textShadow: "-1px 1px 1px #110700", color: "#14B7E7" }}>
+              <div className="tx-altfont-2 ">+1 Point!</div>
+              <div style={{color: "#ff9900"}} className="tx-altfont-1 tx-md">Tap to continue!</div>
+            </button>
+          </Html>
         }
         {score > -2 &&
             <Cylinder args={[0.5, 0.5, 0.1]} onClick={boxClick} ref={$box} rotation={[Math.PI / 2, 0, 0]}>
