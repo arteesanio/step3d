@@ -18,7 +18,7 @@ export const FixedScrollingCamera = ({dimensionThreshold=24, scrollAxis="z"}:{di
   useFrame(() => {
     if (Math.abs(velocity.current) < 0.0005) velocity.current = 0;
     if (velocity.current !== 0) {
-      console.log("camera.position.z", camera.position.z)
+      // console.log("camera.position.z", camera.position.z)
       // if (camera.position.z - velocity.current > 5.5) {return}
       // if (camera.position.z - velocity.current < -20) {return}
       camera.position.z -= velocity.current;
@@ -98,7 +98,7 @@ useEffect(() => {
 
   return (<>
       <group ref={useRef<Group>(null)}>
-          <pointLight castShadow ref={lightRef} position={[3, 2, 0]} intensity={5} distance={20} />
+          <pointLight castShadow ref={lightRef} position={[3, 2, 0]} intensity={10} distance={20} />
       </group>
   </>);
 };

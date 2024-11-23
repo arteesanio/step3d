@@ -242,19 +242,87 @@ const defaultLevelHeader = () => {
     </>)
 }
 
+export const useQuizResults = () => {
+    const [quizResults, s__quizResults] = useState("");
+    const [clientLoaded, s__clientLoaded] = useState(false);
+    const [allValid, s__allValid] = useState(false);
+    const [someValid, s__someValid] = useState(false);
+
+    const setQuizRes = () => {
+        const level1Time = parseInt(localStorage.getItem('level1_completion') || '0');
+        const level2Time = parseInt(localStorage.getItem('level2_completion') || '0');
+        const level3Time = parseInt(localStorage.getItem('level3_completion') || '0');
+        const level4Time = parseInt(localStorage.getItem('level4_completion') || '0');
+        const level5Time = parseInt(localStorage.getItem('level5_completion') || '0');
+        const level6Time = parseInt(localStorage.getItem('level6_completion') || '0');
+        const level7Time = parseInt(localStorage.getItem('level7_completion') || '0');
+        const level8Time = parseInt(localStorage.getItem('level8_completion') || '0');
+        console.log("times", level1Time, level2Time, level3Time, level4Time, level5Time, level6Time, level7Time, level8Time)
+
+        if (level1Time || level2Time || level3Time || level4Time || level5Time || level6Time || level7Time || level8Time) {
+            s__someValid(true);
+        }
+        if (level1Time && level2Time && level3Time && level4Time && level5Time && level6Time && level7Time && level8Time) {
+            const quiz_results = `${level1Time},${level2Time},${level3Time},${level4Time},${level5Time},${level6Time},${level7Time},${level8Time}`;
+            s__quizResults(quiz_results);
+            s__allValid(true);
+        }
+    }
+
+    useEffect(() => {
+        if (clientLoaded) {return}
+        s__clientLoaded(true);
+        setQuizRes();
+    }, [clientLoaded]);
+
+    return {
+        quizResults, clientLoaded, allValid, someValid,
+        setQuizRes
+    };
+}
+
 const HomeScreenStage = () => {
+    const {quizResults, clientLoaded, allValid, setQuizRes} = useQuizResults();
+
     return (<>
-    
-        <div className="flex-col z-100" 
-            onClick={()=>{window.location.href = "/?lvl=0"}}
-        >
-            <div className="tx-altfont-1 tx-xl opaci-chov--50 hover-4">
-                <div style={{
-                    color: "#ff3300",
-                    textShadow: "0 0 10px #ff7700aa, -1px -1px 0 #ffcc77, 2px -2px 0 #ffcc77"
-                }}>Start Game!</div>
+        {!!clientLoaded && !allValid && (
+            <div className="flex-col z-100" 
+                onClick={()=>{window.location.href = "/?lvl=0"}}
+            >
+                <div className="tx-altfont-1 tx-xl opaci-chov--50 hover-4">
+                    <div style={{
+                        color: "#ff3300",
+                        textShadow: "0 0 10px #ff7700aa, -1px -1px 0 #ffcc77, 2px -2px 0 #ffcc77"
+                    }}>
+                        Start Game!
+                    </div>
+                </div>
             </div>
-        </div>
+        )}
+        
+        {!!clientLoaded && !!allValid && (<>
+            <div className="flex-col z-100" 
+                onClick={()=>{window.location.href = "/learn"}}
+            >
+                <div className="tx-altfont-1 tx-xl opaci-chov--50 hover-4">
+                    <div style={{
+                        color: "#3388ff",
+                    textShadow: "0 0 10px #0077ff66, -1px -1px 0 #00ccff, 2px -2px 0 #00ccff"
+                }}>Continue!</div>
+                </div>
+            </div>
+            <div className="flex-col z-100 bg-w-90 opaci-chov--50 bg-glass-5 box-shadow-2-b pa-2 bord-r-15" 
+                onClick={()=>{window.location.href = "/map"}}
+            >
+                <div className="tx-altfont-1 tx-lgx  ">
+                    <div style={{
+                        // color: "#3388ff",
+                    // textShadow: "0 0 10px #0077ff66, -1px -1px 0 #00ccff, 2px -2px 0 #00ccff"
+                }}>Open Map</div>
+                </div>
+            </div>
+        </>)}
+        
         <div style={{ position: "absolute", top: "0", left: "0", width: "100%", height: "100%" }}>
             <Canvas shadows camera={{ position: [5, 5, 5] }}>
                 <HomeScreenGroup  />

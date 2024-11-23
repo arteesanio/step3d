@@ -48,16 +48,16 @@ export const BookPortfolio = forwardRef(({ state, calls }: any)=> {
 
   return (<>
     <group position={new THREE.Vector3(...state.position)}>
-      <group position={[0,-0.25,0]}>
+      <group position={[0,-0.41,0]}>
         {/* button-to-book connector tubes/pipes */}
-        <Box  position={[0,0.2,-0.05]} args={[0.2,0.2,0.28]} >
+        {/* <Box  position={[0,0.2,-0.05]} args={[0.2,0.2,0.28]} >
           <meshStandardMaterial color={"white"} />
         </Box>
         <Box position={[-0.5,0.2,-0.1]} args={[1,0.1,0.1]} >
           <meshStandardMaterial color={"white"} />
-        </Box>
+        </Box> */}
       </group>
-      <group rotation={[-Math.PI/2, 0, 0]}>
+      <group rotation={[-Math.PI/2, 0, 0]} position={[0,-0.1,0]}>
       <HoverSelector
         isEnabled={!isSelected}
         ref={$hoverSelector}
@@ -85,35 +85,45 @@ export const BookPortfolio = forwardRef(({ state, calls }: any)=> {
         </>}
       >
 
-        <group >
-          <RoundedBox castShadow receiveShadow args={[1, 1.5, 0.2]}>
+        <group position={[0,0,-0.14]} >
+          {/* <RoundedBox castShadow receiveShadow args={[1, 1.5, 0.2]}>
             <meshStandardMaterial color={!!isSelected ? "lightgrey" : "white"} />
-          </RoundedBox>
+          </RoundedBox> */}
           <group position={[0, 0, 0.13]} rotation={[Math.PI / 2, 0, 0]}>
-            <Basic2DText text={`${TIERPACK_NAMES[state.index] || 'Book'}`} color={TIERPACK_COLORS[state.index][2]} emissive={TIERPACK_COLORS[state.index][2]}
+          {/* <Basic2DText text={`${TIERPACK_NAMES[state.index] || 'Book'}`} color={TIERPACK_COLORS[state.index][2]} emissive={TIERPACK_COLORS[state.index][2]}
               font={0.17} position={[0, 0, -0.45]} 
+            /> */}
+            <Basic2DText text={`${TIERPACK_NAMES[state.index] || 'Book'}`} color={TIERPACK_COLORS[state.index][2]} emissive={TIERPACK_COLORS[state.index][2]}
+              font={0.17} position={[-.95, -0.05, -0.84]} 
             />
             <Suspense fallback={<group> <Box args={[0.1,0.1,0.1]}></Box> </group>}>
               {/* <BookImagePlane src={TIERPACK_IMAGES[state.index]} position={[0, 0.001, 0.05]} /> */}
             </Suspense>
-            <Basic2DText text={`#0${state.index}`} color="#666" emissive="#000"
+            {/* <Basic2DText text={`#0${state.index}`} color="#666" emissive="#000"
               font={0.3} position={[0.18, 0, 0.6]}
             />
             <Basic2DText text={`Stage`} color="#333" emissive="#000"
               font={0.1} position={[-0.24, 0, 0.6]}
-            />
+            /> */}
           </group>
           <group scale={[1, 1, 1]} rotation={[Math.PI / 2, 0, Math.PI / 2]}
             position={[0.48, -0.24, 0]}
           >
-            <Box args={[0.3,0.5,0.5]} position={[0,0.5,-0.2]}>
-              {/* <meshStandardMaterial color={!!isSelected ? TIERPACK_COLORS[state.index][0] : TIERPACK_COLORS[state.index][1]} /> */}
+            {/* <Box args={[0.3,0.5,0.5]} position={[0,0.5,-0.2]}>
               <meshStandardMaterial color={!!isSelected ? TIERPACK_COLORS[state.index][0] : TIERPACK_COLORS[state.index][1]} />
-            </Box>
+            </Box> */}
             {/* <PickBookCover color={!!isSelected ? TIERPACK_COLORS[state.index][0] : TIERPACK_COLORS[state.index][1]} /> */}
           </group>
         </group>
-        {isSelected && (
+
+
+
+
+
+
+
+        {isSelected && (<group position={[1,0,0]} rotation={[0.5,0,0]} >
+        { (
           <group position={[0, 0.03, -0.13]} rotation={[0.2,0,0]}>
             <group position={[-1, .72, 0]}>
               <Basic2DText text={`Click Here to Enter`} color="#000" emissive="#000" textAlign="start"
@@ -125,7 +135,7 @@ export const BookPortfolio = forwardRef(({ state, calls }: any)=> {
             </Box>
           </group>
         )}
-        {isSelected && (
+        { (
           <group onPointerDown={(e:any) => {e.stopPropagation();calls.openLinkInThisTab(state.index)}}>
             <Box args={[0.88, 1.28, 0.02]} position={[-1, 0, 0.1]} castShadow receiveShadow>
               <meshStandardMaterial color="grey" />
@@ -134,6 +144,17 @@ export const BookPortfolio = forwardRef(({ state, calls }: any)=> {
             
           </group>
           )}
+        </group>)}
+
+
+
+
+
+
+
+
+
+
         </HoverSelector>
       </group>
     </group>

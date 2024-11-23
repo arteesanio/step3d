@@ -2,7 +2,7 @@
 import { Canvas } from "@react-three/fiber";
 import { useState, useEffect } from "react";
 import { useMediaQuery } from "usehooks-ts";
-import { TIERPACK_LINKS, TIERPACK_NAMES } from "@/../script/constant/DEFAULT_PACKS";
+import { TIERPACK_LINKS, TIERPACK_NAMES, TIERPACK_REDIRECT_LINKS } from "@/../script/constant/DEFAULT_PACKS";
 import { BookPortfolio } from "./BookPortfolio";
 // import FixedScrollingCamera from "@/model/bit/camera/FixedScrollingCamera";
 import Basic2DText from "@/model/bit/text/Basic2DText";
@@ -53,7 +53,7 @@ export default function BookVerticalListScene() {
     return positions
   }
 
-  const boxPositions = generateBoxPositions(TIERPACK_LINKS.length, 2, 1);
+  const boxPositions = generateBoxPositions(TIERPACK_LINKS.length, 2, 0.5);
   const extractSymbols = (url:any) => {
     try {
       const params = new URLSearchParams(url.split('?')[1]);
@@ -94,13 +94,15 @@ export default function BookVerticalListScene() {
       symbols,
       message,
       onConfirm: () => {
-        if (/^https?:\/\//i.test(url)) {
-          window.location.href = url;
-        } else if (url.startsWith('/')) {
-          window.location.href = window.location.origin + url;
-        } else {
-          window.location.href = `https://${url}`;
-        }
+        if (!TIERPACK_REDIRECT_LINKS[index]) { return }
+        window.location.href = TIERPACK_REDIRECT_LINKS[index];
+        // if (/^https?:\/\//i.test(url)) {
+        //   window.location.href = url;
+        // } else if (url.startsWith('/')) {
+        //   window.location.href = window.location.origin + url;
+        // } else {
+        //   window.location.href = `https://${url}`;
+        // }
       }
     });
   };
@@ -121,8 +123,8 @@ export default function BookVerticalListScene() {
       {!confirmModal.isVisible &&
       <Canvas style={{ maxWidth: "100vw", height: "100%" }} shadows
         camera={{ 
-          fov: 75, 
-          position: [0, isSmallDevice ? 2.5 : 2, isSmallDevice ? -3 : -2] 
+          fov: 60, 
+          position: [0, isSmallDevice ? 3.5 : 3, isSmallDevice ? -3 : -2] 
         }}
         gl={{ preserveDrawingBuffer: true }}
       >
@@ -130,9 +132,9 @@ export default function BookVerticalListScene() {
           dimensionThreshold={isSmallDevice ? 28 : 30} 
           scrollAxis="z"
         />
-        <ambientLight intensity={0.5} />
-        <Plane args={[3,50]} rotation={[-Math.PI/2,0,0]} receiveShadow position={[0,-0.17,-23.5]}>
-          <meshStandardMaterial color="white" />
+        <ambientLight intensity={0.75} />
+        <Plane args={[100,200]} rotation={[-Math.PI/2,0,0]} receiveShadow position={[0,-0.17,-23.5]}>
+          <meshStandardMaterial color="white"  />
         </Plane>
         {/* <pointLight castShadow position={[-5, 4, -3]} intensity={50} /> */}
 
@@ -154,7 +156,7 @@ export default function BookVerticalListScene() {
             font={0.3} position={[-2.25, 0, 0.13]} rotation={[0, 0, -.75]} hoverSpeed={2}
           />
         </group>
-        <group position={[0, 0, 0]} rotation={[0, Math.PI, 0]}>
+        <group position={[0.25, 0, -0.5]} rotation={[0, Math.PI, 0]}>
           {boxPositions.map((position, index) => (
             <group key={index} position={[0.7, 0, 0]} rotation={[0, 0, 0]}>
               <BookPortfolio 

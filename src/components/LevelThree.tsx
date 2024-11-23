@@ -106,7 +106,7 @@ export const LevelThree = ({ score, s__score = () => { }, onToast = () => { } }:
     })
 
     const onStepClick = () => {
-        localStorage.setItem('level2_completion', Date.now().toString());
+        localStorage.setItem('level3_completion', Date.now().toString());
         return window.location.href = ROUTES.NEXT_LEVEL
     }
 

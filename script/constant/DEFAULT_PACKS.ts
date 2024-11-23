@@ -1,7 +1,7 @@
 import TIERPACK_LINKS_JSON from "./TIERPACKS.json"
 
 export const TIERPACK_COLORS = [
-    ["#b5b5b5", "#999999", "#ffffff"], // webpov
+    ["#b5b5b5", "#999999", "#ff0000"], // webpov
     ["#A7FEDB", "#18FB9F", "#7824eC"], // Solana Season
     ["#FFCB9B", "#FfFbaC", "#a12F00"], // AI Future
     ["#d0f0FF", "#a0e2FF", "#333333"], // Coinbase Ventures
@@ -83,3 +83,21 @@ export function getTierPackLinks(tierpacks:any[], basePackUrl:string):string[] {
 export const basePackUrl = process.env.NODE_ENV === "production"? "https://webqub.com/trade/?" : "http://localhost:3800/trade/?"
 
 export const TIERPACK_LINKS = getTierPackLinks(TIERPACK_LINKS_JSON ,basePackUrl);
+export const TIERPACK_REDIRECT_LINKS = [
+    `/?lvl=0`,
+    
+
+    `/learn`,
+    `/learn/connect`,
+    `/learn/play`,
+
+    `/learn/trends`,
+    `/learn/analysis`,
+    `/learn/chart-patterns`,
+    `/learn/volume`,
+    `/learn/signals`,
+
+    `/learn/invest`,
+
+
+]
