@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
         }
 
         // Check for existing solana_request with this address
-        const existingRequest = await checkExistingSolanaRequest(addr);
+        const existingRequest = await checkExistingSolanaRequest(addr, tgid);
         if (existingRequest) {
             return Response.json(
                 { 

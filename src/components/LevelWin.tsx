@@ -13,7 +13,7 @@ interface LevelWinProps {
 }
 
 export const LevelWinHeader:any = ({score}:{score:number}) => {
-    const isStageOne = window.location.pathname === "/";
+    const isStageOne = window?.location?.pathname === "/";
     const hasCompletedStageOne = verifyLevelProgression();
     
     if (score == 0) {
@@ -44,7 +44,7 @@ export const LevelWinHeader:any = ({score}:{score:number}) => {
     return <h1 
         className="flex-col opaci-chov--50 z-100" 
         onClick={() => {
-            const isStageOne = window.location.pathname === "/win";
+            const isStageOne = window?.location?.pathname === "/win";
             if (isStageOne && verifyLevelProgression()) {
                 window.location.href = "/learn?lvl=0";
             }
@@ -271,7 +271,7 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
         };
 
         // Check if stage 1 is completed and we're in stage 1
-        const isStageOne = window.location.pathname === "/";
+        const isStageOne = window?.location?.pathname === "/";
         if (isStageOne && verifyLevelProgression()) {
             window.location.href = "/learn?lvl=0";
             return;
