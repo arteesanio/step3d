@@ -247,7 +247,10 @@ export const useQuizResults = () => {
     const [clientLoaded, s__clientLoaded] = useState(false);
     const [allValid, s__allValid] = useState(false);
     const [someValid, s__someValid] = useState(false);
-
+    const resetResults = () => {
+        localStorage.clear();
+        setQuizRes();
+    }
     const setQuizRes = () => {
         const level1Time = parseInt(localStorage.getItem('level1_completion') || '0');
         const level2Time = parseInt(localStorage.getItem('level2_completion') || '0');
@@ -277,7 +280,7 @@ export const useQuizResults = () => {
 
     return {
         quizResults, clientLoaded, allValid, someValid,
-        setQuizRes
+        setQuizRes, resetResults
     };
 }
 

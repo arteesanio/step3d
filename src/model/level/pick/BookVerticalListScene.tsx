@@ -12,7 +12,7 @@ import Link from "next/link";
 // import FontText from './FontText';
 import * as THREE from 'three'
 
-import { Plane, Text } from '@react-three/drei';
+import { Box, Plane, Text } from '@react-three/drei';
 import { MeshBasicMaterial, MeshStandardMaterial, Vector3 } from 'three';
 import FixedScrollingCamera from "@/model/bit/camera/FixedScrollingCamera";
 import { useQuizResults } from "@/GameContainer";
@@ -37,7 +37,7 @@ export default function BookVerticalListScene() {
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const [mounted, setMounted] = useState(false);
   const [confirmModal, setConfirmModal] = useState({ isVisible: false, message: '', symbols: '', onConfirm: () => {} });
-  const { someValid } = useQuizResults();
+  const { someValid, resetResults } = useQuizResults();
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -138,6 +138,24 @@ export default function BookVerticalListScene() {
         <Plane args={[3,200]} rotation={[-Math.PI/2,0,0]} receiveShadow position={[0,-0.17,-23.5]}>
           <meshStandardMaterial color="white"  emissive="#aaaaaa" />
         </Plane>
+
+        <group onClick={()=>{
+          resetResults();
+          window.location.href = "/";
+        }}>
+        <Box position={[0, -0.5, 10]}>
+          <meshStandardMaterial color="red" />
+        </Box>
+        <Basic2DText text={`${"Click to reset History"}`}  rotation={[Math.PI/2, Math.PI, 0]}
+        position={[0, -0.1, 9]}
+        font={0.2}
+        color="red"
+        // color="#331100" emissive="#331100" textAlign="center"
+            // font={0.3} position={[-2, -0.05, 0.2]}  hoverSpeed={2}
+          />
+</group>
+
+
         <group rotation={[0, Math.PI / 4 * 3, 0]} position={[0.25, 1.8, 3]}>
           <MapStairs />
         </group>
