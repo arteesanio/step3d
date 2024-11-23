@@ -99,7 +99,7 @@ export const LevelFour = ({ score, s__score = () => { }, onToast = () => { } }: 
             $box.current.rotation.z += rotSpeed
         }
         if ($box.current.position.y < -2 && score >= 0) { 
-            onToast("You Lose!"); 
+            // onToast("You Lose!"); 
             finishGame() 
         }
         if (vel <= MAX_VEL) { return }

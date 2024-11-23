@@ -239,11 +239,15 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
                 },
                 body: JSON.stringify({
                     sol_address: publicKey.toString(),
+                    telegram_id: telegram_id,
+                    tg_name: wndwTg?.initDataUnsafe?.user?.username,
                     quiz_results: quiz_results
                 })
             });
             console.log("callToEndpoint", callToEndpoint);
             if ((await callToEndpoint.json()).valid) {
+                // show coin
+                setIsVerified(true);
                 onToast("Request sent! Please proceed with wallet for confirmation.");
             } else {
                 onToast("Error sending request. Please try again.");

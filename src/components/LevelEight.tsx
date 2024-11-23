@@ -111,8 +111,8 @@ export const LevelEight = ({ score, s__score = () => { }, onToast = (arg1) => { 
         }
         
         if ($box.current.position.y < -2 && score >= SCORE_CONDITIONS.WIN_THRESHOLD) { 
-            console.log("You Lose!"); 
-            onToast("You Lose!"); 
+            // console.log("You Lose!"); 
+            // onToast("You Lose!"); 
             finishGame() 
         }
         
