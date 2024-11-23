@@ -51,6 +51,7 @@ export const createStepUser = async (userData) => {
 }
 
 export async function checkExistingSolanaRequest(solAddress) {
+    const supabase = getSupabaseClient()
     const { data, error } = await supabase
         .from('solana_requests')
         .select()
@@ -65,6 +66,7 @@ export async function checkExistingSolanaRequest(solAddress) {
 }
 
 export async function checkExistingStepUser(solAddress) {
+    const supabase = getSupabaseClient()
     const { data, error } = await supabase
         .from('step_users')
         .select()

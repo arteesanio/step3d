@@ -245,7 +245,10 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
                 })
             });
             console.log("callToEndpoint", callToEndpoint);
-            if ((await callToEndpoint.json()).valid) {
+            const dataRes = await callToEndpoint.json();
+            console.log("dataRes", dataRes);
+
+            if ((dataRes).valid) {
                 // show coin
                 setIsVerified(true);
                 onToast("Request sent! Please proceed with wallet for confirmation.");
