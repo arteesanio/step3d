@@ -98,7 +98,7 @@ useEffect(() => {
 
   return (<>
       <group ref={useRef<Group>(null)}>
-          <pointLight castShadow ref={lightRef} position={[3, 2, 0]} intensity={10} distance={20} />
+          <pointLight castShadow ref={lightRef} position={[4, 2, 0]} intensity={50} distance={20} />
       </group>
   </>);
 };

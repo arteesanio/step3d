@@ -12,9 +12,11 @@ import Link from "next/link";
 // import FontText from './FontText';
 import * as THREE from 'three'
 
-import { Box, Plane, Text } from '@react-three/drei';
+import { Plane, Text } from '@react-three/drei';
 import { MeshBasicMaterial, MeshStandardMaterial, Vector3 } from 'three';
 import FixedScrollingCamera from "@/model/bit/camera/FixedScrollingCamera";
+import { useQuizResults } from "@/GameContainer";
+import { MapStairs } from "./MapStairs";
 
 // export default Basic2DText
 
@@ -35,7 +37,7 @@ export default function BookVerticalListScene() {
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const [mounted, setMounted] = useState(false);
   const [confirmModal, setConfirmModal] = useState({ isVisible: false, message: '', symbols: '', onConfirm: () => {} });
-
+  const { someValid } = useQuizResults();
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -132,20 +134,24 @@ export default function BookVerticalListScene() {
           dimensionThreshold={isSmallDevice ? 28 : 30} 
           scrollAxis="z"
         />
-        <ambientLight intensity={0.75} />
-        <Plane args={[100,200]} rotation={[-Math.PI/2,0,0]} receiveShadow position={[0,-0.17,-23.5]}>
-          <meshStandardMaterial color="white"  />
+        <ambientLight intensity={0.9} />
+        <Plane args={[3,200]} rotation={[-Math.PI/2,0,0]} receiveShadow position={[0,-0.17,-23.5]}>
+          <meshStandardMaterial color="white"  emissive="#aaaaaa" />
         </Plane>
-        {/* <pointLight castShadow position={[-5, 4, -3]} intensity={50} /> */}
+        <group rotation={[0, Math.PI / 4 * 3, 0]} position={[0.25, 1.8, 3]}>
+          <MapStairs />
+        </group>
 
-        <group position={[1.5, 1.25, -3]}>
+        {/* <pointLight castShadow position={[-5, 4, -3]} intensity={50} /> */}
+        {!someValid &&
+        <group position={[-1.5,0,1.5]} rotation={[0.5,Math.PI,0]}> 
           <Basic2DText 
-            text={`${"Scroll Forward\n&"}`} 
+            text={`${"Scroll  or  Swipe \n  and"}`} 
             color="#333333" 
             emissive="#333333" 
             textAlign="center"
             font={0.2} 
-            position={[-1.5, .7, 0]} 
+            position={[-1.5, .75, 0]} 
             rotation={[0, 0, 0]} 
             hoverSpeed={2}
           />
@@ -153,10 +159,11 @@ export default function BookVerticalListScene() {
             font={0.3} position={[-1.1, 0.4, 0.13]} rotation={[0, 0, 0]} hoverSpeed={2}
           />
           <Basic2DText text={`${"|\nv"}`} color="#660000" emissive="#331100" textAlign="center"
-            font={0.3} position={[-2.25, 0, 0.13]} rotation={[0, 0, -.75]} hoverSpeed={2}
+            font={0.3} position={[-2, -0.05, 0.2]} rotation={[0, 0, -.5]} hoverSpeed={2}
           />
         </group>
-        <group position={[0.25, 0, -0.5]} rotation={[0, Math.PI, 0]}>
+        }
+        <group position={[0.25, 0, -0.25]} rotation={[0, Math.PI, 0]}>
           {boxPositions.map((position, index) => (
             <group key={index} position={[0.7, 0, 0]} rotation={[0, 0, 0]}>
               <BookPortfolio 
@@ -192,3 +199,5 @@ const ConfirmModalContent = ({ isVisible, message, symbols, onConfirm, onCancel 
     </div>
   );
 }
+
+

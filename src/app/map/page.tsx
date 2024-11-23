@@ -5,8 +5,12 @@ import { GameMapContainer } from '@/components/GameMapContainer'
 
 export default function WinPage() {
   return (
-    <main className={styles.main}>
-      <GameMapContainer  />
-    </main>
+    <div style={{ 
+      background: 'linear-gradient(-45deg, #ffffff,#ffffff)',
+      width: '100vw',
+      height: '100vh',
+    }}>
+      <GameMapContainer />
+    </div>
   )
 } 
