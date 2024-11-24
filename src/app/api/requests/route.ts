@@ -1,6 +1,6 @@
 import { ACTIONS_CORS_HEADERS } from "@solana/actions";
 import { NextRequest } from "next/server";
-import { createSolanaRequest, checkExistingSolanaRequest, checkExistingStepUser } from "@/../script/webdk";
+import { createSolanaRequest, checkExistingSolanaRequest, checkExistingStepUser, checkExistingSolanaRequestWithTg } from "@/../script/webdk";
 
 export async function POST(request: NextRequest) {
     try {
@@ -24,8 +24,24 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Check for existing solana_request with this address
-        const existingRequest = await checkExistingSolanaRequest(addr, tgid);
+        // Check for existing solana_request only with this address 
+        const existingRequestByAddress = await checkExistingSolanaRequest(addr);
+        console.log("existingRequestByAddress", existingRequestByAddress);
+        if (existingRequestByAddress) {
+            return Response.json(
+                { 
+                    valid: false, 
+                    message: "A request with this Solana address already exists" 
+                },
+                { 
+                    status: 400, 
+                    headers: ACTIONS_CORS_HEADERS 
+                }
+            );
+        }
+        // Check for existing solana_request with this address and telegram_id
+        const existingRequest = await checkExistingSolanaRequestWithTg(addr, tgid);
+        console.log("existingRequest", existingRequest);
         if (existingRequest) {
             return Response.json(
                 { 

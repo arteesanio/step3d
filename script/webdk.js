@@ -50,22 +50,36 @@ export const createStepUser = async (userData) => {
     return newUser
 }
 
-export async function checkExistingSolanaRequest(solAddress, tg_id) {
+export async function checkExistingSolanaRequest(solAddress) {
+    console.log("checkExistingSolanaRequest solAddress", solAddress);
     const supabase = getSupabaseClient()
     const { data, error } = await supabase
         .from('solana_requests')
         .select()
-        .eq('sol_address', solAddress)
-        .eq('telegram_id', tg_id)
+        .match({ sol_address: solAddress })
+
+
         .single();
     
     if (error && error.code !== 'PGRST116') {
         throw error;
     }
     
+    console.log("data", data);
     return data;
 }
-
+export async function checkExistingSolanaRequestWithTg(solAddress, tg_id) {
+    const supabase = getSupabaseClient()
+    const { data, error } = await supabase
+        .from('solana_requests')
+        .select()
+        .match({ sol_address: solAddress, telegram_id: tg_id })
+        .single();
+    if (error && error.code !== 'PGRST116') {
+        throw error;
+    }
+    return data;
+}
 export async function checkExistingStepUser(solAddress) {
     const supabase = getSupabaseClient()
     const { data, error } = await supabase

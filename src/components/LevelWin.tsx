@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 // import WebApp from '@twa-dev/sdk'
 import { verifyLevelProgression } from "@/scripts/helpers";
 import { createSolanaRequest } from "../../script/webdk";
+import { useQuizResults } from "@/GameContainer";
 
 interface LevelWinProps {
     score: number;
@@ -14,14 +15,14 @@ interface LevelWinProps {
 
 export const LevelWinHeader:any = ({score}:{score:number}) => {
     const isStageOne = window?.location?.pathname === "/";
-    const hasCompletedStageOne = verifyLevelProgression();
+    const { someValid, allValid } = useQuizResults();
     
     if (score == 0) {
         return <>
             <h1 className="flex-col">
                 <div className="tx-altfont-2 tx-xxl">Congrats!</div>
                 <div className="tx-altfont-1">You&apos;ve Won!</div>
-                {isStageOne && hasCompletedStageOne && (
+                {isStageOne && allValid && (
                     <div 
                         className="tx-altfont-1 tx-lg opaci-chov--50"
                         onClick={() => window.location.href = "/learn?lvl=0"}
@@ -52,7 +53,7 @@ export const LevelWinHeader:any = ({score}:{score:number}) => {
     >
         <div className="tx-altfont-2 tx-xxl">Congrats!</div>
         <div className="tx-altfont-1 tx-lg">
-            {isStageOne && hasCompletedStageOne 
+            {isStageOne && allValid 
                 ? "Tap here to go to Stage 2!"
                 : "Tap here to go to next stage!"
             }
@@ -71,6 +72,7 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
     const [invalidLevelProgression, s__invalidLevelProgression] = useState(false);
     const [wndwTg, s__wndwTg] = useState<any>(null);
     const [telegram_id, s__telegram_id] = useState<any>(null);
+    const { quizResults, allValid, someValid, setQuizRes } = useQuizResults();
     const setTelegram = async () => {
         // @ts-ignore: expect error cuz of unkonwn telegram object inside window context
         const wwwTg = window?.Telegram?.WebApp
@@ -101,17 +103,9 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
         try {
             const phantom = (window as any)?.phantom?.solana;
             onToast("Verifying transaction...");
-            // to make quiz_results join the levels times by  a comma and just send a string
-            console.log("txSignature", txSignature);
-            const level1Time = parseInt(localStorage.getItem('level1_completion') || '0');
-            const level2Time = parseInt(localStorage.getItem('level2_completion') || '0');
-            const level3Time = parseInt(localStorage.getItem('level3_completion') || '0');
-            const level4Time = parseInt(localStorage.getItem('level4_completion') || '0');
-            const level5Time = parseInt(localStorage.getItem('level5_completion') || '0');
-            const level6Time = parseInt(localStorage.getItem('level6_completion') || '0');
-            const level7Time = parseInt(localStorage.getItem('level7_completion') || '0');
-            const level8Time = parseInt(localStorage.getItem('level8_completion') || '0');
-            const quiz_results = `${level1Time},${level2Time},${level3Time},${level4Time},${level5Time},${level6Time},${level7Time},${level8Time}`;
+            
+            setQuizRes();
+            
             const validationResponse = await fetch("/api/actions/memo/validate", {
                 method: "POST",
                 headers: {
@@ -120,7 +114,7 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
                 body: JSON.stringify({
                     signature: txSignature,
                     sol_address: phantom.publicKey.toString(),
-                    quiz_results: quiz_results,
+                    quiz_results: quizResults,
                     telegram_id: telegram_id,
                     tg_name: wndwTg?.initDataUnsafe?.user?.username
                 })
@@ -144,6 +138,7 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
     useEffect(() => {
         // console.log("WebApp", WebApp);
         setTelegram();
+        setQuizRes();
 //   WebApp.ready();
 
     }, []);
@@ -165,18 +160,8 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
             try {
                 onToast("Verifying completion...");
                 
-                // Get all level completion times
-                const level1Time = parseInt(localStorage.getItem('level1_completion') || '0');
-                const level2Time = parseInt(localStorage.getItem('level2_completion') || '0');
-                const level3Time = parseInt(localStorage.getItem('level3_completion') || '0');
-                const level4Time = parseInt(localStorage.getItem('level4_completion') || '0');
-                const level5Time = parseInt(localStorage.getItem('level5_completion') || '0');
-                const level6Time = parseInt(localStorage.getItem('level6_completion') || '0');
-                const level7Time = parseInt(localStorage.getItem('level7_completion') || '0');
-                const level8Time = parseInt(localStorage.getItem('level8_completion') || '0');
+                setQuizRes();
                 
-                const quiz_results = `${level1Time},${level2Time},${level3Time},${level4Time},${level5Time},${level6Time},${level7Time},${level8Time}`;
-
                 const validationResponse = await fetch("/api/requests", {
                     method: "POST",
                     headers: {
@@ -184,7 +169,7 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
                     },
                     body: JSON.stringify({
                         telegram_id: telegram_id,
-                        quiz_results: quiz_results,
+                        quiz_results: quizResults,
                         tg_name: wndwTg?.initDataUnsafe?.user?.username,
                         sol_address: valid_address.toString()
                     })
@@ -202,7 +187,6 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
                 }
             } catch (error) {
                 onToast("Error during verification");
-                console.log("errorerrorerrorerrorerror", error);
                 console.error(error);
             }
             
@@ -220,18 +204,8 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
             const publicKey = new PublicKey(address);
             localStorage.setItem('solana_address', publicKey.toString());
             
-                // Get all level completion times
-                const level1Time = parseInt(localStorage.getItem('level1_completion') || '0');
-                const level2Time = parseInt(localStorage.getItem('level2_completion') || '0');
-                const level3Time = parseInt(localStorage.getItem('level3_completion') || '0');
-                const level4Time = parseInt(localStorage.getItem('level4_completion') || '0');
-                const level5Time = parseInt(localStorage.getItem('level5_completion') || '0');
-                const level6Time = parseInt(localStorage.getItem('level6_completion') || '0');
-                const level7Time = parseInt(localStorage.getItem('level7_completion') || '0');
-                const level8Time = parseInt(localStorage.getItem('level8_completion') || '0');
-                
-                const quiz_results = `${level1Time},${level2Time},${level3Time},${level4Time},${level5Time},${level6Time},${level7Time},${level8Time}`;
-
+            setQuizRes();
+            
             const callToEndpoint = await fetch("/api/requests", {
                 method: "POST",
                 headers: {
@@ -241,7 +215,7 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
                     sol_address: publicKey.toString(),
                     telegram_id: telegram_id,
                     tg_name: wndwTg?.initDataUnsafe?.user?.username,
-                    quiz_results: quiz_results
+                    quiz_results: quizResults
                 })
             });
             console.log("callToEndpoint", callToEndpoint);
@@ -257,7 +231,7 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
             }
             return;
         }
-        if (!verifyLevelProgression()) {
+        if (!allValid) {
             console.log("Invalid level progression detected!");
             onToast("Invalid level progression detected!");
             s__invalidLevelProgression(true);
