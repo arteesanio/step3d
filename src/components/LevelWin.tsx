@@ -177,7 +177,7 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
                 
                 const quiz_results = `${level1Time},${level2Time},${level3Time},${level4Time},${level5Time},${level6Time},${level7Time},${level8Time}`;
 
-                const validationResponse = await fetch("/api/actions/memo/validate", {
+                const validationResponse = await fetch("/api/requests", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
