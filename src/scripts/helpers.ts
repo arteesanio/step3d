@@ -215,6 +215,110 @@ export const secondStage_levelSix = secondStageQuizSets[6];
 export const secondStage_levelSeven = secondStageQuizSets[7];
 export const secondStage_levelEight = secondStageQuizSets[8];
 
+export const thirdStageQuizSets: QuizSet[] = [
+    {
+        question: "What is a zero-knowledge proof?",
+        options: [
+            { text: "Cryptographic verification method", correct: true },
+            { text: "Proof without revealing data", correct: true },
+            { text: "Empty blockchain block", correct: false },
+            { text: "Type of private key", correct: false },
+            { text: "All of the above", correct: false }
+        ]
+    },
+    {
+        question: "What is MEV (Maximal Extractable Value)?",
+        options: [
+            { text: "Block ordering profit", correct: true },
+            { text: "Mining reward", correct: false },
+            { text: "Transaction frontrunning", correct: true },
+            { text: "Network fee", correct: false },
+            { text: "All of the above", correct: false }
+        ]
+    },
+    {
+        question: "What is a rollup?",
+        options: [
+            { text: "Layer 2 scaling solution", correct: true },
+            { text: "Transaction bundling", correct: true },
+            { text: "Smart contract collection", correct: false },
+            { text: "Blockchain merger", correct: false },
+            { text: "All of the above", correct: false }
+        ]
+    },
+    {
+        question: "What is composability in DeFi?",
+        options: [
+            { text: "Protocol interoperability", correct: true },
+            { text: "Smart contract linking", correct: true },
+            { text: "Money Lego building", correct: true },
+            { text: "Token creation", correct: false },
+            { text: "All of the above", correct: true }
+        ]
+    },
+    {
+        question: "What is a flash loan?",
+        options: [
+            { text: "Uncollateralized loan", correct: true },
+            { text: "Single-transaction loan", correct: true },
+            { text: "Instant approval loan", correct: false },
+            { text: "Long-term loan", correct: false },
+            { text: "All of the above", correct: false }
+        ]
+    },
+    {
+        question: "What is a sidechain?",
+        options: [
+            { text: "Independent blockchain", correct: true },
+            { text: "Connected to mainnet", correct: true },
+            { text: "Alternative consensus", correct: true },
+            { text: "Backup network", correct: false },
+            { text: "All of the above", correct: false }
+        ]
+    },
+    {
+        question: "What is account abstraction?",
+        options: [
+            { text: "Smart contract wallets", correct: true },
+            { text: "Simplified user experience", correct: true },
+            { text: "Custom transaction logic", correct: true },
+            { text: "Account privacy", correct: false },
+            { text: "All of the above", correct: false }
+        ]
+    },
+    {
+        question: "What is a state channel?",
+        options: [
+            { text: "Off-chain transactions", correct: true },
+            { text: "Direct participant link", correct: true },
+            { text: "Reduced gas fees", correct: true },
+            { text: "Network partition", correct: false },
+            { text: "All of the above", correct: false }
+        ]
+    },
+    {
+        question: "What is a recursive zero-knowledge proof?",
+        options: [
+            { text: "Proof verifying proofs", correct: true },
+            { text: "Scalability solution", correct: true },
+            { text: "Complex computation proof", correct: true },
+            { text: "Transaction privacy", correct: false },
+            { text: "All of the above", correct: false }
+        ]
+    }
+];
+
+// Add these exports
+export const thirdStage_levelZero = thirdStageQuizSets[0];
+export const thirdStage_levelOne = thirdStageQuizSets[1];
+export const thirdStage_levelTwo = thirdStageQuizSets[2];
+export const thirdStage_levelThree = thirdStageQuizSets[3];
+export const thirdStage_levelFour = thirdStageQuizSets[4];
+export const thirdStage_levelFive = thirdStageQuizSets[5];
+export const thirdStage_levelSix = thirdStageQuizSets[6];
+export const thirdStage_levelSeven = thirdStageQuizSets[7];
+export const thirdStage_levelEight = thirdStageQuizSets[8];
+
 export const shuffleArray = <T>(array: T[]): T[] => {
     const shuffled = [...array];
     

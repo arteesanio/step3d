@@ -7,9 +7,15 @@ import { LevelWin, LevelWinHeader } from "./components/LevelWin";
 import { useSearchParams } from 'next/navigation';
 import { SecondStageLevelZero } from "./components/SecondStageLevelZero";
 import { SecondStageLevelOne } from "./components/SecondStageLevelOne";
+import { LevelZero } from "./components/LevelZero";
+import { LevelOne } from "./components/LevelOne";
+import { LevelTwo } from "./components/LevelTwo";
+import { SecondStageLevelTwo } from "./components/SecondStageLevelTwo";
+import { ThirdStageLevelZero } from "./components/ThirdStageLevelZero";
 
 interface SSContainerProps {
     initialLevel?: string;
+    initialStage?: string;
 }
 
 const lookup_levelMap: { [key: string]: string } = {
@@ -24,12 +30,13 @@ const lookup_levelMap: { [key: string]: string } = {
     "8": "eight"
 };
 
-export const SSContainer = ({ initialLevel = "start" }: SSContainerProps) => {
+export const SSContainer = ({ initialLevel = "start", initialStage = "2" }: SSContainerProps) => {
     const searchParams = useSearchParams();
     const [score, s__score] = useState(0);
     const [toast, _s__toast] = useState("");
     const [toastCount, s__toastCount] = useState(0);
     const [currentLevel, s__currentLevel] = useState("zero");
+    const [currentStage, s__currentStage] = useState(initialStage);
     
     const s__toast = (v:any) => {
         s__toastCount((prev)=>prev+1)
@@ -37,6 +44,15 @@ export const SSContainer = ({ initialLevel = "start" }: SSContainerProps) => {
 
     useEffect(() => {
         const lvlParam = searchParams.get('lvl');
+        const stageParam = searchParams.get('stage');
+        
+        if (stageParam) {
+            const numStage = Number(stageParam);
+            if (numStage >= 1 && numStage <= 9) { // Assuming stages 1-9
+                s__currentStage(stageParam);
+            }
+        }
+
         if (!lvlParam) return;
 
         // Handle numeric level
@@ -57,58 +73,38 @@ export const SSContainer = ({ initialLevel = "start" }: SSContainerProps) => {
 
     const defaultLevelHeader = () => {
         return (<>
-            <div className="tx-altfont-2 tx-xl">Stage 2</div>
+            <div className="tx-altfont-2 tx-xl">Stage {currentStage}</div>
             <div className="tx-altfont-1 tx-mdl">Advanced Challenges</div>
         </>)
     }
 
     const getLevelName = () => {
+        const commonHeader = (levelText: string) => (
+            <>
+                <div className="tx-altfont-2 tx-lg">Stage {currentStage}</div>
+                <div className="tx-altfont-1 tx-mdl">Level</div>
+                <div className="tx-altfont-2 tx-xl">{levelText}</div>
+            </>
+        );
+
         const HeaderlevelMap: { [key: string]: any } = {
             "zero": <>
-                <div className="tx-altfont-2 tx-xl">Stage 2</div>
+                <div className="tx-altfont-2 tx-xl">Stage {currentStage}</div>
                 <div className="tx-altfont-1 tx-mdl">Level Zero</div>
             </>,
-            "one": <>
-                <div className="tx-altfont-2 tx-lg">Stage 2</div>
-                <div className="tx-altfont-1 tx-mdl">Level</div>
-                <div className="tx-altfont-2 tx-xl">One</div>
-            </>,
-            "two": <>
-                <div className="tx-altfont-2 tx-lg">Stage 2</div>
-                <div className="tx-altfont-1 tx-mdl">Level</div>
-                <div className="tx-altfont-2 tx-xl">Two</div>
-            </>,
-            "three": <>
-                <div className="tx-altfont-2 tx-lg">Stage 2</div>
-                <div className="tx-altfont-1 tx-mdl">Level</div>
-                <div className="tx-altfont-2 tx-xl">Three</div>
-            </>,
-            "four": <>
-                <div className="tx-altfont-2 tx-lg">Stage 2</div>
-                <div className="tx-altfont-1 tx-mdl">Level</div>
-                <div className="tx-altfont-2 tx-xl">Four</div>
-            </>,
-            "five": <>
-                <div className="tx-altfont-2 tx-lg">Stage 2</div>
-                <div className="tx-altfont-1 tx-mdl">Level</div>
-                <div className="tx-altfont-2 tx-xl">Five</div>
-            </>,
-            "six": <>
-                <div className="tx-altfont-2 tx-lg">Stage 2</div>
-                <div className="tx-altfont-1 tx-mdl">Level</div>
-                <div className="tx-altfont-2 tx-xl">Six</div>
-            </>,
-            "seven": <>
-                <div className="tx-altfont-2 tx-lg">Stage 2</div>
-                <div className="tx-altfont-1 tx-mdl">Level</div>
-                <div className="tx-altfont-2 tx-xl">Seven</div>
-            </>,
+            "one": commonHeader("One"),
+            "two": commonHeader("Two"),
+            "three": commonHeader("Three"),
+            "four": commonHeader("Four"),
+            "five": commonHeader("Five"),
+            "six": commonHeader("Six"),
+            "seven": commonHeader("Seven"),
             "eight": <>
-                <div className="tx-altfont-2 tx-lg">Stage 2</div>
+                <div className="tx-altfont-2 tx-lg">Stage {currentStage}</div>
                 <div className="tx-altfont-2 tx-xl">Level Eight</div>
             </>,
             "win": <>
-                <div className="tx-altfont-2 tx-xl">Stage 2 Complete!</div>
+                <div className="tx-altfont-2 tx-xl">Stage {currentStage} Complete!</div>
             </>
         };
         
@@ -117,8 +113,8 @@ export const SSContainer = ({ initialLevel = "start" }: SSContainerProps) => {
     }
 
     useEffect(() => {
-        document.title = `Stage 2 - Lvl ${currentLevel}`;
-    }, [currentLevel]);
+        document.title = `Stage ${currentStage} - Lvl ${currentLevel}`;
+    }, [currentLevel, currentStage]);
 
     const renderHeader = () => {
         if (initialLevel === "win" || currentLevel === "win") {
@@ -155,26 +151,67 @@ export const SSContainer = ({ initialLevel = "start" }: SSContainerProps) => {
             return <LevelWin score={score} s__score={s__score} onToast={s__toast} />;
         }
 
-        const levelKey = lookup_levelMap[currentLevel] || currentLevel;
+        // Common props for all level components
+        const levelProps = {
+            score,
+            s__score,
+            onToast: s__toast
+        };
 
-        switch(levelKey) {
-            case "zero":
-                return <SecondStageLevelZero score={score} s__score={s__score} onToast={s__toast} />;
-            case "one":
-                return <SecondStageLevelOne score={score} s__score={s__score} onToast={s__toast} />;
-            default:
-                return <SecondStageLevelZero score={score} s__score={s__score} onToast={s__toast} />;
+        // Dynamic import based on stage and level
+        try {
+            const levelKey = lookup_levelMap[currentLevel] || currentLevel;
+            
+            switch(currentStage) {
+                case "1":
+                    switch(levelKey) {
+                        case "zero": return <LevelZero {...levelProps} />;
+                        case "one": return <LevelOne {...levelProps} />;
+                        case "two": return <LevelTwo {...levelProps} />;
+                        // Add more level cases for stage 1
+                        default: return <LevelZero {...levelProps} />;
+                    }
+                case "2":
+                    switch(levelKey) {
+                        case "zero": return <SecondStageLevelZero {...levelProps} />;
+                        case "one": return <SecondStageLevelOne {...levelProps} />;
+                        case "two": return <SecondStageLevelTwo {...levelProps} />;
+                        // Add more level cases for stage 2
+                        default: return <SecondStageLevelZero {...levelProps} />;
+                    }
+                case "3":
+                    switch(levelKey) {
+                        case "zero": return <ThirdStageLevelZero {...levelProps} />;
+                        // case "one": return <ThirdStageLevelOne {...levelProps} />;
+                        // case "two": return <ThirdStageLevelTwo {...levelProps} />;
+                        // case "three": return <ThirdStageLevelThree {...levelProps} />;
+                        // case "four": return <ThirdStageLevelFour {...levelProps} />;
+                        // case "five": return <ThirdStageLevelFive {...levelProps} />;
+                        // case "six": return <ThirdStageLevelSix {...levelProps} />;
+                        // case "seven": return <ThirdStageLevelSeven {...levelProps} />;
+                        // case "eight": return <ThirdStageLevelEight {...levelProps} />;
+                        // Add more level cases for stage 3
+                        default: return <ThirdStageLevelZero {...levelProps} />;
+                    }
+                // Add more stage cases here
+                default:
+                    return <SecondStageLevelZero {...levelProps} />;
+            }
+        } catch (error) {
+            console.error("Error loading level:", error);
+            return <SecondStageLevelZero {...levelProps} />;
         }
     };
 
     const onStepClick = () => {
         const params = new URLSearchParams(window.location.search);
         const currentLvl = params.get('lvl');
+        const currentStage = params.get('stage') || '2';
         if (!currentLvl) {
-            return window.location.href = "/learn?lvl=1";
+            return window.location.href = `/learn?stage=${currentStage}&lvl=1`;
         }
         const nextLevel = parseInt(currentLvl) + 1;
-        return window.location.href = `/learn?lvl=${nextLevel}`;
+        return window.location.href = `/learn?stage=${currentStage}&lvl=${nextLevel}`;
     }
 
     return (<>

@@ -9,10 +9,12 @@ import PickBookCover from "@/model/level/pick/PickBookCover";
 import { BookImagePlane } from "./BookImagePlane";
 import { SingleBookTierList } from "./SingleBookTierList";
 import Basic2DText from "@/model/bit/text/Basic2DText";
+import { useQuizResults } from "@/GameContainer";
 // import Basic2DText from "@/model/bit/text/Basic2DText";
 
 
 export const BookPortfolio = forwardRef(({ state, calls }: any)=> {
+  const { quizResults, allValid } = useQuizResults();
     const $hoverSelector = useRef<any>(null);
   const [isSelected, s__isSelected] = useState(false);
   const [reachedEnd, s__reachedEnd] = useState(false);
@@ -73,10 +75,10 @@ export const BookPortfolio = forwardRef(({ state, calls }: any)=> {
         triggerModel={<>
           {/* big red button */}
           <group position={[-1,0.2,0]} >
-            <Cylinder args={[0.25,0.25,0.3,24,1]} position={[0,0,!isMoonSpinActive && !reachedEnd ? -0.02 : -0.1]}
+            <Cylinder args={[0.25,0.25,0.3,24,1]} position={[0,0,(!isMoonSpinActive && !reachedEnd) ? -0.02 : -0.1]}
               rotation={[Math.PI/2, 0, 0]}
             >
-              <meshStandardMaterial color={!isMoonSpinActive && !reachedEnd ? "red" : "grey"} />
+              <meshStandardMaterial color={(!isMoonSpinActive && !reachedEnd) && allValid ? "red" : "grey"} />
             </Cylinder>
             <RoundedBox position={[0,0,-0.1]} args={[0.75,0.75,0.25]} >
               <meshStandardMaterial color={"white"} />
