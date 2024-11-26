@@ -314,18 +314,18 @@ const HomeScreenStage = () => {
                 }}>Continue!</div>
                 </div>
             </div>
-            <div className="flex-col z-100 bg-w-90 opaci-chov--50 bg-glass-5 box-shadow-2-b pa-2 bord-r-15" 
-                onClick={()=>{window.location.href = "/map"}}
-            >
-                <div className="tx-altfont-1 tx-lgx  ">
-                    <div style={{
-                        // color: "#3388ff",
-                    // textShadow: "0 0 10px #0077ff66, -1px -1px 0 #00ccff, 2px -2px 0 #00ccff"
-                }}>Open Map</div>
-                </div>
-            </div>
         </>)}
         
+        <div className="flex-col z-100 bg-w-90 opaci-chov--50 bg-glass-5 box-shadow-2-b pa-2 bord-r-15" 
+            onClick={()=>{window.location.href = "/map"}}
+        >
+            <div className="tx-altfont-1 tx-lgx  ">
+                <div style={{
+                    // color: "#3388ff",
+                // textShadow: "0 0 10px #0077ff66, -1px -1px 0 #00ccff, 2px -2px 0 #00ccff"
+            }}>Open Map</div>
+            </div>
+        </div>
         <div style={{ position: "absolute", top: "0", left: "0", width: "100%", height: "100%" }}>
             <Canvas shadows camera={{ position: [5, 5, 5] }}>
                 <HomeScreenGroup  />
