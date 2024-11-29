@@ -257,6 +257,7 @@ export const useQuizResults = () => {
     const [allValid, s__allValid] = useState(false);
     const [someValid, s__someValid] = useState(false);
     const resetResults = () => {
+        alert("resetting results")
         console.log("resetResults 123")
         // window.localStorage.clear();
         window.localStorage.setItem('level1_completion', '');
