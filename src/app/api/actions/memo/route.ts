@@ -5,9 +5,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 // Add this near the top of your file, after the imports
 // You'll need to add these font files to your project
-registerFont('./public/fonts/Roboto-Regular.ttf', { family: 'Roboto' });
-registerFont('./public/fonts/Roboto-Bold.ttf', { family: 'Roboto', weight: 'bold' });
-registerFont('./public/fonts/Roboto-Italic.ttf', { family: 'Roboto', style: 'italic' });
+// registerFont('./public/fonts/Roboto-Regular.ttf', { family: 'Roboto' });
+// registerFont('./public/fonts/Roboto-Bold.ttf', { family: 'Roboto', weight: 'bold' });
+// registerFont('./public/fonts/Roboto-Italic.ttf', { family: 'Roboto', style: 'italic' });
 
 // export async function GET(request: NextRequest) {
 //     const payload:ActionGetResponse = {
