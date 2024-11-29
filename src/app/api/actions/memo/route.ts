@@ -8,7 +8,7 @@ import { NextRequest, NextResponse } from "next/server";
 // registerFont('./public/fonts/Roboto-Regular.ttf', { family: 'Roboto' });
 // registerFont('./public/fonts/Roboto-Bold.ttf', { family: 'Roboto', weight: 'bold' });
 // registerFont('./public/fonts/Roboto-Italic.ttf', { family: 'Roboto', style: 'italic' });
-registerFont('./public/fonts/raleway.ttf', { family: 'Raleway' });
+registerFont('./raleway.ttf', { family: 'Raleway' });
 //     const payload:ActionGetResponse = {
 //         icon: new URL("/solana.png", new URL(request.url).origin).toString(),
 //         label: "Send Memo",
