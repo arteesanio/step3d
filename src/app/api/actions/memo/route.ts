@@ -1,7 +1,13 @@
-import { createCanvas } from "canvas";
+import { createCanvas, registerFont } from "canvas";
 import { ActionGetResponse, ActionPostRequest, ActionPostResponse, ACTIONS_CORS_HEADERS, createPostResponse, MEMO_PROGRAM_ID } from "@solana/actions";
 import { clusterApiUrl, ComputeBudgetInstruction, ComputeBudgetProgram, Connection, PublicKey, Transaction, TransactionInstruction } from "@solana/web3.js";
 import { NextRequest, NextResponse } from "next/server";
+
+// Add this near the top of your file, after the imports
+// You'll need to add these font files to your project
+registerFont('./public/fonts/Roboto-Regular.ttf', { family: 'Roboto' });
+registerFont('./public/fonts/Roboto-Bold.ttf', { family: 'Roboto', weight: 'bold' });
+registerFont('./public/fonts/Roboto-Italic.ttf', { family: 'Roboto', style: 'italic' });
 
 // export async function GET(request: NextRequest) {
 //     const payload:ActionGetResponse = {
@@ -50,19 +56,22 @@ function generateDynamicImage(livePrice: number, request: NextRequest): string {
     ctx.fillStyle = "#20232a";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Add title - using system font
-    ctx.font = "bold 24px sans-serif";
+    // Add title
+    ctx.font = "24px Arial";
     ctx.fillStyle = "#61dafb";
+    ctx.textBaseline = "top";
     ctx.fillText("Live SOL Price", 20, 40);
 
-    // Display live price - using system font
-    ctx.font = "bold 48px sans-serif";
+    // Display live price
+    ctx.font = "48px Arial";
     ctx.fillStyle = "#ffffff";
-    ctx.fillText(`$${livePrice}`, 20, 100);
+    ctx.textBaseline = "top";
+    ctx.fillText(`$${livePrice.toFixed(2)}`, 20, 100);
 
-    // Footer - using system font
-    ctx.font = "italic 16px sans-serif";
+    // Footer
+    ctx.font = "16px Arial";
     ctx.fillStyle = "#cccccc";
+    ctx.textBaseline = "top";
     ctx.fillText("Data from CoinGecko", 20, 180);
 
     const buffer = canvas.toBuffer("image/png");
