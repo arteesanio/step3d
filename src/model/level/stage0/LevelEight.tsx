@@ -1,10 +1,12 @@
 import { Html, Cylinder, Box, useTexture, Plane } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useContext, useRef, useState } from "react";
-import { Stairs } from "./Stairs";
-import { QuizModal } from "./QuizModal";
 import { levelEight_quizOptions } from "@/scripts/helpers";
-import { GameContext } from "../../script/state/GameContext";
+import { QuizModal } from "@/model/bit/text/QuizModal";
+import { Stairs } from "@/model/core/Stairs";
+// import { Stairs } from "./Stairs";
+// import { QuizModal } from "./QuizModal";
+// import { GameContext } from "../../script/state/GameContext";
 
 interface LevelEightProps {
     score: number;
