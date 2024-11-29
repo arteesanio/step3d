@@ -258,29 +258,29 @@ export const useQuizResults = () => {
     const [someValid, s__someValid] = useState(false);
     const resetResults = () => {
         console.log("resetResults 123")
-        // localStorage.clear();
-        localStorage.setItem('level1_completion', '');
-        localStorage.setItem('level2_completion', '');
-        localStorage.setItem('level3_completion', '');
-        localStorage.setItem('level4_completion', '');
-        localStorage.setItem('level5_completion', '');
-        localStorage.setItem('level6_completion', '');
-        localStorage.setItem('level7_completion', '');
-        localStorage.setItem('level8_completion', '');
+        // window.localStorage.clear();
+        window.localStorage.setItem('level1_completion', '');
+        window.localStorage.setItem('level2_completion', '');
+        window.localStorage.setItem('level3_completion', '');
+        window.localStorage.setItem('level4_completion', '');
+        window.localStorage.setItem('level5_completion', '');
+        window.localStorage.setItem('level6_completion', '');
+        window.localStorage.setItem('level7_completion', '');
+        window.localStorage.setItem('level8_completion', '');
         s__allValid(false);
         s__someValid(false);
         s__quizResults("");
         // setQuizRes();
     }
     const setQuizRes = () => {
-        const level1Time = parseInt(localStorage.getItem('level1_completion') || '0');
-        const level2Time = parseInt(localStorage.getItem('level2_completion') || '0');
-        const level3Time = parseInt(localStorage.getItem('level3_completion') || '0');
-        const level4Time = parseInt(localStorage.getItem('level4_completion') || '0');
-        const level5Time = parseInt(localStorage.getItem('level5_completion') || '0');
-        const level6Time = parseInt(localStorage.getItem('level6_completion') || '0');
-        const level7Time = parseInt(localStorage.getItem('level7_completion') || '0');
-        const level8Time = parseInt(localStorage.getItem('level8_completion') || '0');
+        const level1Time = parseInt(window.localStorage.getItem('level1_completion') || '0');
+        const level2Time = parseInt(window.localStorage.getItem('level2_completion') || '0');
+        const level3Time = parseInt(window.localStorage.getItem('level3_completion') || '0');
+        const level4Time = parseInt(window.localStorage.getItem('level4_completion') || '0');
+        const level5Time = parseInt(window.localStorage.getItem('level5_completion') || '0');
+        const level6Time = parseInt(window.localStorage.getItem('level6_completion') || '0');
+        const level7Time = parseInt(window.localStorage.getItem('level7_completion') || '0');
+        const level8Time = parseInt(window.localStorage.getItem('level8_completion') || '0');
         console.log("times", level1Time, level2Time, level3Time, level4Time, level5Time, level6Time, level7Time, level8Time)
 
         if (level1Time || level2Time || level3Time || level4Time || level5Time || level6Time || level7Time || level8Time) {
