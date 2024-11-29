@@ -1,4 +1,4 @@
-import { createCanvas } from "canvas";
+import { createCanvas, registerFont } from "canvas";
 import { ActionGetResponse, ActionPostRequest, ActionPostResponse, ACTIONS_CORS_HEADERS, createPostResponse, MEMO_PROGRAM_ID } from "@solana/actions";
 import { clusterApiUrl, ComputeBudgetInstruction, ComputeBudgetProgram, Connection, PublicKey, Transaction, TransactionInstruction } from "@solana/web3.js";
 import { NextRequest, NextResponse } from "next/server";
@@ -40,6 +40,7 @@ async function fetchLivePrice(asset: string): Promise<number> {
         return 0; // Default to 0 on error
     }
 }
+registerFont('./fonts/raleway.ttf', { family: 'Raleway' });
 
 // Generate dynamic image
 function generateDynamicImage(livePrice: number, request: NextRequest): string {
