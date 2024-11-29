@@ -25,9 +25,10 @@ const fontPath = path.join(process.cwd(), 'public', 'fonts', 'raleway.ttf');
 
 export async function GET(request: NextRequest) {
     const livePrice = await fetchLivePrice("solana");
-
+    // get address url param
+    const address = request.nextUrl.searchParams.get('address') || "";
     // Generate dynamic image
-    const dynamicImageUrl = generateDynamicImage(livePrice, request);
+    const dynamicImageUrl = generateDynamicImage(livePrice, address, request);
 
     const payload: ActionGetResponse = {
         icon: dynamicImageUrl, // Include the dynamically generated image URL
@@ -52,9 +53,9 @@ async function fetchLivePrice(asset: string): Promise<number> {
 }
 
 // Generate dynamic image
-function generateDynamicImage(livePrice: number, request: NextRequest): string {
+function generateDynamicImage(livePrice: number, address: string, request: NextRequest): string {
     registerFont(fontPath, { family: 'Raleway' });
-    const canvas = createCanvas(500, 200);
+    const canvas = createCanvas(500, 250);
     const ctx = canvas.getContext("2d");
 
     // Background
@@ -62,7 +63,7 @@ function generateDynamicImage(livePrice: number, request: NextRequest): string {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Add title
-    ctx.font = "30px Raleway";
+    ctx.font = "20px Raleway";
     ctx.fillStyle = "#61dafb";
     ctx.textBaseline = "top";
     ctx.fillText("Live SOL Price", 20, 40);
@@ -72,10 +73,12 @@ function generateDynamicImage(livePrice: number, request: NextRequest): string {
     ctx.textBaseline = "top";
     ctx.fillText(`$${livePrice.toFixed(2)}`, 20, 100);
 
-    // Footer
-    ctx.fillStyle = "#cccccc";
-    ctx.textBaseline = "top";
-    ctx.fillText("Data from CoinGecko", 20, 180);
+    if (address) {
+        // Footer
+        ctx.fillStyle = "#cccccc";
+        ctx.textBaseline = "top";
+        ctx.fillText(`Target Address: ${address}`, 20, 180);
+    }
 
     const buffer = canvas.toBuffer("image/png");
     const base64Image = buffer.toString("base64");
