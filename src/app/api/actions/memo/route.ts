@@ -40,7 +40,7 @@ async function fetchLivePrice(asset: string): Promise<number> {
         return 0; // Default to 0 on error
     }
 }
-registerFont('./fonts/raleway.ttf', { family: 'Raleway' });
+registerFont('https://step3d.vercel.app/fonts/raleway.ttf', { family: 'Raleway' });
 
 // Generate dynamic image
 function generateDynamicImage(livePrice: number, request: NextRequest): string {
