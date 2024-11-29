@@ -407,3 +407,5 @@ export const LevelWin = forwardRef<LevelWinRef, LevelWinProps>(({ score, s__scor
         </group>
     </>);
 }); 
+
+LevelWin.displayName = "LevelWin";
