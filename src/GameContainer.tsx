@@ -267,6 +267,7 @@ export const useQuizResults = () => {
         window.localStorage.setItem('level6_completion', '');
         window.localStorage.setItem('level7_completion', '');
         window.localStorage.setItem('level8_completion', '');
+        alert("done")
         s__allValid(false);
         s__someValid(false);
         s__quizResults("");
