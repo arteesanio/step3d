@@ -26,13 +26,12 @@ const fontPath = path.join(process.cwd(), 'public', 'fonts', 'raleway.ttf');
 export async function GET(request: NextRequest) {
     const livePrice = await fetchLivePrice("solana");
     // get address url param
-    // const address = request.nextUrl.searchParams.get('address') || "";
+    const address = request.nextUrl.searchParams.get('address') || "";
     // Generate dynamic image
-    // const dynamicImageUrl = generateDynamicImage(livePrice, address, request);
+    const dynamicImageUrl = generateDynamicImage(livePrice, address, request);
 
     const payload: ActionGetResponse = {
-        icon: './solana.png', // Include the dynamically generated image URL
-        // icon: dynamicImageUrl, // Include the dynamically generated image URL
+        icon: dynamicImageUrl, // Include the dynamically generated image URL
         label: `Send Memo`, 
         description: `Send a memo to the specified address. The current price of Solana is $${livePrice}`,
         title: "Live Memo Price Tracker",

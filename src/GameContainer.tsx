@@ -292,12 +292,24 @@ const HomeScreenStage = () => {
             <button className="flex-col z-100" 
                 onClick={()=>{window.location.href = "/?lvl=0"}}
             >
-                <div className="tx-altfont-1 tx-xl opaci-chov--50 hover-4">
-                    <div style={{
-                        color: "#ff3300",
-                        textShadow: "0 0 10px #ff7700aa, -1px -1px 0 #ffcc77, 2px -2px 0 #ffcc77"
+                <div className="tx-altfont-2 tx-xl opaci-chov--50 hover-4 pa-2 bord-r-50"
+                style={
+                    {
+                        background: "linear-gradient(180deg, #cccccc, #AAAAAA 30%, #0F0F0D 100%)",
+                    }
+                }>
+                    <div 
+                    className="button- 29 py-2 px-8 bord-r-50"
+                    // className="px-2 py-1 bg-w-50" 
+                    style={{
+                        background: "linear-gradient(170deg, #C12911, #FC9419)",
+                        color: "#ffffff",
+                        // border: "2px solid #ffcc77",
+                        textShadow: "2px 2px 1px #773300",
+                        // borderRadius: "20px",
+                        // textShadow: "0 0 10px #ff7700aa, -1px -1px 0 #ffcc77, 2px -2px 0 #ffcc77"
                     }}>
-                        Start Game!
+                        Start Game
                     </div>
                 </div>
             </button    >
