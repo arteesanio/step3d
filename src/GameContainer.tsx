@@ -257,8 +257,19 @@ export const useQuizResults = () => {
     const [allValid, s__allValid] = useState(false);
     const [someValid, s__someValid] = useState(false);
     const resetResults = () => {
-        localStorage.clear();
-        setQuizRes();
+        // localStorage.clear();
+        localStorage.removeItem('level1_completion');
+        localStorage.removeItem('level2_completion');
+        localStorage.removeItem('level3_completion');
+        localStorage.removeItem('level4_completion');
+        localStorage.removeItem('level5_completion');
+        localStorage.removeItem('level6_completion');
+        localStorage.removeItem('level7_completion');
+        localStorage.removeItem('level8_completion');
+        s__allValid(false);
+        s__someValid(false);
+        s__quizResults("");
+        // setQuizRes();
     }
     const setQuizRes = () => {
         const level1Time = parseInt(localStorage.getItem('level1_completion') || '0');
