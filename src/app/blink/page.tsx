@@ -5,8 +5,9 @@ import {
 } from '@solana/wallet-adapter-react';
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import { useMemo } from 'react';
-import { BlinkComponent } from '@/components/BlinkComponent';
+// import { BlinkComponent } from '@/components/BlinkComponent';
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-phantom';
+import { BlinkComponent } from '@/dom/BlinkComponent';
 
 require('@solana/wallet-adapter-react-ui/styles.css');
 

@@ -1,11 +1,15 @@
 import { Html, Cylinder, Box, useTexture, Plane } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef, useState, useEffect, useContext } from "react";
-import { Stairs } from "./Stairs";
-import { QuizModal } from "./QuizModal";
 import { secondStage_levelOne } from "@/scripts/helpers";
-import { BlockchainLink } from "./BlockchainLink";
-import { GameContext } from "../../script/state/GameContext";
+import { GameContext } from "../../../../script/state/GameContext";
+import { QuizModal } from "@/model/bit/text/QuizModal";
+import { BlockchainLink } from "@/model/core/BlockchainLink";
+import { Stairs } from "@/model/core/Stairs";
+// import { Stairs } from "./Stairs";
+// import { QuizModal } from "./QuizModal";
+// import { BlockchainLink } from "./BlockchainLink";
+// import { GameContext } from "../../script/state/GameContext";
 
 interface SecondStageLevelOneProps {
   score: number;
