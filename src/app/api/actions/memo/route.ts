@@ -8,8 +8,7 @@ import { NextRequest, NextResponse } from "next/server";
 // registerFont('./public/fonts/Roboto-Regular.ttf', { family: 'Roboto' });
 // registerFont('./public/fonts/Roboto-Bold.ttf', { family: 'Roboto', weight: 'bold' });
 // registerFont('./public/fonts/Roboto-Italic.ttf', { family: 'Roboto', style: 'italic' });
-
-// export async function GET(request: NextRequest) {
+registerFont('./public/fonts/raleway.ttf', { family: 'Raleway' });
 //     const payload:ActionGetResponse = {
 //         icon: new URL("/solana.png", new URL(request.url).origin).toString(),
 //         label: "Send Memo",
@@ -57,19 +56,19 @@ function generateDynamicImage(livePrice: number, request: NextRequest): string {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Add title
-    ctx.font = "24px Arial";
+    ctx.font = "24px Raleway";
     ctx.fillStyle = "#61dafb";
     ctx.textBaseline = "top";
     ctx.fillText("Live SOL Price", 20, 40);
 
     // Display live price
-    ctx.font = "48px Arial";
+    ctx.font = "48px Raleway";
     ctx.fillStyle = "#ffffff";
     ctx.textBaseline = "top";
     ctx.fillText(`$${livePrice.toFixed(2)}`, 20, 100);
 
     // Footer
-    ctx.font = "16px Arial";
+    ctx.font = "16px Raleway";
     ctx.fillStyle = "#cccccc";
     ctx.textBaseline = "top";
     ctx.fillText("Data from CoinGecko", 20, 180);
