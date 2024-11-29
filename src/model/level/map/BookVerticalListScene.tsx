@@ -146,7 +146,7 @@ export default function BookVerticalListScene() {
         <Box position={[0, -0.5, 10]}>
           <meshStandardMaterial color="red" />
         </Box>
-        <Basic2DText text={`${"Click to reset History"}`}  rotation={[Math.PI/2, Math.PI, 0]}
+        <Basic2DText text={`${"Logout"}`}  rotation={[Math.PI/2, Math.PI, 0]}
         position={[0, -0.1, 9]}
         font={0.2}
         color="red"

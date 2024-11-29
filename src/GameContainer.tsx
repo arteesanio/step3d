@@ -15,6 +15,7 @@ import { LevelSix } from "./model/level/stage0/LevelSix";
 import { LevelThree } from "./model/level/stage0/LevelThree";
 import { LevelTwo } from "./model/level/stage0/LevelTwo";
 import { LevelZero } from "./model/level/stage0/LevelZero";
+import { WinContainer } from "./model/level/win/WinContainer";
 
 interface GameContainerProps {
     initialLevel?: string;
@@ -219,6 +220,14 @@ const defaultLevelHeader = () => {
         return <HomeScreenStage />;
     }
 
+    
+    if (initialLevel == "win") {
+        return (<>
+        {toast && <Toast message={toast} onClose={() => s__toast("")} />}
+        <WinContainer score={score} s__score={s__score} s__toast={s__toast} />
+        </>)
+    }
+
     return (<>
         <div className="flex-col">
             {renderHeader()}
@@ -299,7 +308,7 @@ const HomeScreenStage = () => {
                     }
                 }>
                     <div 
-                    className="button- 29 py-2 px-8 bord-r-50"
+                    className="button- 29 py-2 px-4 bord-r-50"
                     // className="px-2 py-1 bg-w-50" 
                     style={{
                         background: "linear-gradient(170deg, #C12911, #FC9419)",
@@ -309,8 +318,8 @@ const HomeScreenStage = () => {
                         // borderRadius: "20px",
                         // textShadow: "0 0 10px #ff7700aa, -1px -1px 0 #ffcc77, 2px -2px 0 #ffcc77"
                     }}>
-                        <div className="tx-xl Q_md_x">Start Game</div>
-                        <div className="tx-lgx Q_xs_sm">Start Game</div>
+                        <div className="tx-xl px-4 Q_md_x">Start Game</div>
+                        <div className="tx-lgx Q_xs_md">Start Game</div>
                     </div>
                 </div>
             </button    >

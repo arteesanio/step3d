@@ -1,7 +1,8 @@
+"use client";
 import { Cylinder, useTexture, Text, Box, RoundedBox } from "@react-three/drei";
 import { useFrame, ThreeEvent } from "@react-three/fiber";
 import { Connection, PublicKey, Transaction } from "@solana/web3.js";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, forwardRef, useImperativeHandle } from "react";
 // import WebApp from '@twa-dev/sdk'
 import { verifyLevelProgression } from "@/scripts/helpers";
 import { createSolanaRequest } from "../../../script/webdk";
@@ -11,6 +12,10 @@ interface LevelWinProps {
     score: number;
     s__score: (score: number) => void;
     onToast: (message: string) => void;
+}
+
+export interface LevelWinRef {
+    handleBoxClick: () => Promise<void>;
 }
 
 export const LevelWinHeader:any = ({score}:{score:number}) => {
@@ -61,7 +66,7 @@ export const LevelWinHeader:any = ({score}:{score:number}) => {
     </h1>
 };
 
-export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
+export const LevelWin = forwardRef<LevelWinRef, LevelWinProps>(({ score, s__score, onToast }, ref) => {
     const miniHdri = useTexture("./miniHdri.jpg");
     const $coin = useRef<any>(null);
     const $box = useRef<any>(null);
@@ -313,6 +318,11 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
         }
     };
 
+    useImperativeHandle(ref, () => ({
+        handleBoxClick,
+        isVerified
+    }));
+
     return (<>
         <pointLight 
             position={[3, 3, 3]} 
@@ -330,19 +340,54 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
                 >
                     <meshMatcapMaterial matcap={miniHdri} color={"#ffee00"} />
                 </Cylinder>
-            ) : (
-                <RoundedBox
+            ) : (<>
+            <group
                     ref={$box}
+                    onClick={handleBoxClick}
+                    >
+
+<RoundedBox
                     args={[1, 1, 1]}
                     position={[0, 1, 0]}
-                    onClick={handleBoxClick}
                 >
                     <meshStandardMaterial 
-                        color={isProcessing || showVerifyButton ? "#777777" : "#997755"} 
+                        color={isProcessing || showVerifyButton ? "#777777" : "#ffffff"} 
                         transparent
                         opacity={isProcessing || showVerifyButton ? 0.7 : 1}
                     />
                 </RoundedBox>
+                <RoundedBox
+                    args={[1.035, 1.03, 0.2]}
+                    position={[0, 1, 0]}
+                >
+                    <meshStandardMaterial 
+                        color={isProcessing || showVerifyButton ? "#777777" : "#ff4433"} 
+                        transparent
+                        opacity={isProcessing || showVerifyButton ? 0.7 : 1}
+                    />
+                </RoundedBox>
+                <RoundedBox
+                    args={[0.2, 1.03, 1.03]}
+                    position={[0, 1, 0]}
+                >
+                    <meshStandardMaterial 
+                        color={isProcessing || showVerifyButton ? "#777777" : "#ff4433"} 
+                        transparent
+                        opacity={isProcessing || showVerifyButton ? 0.7 : 1}
+                    />
+                </RoundedBox>
+                <RoundedBox
+                    args={[1.025, 0.2, 1.025]}
+                    position={[0, 1, 0]}
+                >
+                    <meshStandardMaterial 
+                        color={isProcessing || showVerifyButton ? "#777777" : "#ff4433"} 
+                        transparent
+                        opacity={isProcessing || showVerifyButton ? 0.7 : 1}
+                    />
+                </RoundedBox>
+                </group>
+                </>
             )}
             
             {showVerifyButton && (
@@ -361,4 +406,4 @@ export const LevelWin = ({ score, s__score, onToast }: LevelWinProps) => {
             )}
         </group>
     </>);
-}; 
+}); 
