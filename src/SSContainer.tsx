@@ -5,13 +5,19 @@ import { Toast } from "./dom/Toast";
 import { GameLevel } from "./model/core/GameLevel";
 import { LevelWin, LevelWinHeader } from "./model/level/LevelWin";
 import { useSearchParams } from 'next/navigation';
-import { SecondStageLevelZero } from "./components/SecondStageLevelZero";
-import { SecondStageLevelOne } from "./components/SecondStageLevelOne";
-import { LevelZero } from "./components/LevelZero";
-import { LevelOne } from "./components/LevelOne";
-import { LevelTwo } from "./components/LevelTwo";
-import { SecondStageLevelTwo } from "./components/SecondStageLevelTwo";
+// import { SecondStageLevelZero } from "./components/SecondStageLevelZero";
+// import { SecondStageLevelOne } from "./components/SecondStageLevelOne";
+// import { LevelZero } from "./components/LevelZero";
+// import { LevelOne } from "./components/LevelOne";
+// import { LevelTwo } from "./components/LevelTwo";
+// import { SecondStageLevelTwo } from "./components/SecondStageLevelTwo";
 import { ThirdStageLevelZero } from "./model/level/stagex/ThirdStageLevelZero";
+import { LevelOne } from "./model/level/stage0/LevelOne";
+import { LevelTwo } from "./model/level/stage0/LevelTwo";
+import { LevelZero } from "./model/level/stage0/LevelZero";
+import { SecondStageLevelOne } from "./model/level/stagex/SecondStageLevelOne";
+import { SecondStageLevelTwo } from "./model/level/stagex/SecondStageLevelTwo";
+import { SecondStageLevelZero } from "./model/level/stagex/SecondStageLevelZero";
 
 interface SSContainerProps {
     initialLevel?: string;

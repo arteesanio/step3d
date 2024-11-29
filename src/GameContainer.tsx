@@ -1,20 +1,20 @@
 "use client";
 import { Canvas } from "@react-three/fiber";
 import { useState, useEffect } from "react";
-import { LevelOne } from "./components/LevelOne";
 import { Toast } from "./dom/Toast";
 import { GameLevel } from "./model/core/GameLevel";
-import { LevelZero } from "./components/LevelZero";
 import { LevelWin, LevelWinHeader } from "./model/level/LevelWin";
 import { useSearchParams } from 'next/navigation';
-import { LevelFour } from "./components/LevelFour";
-import { LevelThree } from "./components/LevelThree";
-import { LevelTwo } from "./components/LevelTwo";
-import { LevelEight } from "./components/LevelEight";
-import { LevelFive } from "./components/LevelFive";
-import { LevelSeven } from "./components/LevelSeven";
-import { LevelSix } from "./components/LevelSix";
 import { HomeScreenGroup } from "./HomeScreenGroup";
+import { LevelEight } from "./model/level/stage0/LevelEight";
+import { LevelFive } from "./model/level/stage0/LevelFive";
+import { LevelFour } from "./model/level/stage0/LevelFour";
+import { LevelOne } from "./model/level/stage0/LevelOne";
+import { LevelSeven } from "./model/level/stage0/LevelSeven";
+import { LevelSix } from "./model/level/stage0/LevelSix";
+import { LevelThree } from "./model/level/stage0/LevelThree";
+import { LevelTwo } from "./model/level/stage0/LevelTwo";
+import { LevelZero } from "./model/level/stage0/LevelZero";
 
 interface GameContainerProps {
     initialLevel?: string;
