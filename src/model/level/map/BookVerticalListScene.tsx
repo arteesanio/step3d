@@ -143,7 +143,10 @@ export default function BookVerticalListScene() {
           resetResults();
           window.location.href = "/";
         }}>
-        <Box position={[0, -0.5, 10]}>
+        <Box position={[0, -0.5, 10]} onClick={()=>{
+          resetResults();
+          window.location.href = "/";
+        }}>
           <meshStandardMaterial color="red" />
         </Box>
         <Basic2DText text={`${"Logout"}`}  rotation={[Math.PI/2, Math.PI, 0]}
