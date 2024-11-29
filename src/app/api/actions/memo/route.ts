@@ -2,6 +2,11 @@ import { createCanvas, registerFont } from "canvas";
 import { ActionGetResponse, ActionPostRequest, ActionPostResponse, ACTIONS_CORS_HEADERS, createPostResponse, MEMO_PROGRAM_ID } from "@solana/actions";
 import { clusterApiUrl, ComputeBudgetInstruction, ComputeBudgetProgram, Connection, PublicKey, Transaction, TransactionInstruction } from "@solana/web3.js";
 import { NextRequest, NextResponse } from "next/server";
+import fs from 'fs';
+import path from 'path';
+
+const fontPath = path.join(process.cwd(), 'public', 'fonts', 'raleway.ttf');
+
 
 // Add this near the top of your file, after the imports
 // You'll need to add these font files to your project
@@ -48,6 +53,7 @@ async function fetchLivePrice(asset: string): Promise<number> {
 
 // Generate dynamic image
 function generateDynamicImage(livePrice: number, request: NextRequest): string {
+    registerFont(fontPath, { family: 'Raleway' });
     const canvas = createCanvas(500, 200);
     const ctx = canvas.getContext("2d");
 
@@ -56,7 +62,7 @@ function generateDynamicImage(livePrice: number, request: NextRequest): string {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Add title
-    ctx.font = "30px Arial";
+    ctx.font = "30px Raleway";
     ctx.fillStyle = "#61dafb";
     ctx.textBaseline = "top";
     ctx.fillText("Live SOL Price", 20, 40);
