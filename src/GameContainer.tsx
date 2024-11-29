@@ -259,14 +259,14 @@ export const useQuizResults = () => {
     const resetResults = () => {
         console.log("resetResults 123")
         // localStorage.clear();
-        localStorage.removeItem('level1_completion');
-        localStorage.removeItem('level2_completion');
-        localStorage.removeItem('level3_completion');
-        localStorage.removeItem('level4_completion');
-        localStorage.removeItem('level5_completion');
-        localStorage.removeItem('level6_completion');
-        localStorage.removeItem('level7_completion');
-        localStorage.removeItem('level8_completion');
+        localStorage.setItem('level1_completion', '');
+        localStorage.setItem('level2_completion', '');
+        localStorage.setItem('level3_completion', '');
+        localStorage.setItem('level4_completion', '');
+        localStorage.setItem('level5_completion', '');
+        localStorage.setItem('level6_completion', '');
+        localStorage.setItem('level7_completion', '');
+        localStorage.setItem('level8_completion', '');
         s__allValid(false);
         s__someValid(false);
         s__quizResults("");
