@@ -1,11 +1,13 @@
 import { Html, Cylinder, Box, useTexture, Plane } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useContext, useRef, useState } from "react";
-import { Stairs } from "./Stairs";
-import { QuizModal } from "./QuizModal";
 import { levelOne_quizOptions } from "@/scripts/helpers";
-import { BlockchainLink } from "./BlockchainLink";
-import { GameContext } from "../../script/state/GameContext";
+import { QuizModal } from "@/model/bit/text/QuizModal";
+import { GameContext } from "../../../../script/state/GameContext";
+// import { Stairs } from "./Stairs";
+// import { QuizModal } from "./QuizModal";
+// import { BlockchainLink } from "./BlockchainLink";
+// import { GameContext } from "../../script/state/GameContext";
 
 interface LevelOneProps {
     score: number;
