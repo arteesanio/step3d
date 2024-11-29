@@ -1,4 +1,4 @@
-import { createCanvas, registerFont } from "canvas";
+import { createCanvas } from "canvas";
 import { ActionGetResponse, ActionPostRequest, ActionPostResponse, ACTIONS_CORS_HEADERS, createPostResponse, MEMO_PROGRAM_ID } from "@solana/actions";
 import { clusterApiUrl, ComputeBudgetInstruction, ComputeBudgetProgram, Connection, PublicKey, Transaction, TransactionInstruction } from "@solana/web3.js";
 import { NextRequest, NextResponse } from "next/server";
@@ -40,7 +40,6 @@ async function fetchLivePrice(asset: string): Promise<number> {
         return 0; // Default to 0 on error
     }
 }
-registerFont('https://step3d.vercel.app/fonts/raleway.ttf', { family: 'Raleway' });
 
 // Generate dynamic image
 function generateDynamicImage(livePrice: number, request: NextRequest): string {
@@ -48,29 +47,25 @@ function generateDynamicImage(livePrice: number, request: NextRequest): string {
     const ctx = canvas.getContext("2d");
 
     // Background
-    ctx.fillStyle = "#20232a"; // Dark background
+    ctx.fillStyle = "#20232a";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Add title
-    ctx.font = "bold 24px Arial";
+    // Add title - using system font
+    ctx.font = "bold 24px sans-serif";
     ctx.fillStyle = "#61dafb";
     ctx.fillText("Live SOL Price", 20, 40);
 
-    // Display live price
-    ctx.font = "bold 48px Arial";
+    // Display live price - using system font
+    ctx.font = "bold 48px sans-serif";
     ctx.fillStyle = "#ffffff";
     ctx.fillText(`$${livePrice}`, 20, 100);
 
-    // Footer
-    ctx.font = "italic 16px Arial";
+    // Footer - using system font
+    ctx.font = "italic 16px sans-serif";
     ctx.fillStyle = "#cccccc";
     ctx.fillText("Data from CoinGecko", 20, 180);
 
-    // Save the image
     const buffer = canvas.toBuffer("image/png");
-
-    // For demonstration, serve the image as a Base64-encoded URL
-    // In production, consider saving to a CDN or S3 bucket
     const base64Image = buffer.toString("base64");
     return `data:image/png;base64,${base64Image}`;
 }
