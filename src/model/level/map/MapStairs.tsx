@@ -1,5 +1,5 @@
 "use client";
-import { Stairs } from "@/components/Stairs";
+import { Stairs } from "@/model/core/Stairs";
 import { Box } from "@react-three/drei";
 
 

@@ -1,9 +1,9 @@
 "use client";
 import { Canvas } from "@react-three/fiber";
 import { useState, useEffect } from "react";
-import { Toast } from "./components/Toast";
-import { GameLevel } from "./components/GameLevel";
-import { LevelWin, LevelWinHeader } from "./components/LevelWin";
+import { Toast } from "./dom/Toast";
+import { GameLevel } from "./model/core/GameLevel";
+import { LevelWin, LevelWinHeader } from "./model/level/LevelWin";
 import { useSearchParams } from 'next/navigation';
 import { SecondStageLevelZero } from "./components/SecondStageLevelZero";
 import { SecondStageLevelOne } from "./components/SecondStageLevelOne";
@@ -11,7 +11,7 @@ import { LevelZero } from "./components/LevelZero";
 import { LevelOne } from "./components/LevelOne";
 import { LevelTwo } from "./components/LevelTwo";
 import { SecondStageLevelTwo } from "./components/SecondStageLevelTwo";
-import { ThirdStageLevelZero } from "./components/ThirdStageLevelZero";
+import { ThirdStageLevelZero } from "./model/level/stagex/ThirdStageLevelZero";
 
 interface SSContainerProps {
     initialLevel?: string;

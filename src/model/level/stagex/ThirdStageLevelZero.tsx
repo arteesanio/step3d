@@ -1,11 +1,11 @@
 import { Html, Cylinder, Box, useTexture, Plane } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef, useState, useEffect, useContext } from "react";
-import { Stairs } from "./Stairs";
-import { QuizModal } from "./QuizModal";
+import { Stairs } from "../../core/Stairs";
+import { QuizModal } from "../../bit/text/QuizModal";
 import { thirdStage_levelZero } from "@/scripts/helpers";
-import { BlockchainLink } from "./BlockchainLink";
-import { GameContext } from "../../script/state/GameContext";
+import { BlockchainLink } from "../../core/BlockchainLink";
+import { GameContext } from "../../../../script/state/GameContext";
 
 interface ThirdStageLevelZeroProps {
   score: number;

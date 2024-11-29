@@ -2,10 +2,10 @@
 import { Canvas } from "@react-three/fiber";
 import { useState, useEffect } from "react";
 import { LevelOne } from "./components/LevelOne";
-import { Toast } from "./components/Toast";
-import { GameLevel } from "./components/GameLevel";
+import { Toast } from "./dom/Toast";
+import { GameLevel } from "./model/core/GameLevel";
 import { LevelZero } from "./components/LevelZero";
-import { LevelWin, LevelWinHeader } from "./components/LevelWin";
+import { LevelWin, LevelWinHeader } from "./model/level/LevelWin";
 import { useSearchParams } from 'next/navigation';
 import { LevelFour } from "./components/LevelFour";
 import { LevelThree } from "./components/LevelThree";

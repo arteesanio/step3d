@@ -1,6 +1,7 @@
 import Image from 'next/image'
+import BookVerticalListScene from './BookVerticalListScene'
 // import { PickBtnGroup } from "@/dom/atom/popup/PickBtnGroup";
-import BookVerticalListScene from '@/model/level/pick/BookVerticalListScene';
+// import BookVerticalListScene from '@/model/level/pick/BookVerticalListScene';
 
 
 export default function PickBookStage({}:any) {

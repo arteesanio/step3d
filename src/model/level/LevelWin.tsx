@@ -4,7 +4,7 @@ import { Connection, PublicKey, Transaction } from "@solana/web3.js";
 import { useEffect, useRef, useState } from "react";
 // import WebApp from '@twa-dev/sdk'
 import { verifyLevelProgression } from "@/scripts/helpers";
-import { createSolanaRequest } from "../../script/webdk";
+import { createSolanaRequest } from "../../../script/webdk";
 import { useQuizResults } from "@/GameContainer";
 
 interface LevelWinProps {

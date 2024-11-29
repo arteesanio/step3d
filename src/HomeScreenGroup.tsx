@@ -1,6 +1,6 @@
 "use client";
 import { Box, RoundedBox } from "@react-three/drei";
-import { Stairs } from "./components/Stairs";
+import { Stairs } from "./model/core/Stairs";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 

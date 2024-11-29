@@ -19,11 +19,14 @@ export async function POST(request: NextRequest) {
         const body:ActionPostRequest = await request.json();
         console.log(body);
         let theAddress:PublicKey;
+
         try {
             theAddress = new PublicKey(body.account);
         } catch (error) {
             return Response.json("Invalid account address", { status: 400, headers: ACTIONS_CORS_HEADERS });
         }
+
+        
 
         const transaction = new Transaction()
         transaction.add(
