@@ -5,7 +5,7 @@ import { TIERPACK_NAMES, TIERPACK_COLORS, TIERPACK_IMAGES } from "@/../script/co
 import { Suspense, forwardRef, useImperativeHandle, useRef, useState } from "react";
 import React from 'react';
 import { HoverSelector } from "@/model/tools/HoverSelector";
-import PickBookCover from "@/model/level/pick/PickBookCover";
+// import PickBookCover from "@/model/level/pick/PickBookCover";
 import { BookImagePlane } from "./BookImagePlane";
 import { SingleBookTierList } from "./SingleBookTierList";
 import Basic2DText from "@/model/bit/text/Basic2DText";
