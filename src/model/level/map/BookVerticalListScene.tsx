@@ -141,12 +141,13 @@ export default function BookVerticalListScene() {
 
         <group onClick={()=>{
                   console.log("pre 111 resetResults ")
-
+alert("pre 111 resetResults ")
           resetResults();
           window.location.href = "/";
         }}>
         <Box position={[0, -0.5, 10]} onClick={()=>{
                   console.log("* pre 222 resetResults ")
+alert("* pre 222 resetResults ")
                   resetResults();
           window.location.href = "/";
         }}>
