@@ -36,6 +36,7 @@ export function LoadingFullScreen() {
 export default function BookVerticalListScene() {
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const [mounted, setMounted] = useState(false);
+  const [resetting, setResetting] = useState(false);
   const [confirmModal, setConfirmModal] = useState({ isVisible: false, message: '', symbols: '', onConfirm: () => {} });
   const { someValid, resetResults } = useQuizResults();
   useEffect(() => {
@@ -142,18 +143,20 @@ export default function BookVerticalListScene() {
         <Box position={[0, -0.5, 10]} onClick={()=>{
                   console.log("* pre 222 resetResults ")
 alert("* pre 222 resetResults ")
+          setResetting(true);
                   resetResults();
           window.location.href = "/";
         }}>
-          <meshStandardMaterial color="green" />
+          <meshStandardMaterial color="red" />
         </Box>
         <group onClick={()=>{
                   console.log("pre 111 resetResults ")
 alert("pre 111 resetResults ")
+          setResetting(true);
           resetResults();
           window.location.href = "/";
         }}>
-        <Basic2DText text={`${"Logout"}`}  rotation={[Math.PI/2, Math.PI, 0]}
+        <Basic2DText text={`${ resetting ? "Logging out..." : "Logout" }`}  rotation={[Math.PI/2, Math.PI, 0]}
         position={[0, -0.1, 9]}
         font={0.2}
         color="red"
