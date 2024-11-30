@@ -268,17 +268,7 @@ export const useQuizResults = () => {
     const [allValid, s__allValid] = useState(false);
     const [someValid, s__someValid] = useState(false);
     const resetResults = () => {
-        alert("resetting results")
-        console.log("resetResults 123")
-        // window.localStorage.clear();
-        // window.localStorage.setItem('level1_completion', '');
-        // window.localStorage.setItem('level2_completion', '');
-        // window.localStorage.setItem('level3_completion', '');
-        // window.localStorage.setItem('level4_completion', '');
-        // window.localStorage.setItem('level5_completion', '');
-        // window.localStorage.setItem('level6_completion', '');
-        // window.localStorage.setItem('level7_completion', '');
-        // window.localStorage.setItem('level8_completion', '');
+        
         s__LS_level1("");
         s__LS_level2("");
         s__LS_level3("");
@@ -287,7 +277,6 @@ export const useQuizResults = () => {
         s__LS_level6("");
         s__LS_level7("");
         s__LS_level8("");
-        alert("done")
         s__allValid(false);
         s__someValid(false);
         s__quizResults("");
