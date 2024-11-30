@@ -139,20 +139,20 @@ export default function BookVerticalListScene() {
           <meshStandardMaterial color="white"  emissive="#aaaaaa" />
         </Plane>
 
-        <group onClick={()=>{
-                  console.log("pre 111 resetResults ")
-alert("pre 111 resetResults ")
-          resetResults();
-          window.location.href = "/";
-        }}>
         <Box position={[0, -0.5, 10]} onClick={()=>{
                   console.log("* pre 222 resetResults ")
 alert("* pre 222 resetResults ")
                   resetResults();
           window.location.href = "/";
         }}>
-          <meshStandardMaterial color="red" />
+          <meshStandardMaterial color="green" />
         </Box>
+        <group onClick={()=>{
+                  console.log("pre 111 resetResults ")
+alert("pre 111 resetResults ")
+          resetResults();
+          window.location.href = "/";
+        }}>
         <Basic2DText text={`${"Logout"}`}  rotation={[Math.PI/2, Math.PI, 0]}
         position={[0, -0.1, 9]}
         font={0.2}
