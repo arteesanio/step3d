@@ -16,6 +16,7 @@ import { LevelThree } from "./model/level/stage0/LevelThree";
 import { LevelTwo } from "./model/level/stage0/LevelTwo";
 import { LevelZero } from "./model/level/stage0/LevelZero";
 import { WinContainer } from "./model/level/win/WinContainer";
+import { useLocalStorage } from "usehooks-ts";
 
 interface GameContainerProps {
     initialLevel?: string;
@@ -252,6 +253,16 @@ const defaultLevelHeader = () => {
 }
 
 export const useQuizResults = () => {
+
+    const [LS_level1, s__LS_level1] = useLocalStorage("level1_completion", "");
+    const [LS_level2, s__LS_level2] = useLocalStorage("level2_completion", "");
+    const [LS_level3, s__LS_level3] = useLocalStorage("level3_completion", "");
+    const [LS_level4, s__LS_level4] = useLocalStorage("level4_completion", "");
+    const [LS_level5, s__LS_level5] = useLocalStorage("level5_completion", "");
+    const [LS_level6, s__LS_level6] = useLocalStorage("level6_completion", "");
+    const [LS_level7, s__LS_level7] = useLocalStorage("level7_completion", "");
+    const [LS_level8, s__LS_level8] = useLocalStorage("level8_completion", "");
+
     const [quizResults, s__quizResults] = useState("");
     const [clientLoaded, s__clientLoaded] = useState(false);
     const [allValid, s__allValid] = useState(false);
@@ -260,14 +271,22 @@ export const useQuizResults = () => {
         alert("resetting results")
         console.log("resetResults 123")
         // window.localStorage.clear();
-        window.localStorage.setItem('level1_completion', '');
-        window.localStorage.setItem('level2_completion', '');
-        window.localStorage.setItem('level3_completion', '');
-        window.localStorage.setItem('level4_completion', '');
-        window.localStorage.setItem('level5_completion', '');
-        window.localStorage.setItem('level6_completion', '');
-        window.localStorage.setItem('level7_completion', '');
-        window.localStorage.setItem('level8_completion', '');
+        // window.localStorage.setItem('level1_completion', '');
+        // window.localStorage.setItem('level2_completion', '');
+        // window.localStorage.setItem('level3_completion', '');
+        // window.localStorage.setItem('level4_completion', '');
+        // window.localStorage.setItem('level5_completion', '');
+        // window.localStorage.setItem('level6_completion', '');
+        // window.localStorage.setItem('level7_completion', '');
+        // window.localStorage.setItem('level8_completion', '');
+        s__LS_level1("");
+        s__LS_level2("");
+        s__LS_level3("");
+        s__LS_level4("");
+        s__LS_level5("");
+        s__LS_level6("");
+        s__LS_level7("");
+        s__LS_level8("");
         alert("done")
         s__allValid(false);
         s__someValid(false);
