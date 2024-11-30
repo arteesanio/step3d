@@ -140,7 +140,7 @@ export default function BookVerticalListScene() {
           <meshStandardMaterial color="white"  emissive="#aaaaaa" />
         </Plane>
 
-        <Box position={[0, -0.5, 10]} onClick={()=>{
+        <Box position={[0, -0.5, 10]} onPointerDown={()=>{
                   console.log("* pre 222 resetResults ")
 alert("* pre 222 resetResults ")
           setResetting(true);
@@ -149,7 +149,7 @@ alert("* pre 222 resetResults ")
         }}>
           <meshStandardMaterial color="red" />
         </Box>
-        <group onClick={()=>{
+        <group onPointerDown={()=>{
                   console.log("pre 111 resetResults ")
 alert("pre 111 resetResults ")
           setResetting(true);
