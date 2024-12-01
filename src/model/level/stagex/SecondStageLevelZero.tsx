@@ -2,11 +2,12 @@ import { Html, Cylinder, Box, useTexture, Plane } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef, useState, useEffect, useContext } from "react";
 
-import { secondStage_levelZero } from "@/scripts/helpers";
+// import { secondStage_levelZero } from "@/scripts/helpers";
 import { GameContext } from "../../../../script/state/GameContext";
 import { QuizModal } from "@/model/bit/text/QuizModal";
 import { BlockchainLink } from "@/model/core/BlockchainLink";
 import { Stairs } from "@/model/core/Stairs";
+import { useLanguageContext } from "@/context/LanguageContext";
 
 interface SecondStageLevelZeroProps {
   score: number;
@@ -16,7 +17,8 @@ interface SecondStageLevelZeroProps {
 
 export const SecondStageLevelZero = ({ score, s__score = () => { }, onToast = () => { } }: SecondStageLevelZeroProps) => {
   const { hasCompletedAllLevels } = useContext(GameContext);
-
+  const langCtx = useLanguageContext()
+  const secondStage_levelZero = langCtx.secondStage_levelSets[0]
   const solanaLogo = useTexture("./solana.png");
   const miniHdri = useTexture("./miniHdri.jpg");
   const MAX_VEL = -0.015;
@@ -108,7 +110,7 @@ export const SecondStageLevelZero = ({ score, s__score = () => { }, onToast = ()
         </h1>
       </Html>
     }
-    {hasCompletedAllLevels && score === 0 && (
+    {false && hasCompletedAllLevels && score === 0 && (
       <Box 
         args={[0.2, 0.2, 0.2]} 
         position={[-2, 0, 0]}
@@ -150,7 +152,7 @@ export const SecondStageLevelZero = ({ score, s__score = () => { }, onToast = ()
       />
     </Plane>
 
-    <BlockchainLink />
+    {/* <BlockchainLink /> */}
     <Box args={[0.5, 0.2, 0.5]} position={[0, -2.44, 0]}
       receiveShadow castShadow scale={[2.04, 1, 0.46]}>
       <meshStandardMaterial color="#666666" />

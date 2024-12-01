@@ -1,10 +1,9 @@
 import { Html, Cylinder, Box, useTexture, Plane } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useContext, useRef, useState } from "react";
-import { levelSix_quizOptions } from "@/scripts/helpers";
 import { QuizModal } from "@/model/bit/text/QuizModal";
 import { Stairs } from "@/model/core/Stairs";
-import { GameContext } from "../../../../script/state/GameContext";
+import { useLanguageContext } from "@/context/LanguageContext";
 // import { Stairs } from "./Stairs";
 // import { QuizModal } from "./QuizModal";
 // import { GameContext } from "../../script/state/GameContext";
@@ -18,32 +17,47 @@ interface LevelSixProps {
 const MAX_VEL = -0.02;
 const SCORE_CONDITIONS = {
     GAME_OVER: -1,
-    PROCEED_TO_NEXT_LEVEL: -9,
-    SHOW_QUIZ_THRESHOLD: 7,
-    WIN_THRESHOLD: 9,
+    PROCEED_TO_WIN: -2,
+    SHOW_QUIZ_THRESHOLD: 5,
+    WIN_THRESHOLD: 7,
     POINTS_PER_CLICK: 2,
 } as const;
 
 const ROUTES = {
-    NEXT_LEVEL: "/?lvl=7",
+    WIN_PAGE: (time: string) => `/win?time=${time || '0:00'}`,
 } as const;
 
-export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: LevelSixProps) => {
+export const LevelSix = ({ score, s__score = () => { }, onToast = (arg1) => { } }: LevelSixProps) => {
     const solanaLogo = useTexture("./solana.png");
     const miniHdri = useTexture("./miniHdri.jpg");
     const [vel, s__vel] = useState(MAX_VEL);
     const [showQuiz, s__showQuiz] = useState(false);
-    const [completedQuiz, s__completedQuiz] = useState(false);
     const $box: any = useRef(null);
-    const { hasCompletedAllLevels } = useContext(GameContext);
-    const [rotSpeed] = useState((Math.random() - 0.5) * 0.05);
+    const [completedQuiz, s__completedQuiz] = useState(false);
+    const { levelSix_quizOptions } = useLanguageContext()
+    
+    const calculateCompletionTime = () => {
+        const startTime = localStorage.getItem('gameStartTime');
+        if (!startTime) return null;
+
+        const endTime = Date.now();
+        const timeDiff = endTime - parseInt(startTime);
+        const seconds = Math.floor(timeDiff / 1000);
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+
+        return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+    };
+
     const finishGame = () => {
-        if (score == 0) { s__score(-1) } else {
-            if (-score < SCORE_CONDITIONS.PROCEED_TO_NEXT_LEVEL) {
-                s__score(-score)
-            } else {
-                s__score(-1)
+        if (score == 0) { 
+            s__score(-1);
+        } else { 
+            const completionTime = calculateCompletionTime();
+            if (completionTime) {
+                localStorage.setItem('gameCompletionTime', completionTime);
             }
+            s__score(-score);
         }
     }
 
@@ -51,8 +65,10 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: L
         if (score === SCORE_CONDITIONS.GAME_OVER) {
             return window.location.reload()
         }
-        if (score < SCORE_CONDITIONS.PROCEED_TO_NEXT_LEVEL) {
-            return window.location.href = ROUTES.NEXT_LEVEL
+        if (score < SCORE_CONDITIONS.PROCEED_TO_WIN) {
+            localStorage.setItem('level8_completion', Date.now().toString());
+            const completionTime = localStorage.getItem('gameCompletionTime');
+            return window.location.href = ROUTES.WIN_PAGE(completionTime || '0:00');
         }
 
         s__vel((velocity) => (velocity + 0.04))
@@ -73,14 +89,14 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: L
         s__score(score + SCORE_CONDITIONS.POINTS_PER_CLICK)
     }
 
-    const handleCorrectAnswer = () => {
+    const handleCorrectAnswer:any = () => {
         s__showQuiz(false);
         onToast("Correct! Keep going!");
         s__score(score + SCORE_CONDITIONS.POINTS_PER_CLICK);
-        s__completedQuiz(true);
         if ($box.current) {
-            // $box.current.position.z += (0.2)*4;
+            // $box.current.position.z += 0.2;
         }
+        s__completedQuiz(true);
     };
 
     const handleIncorrectAnswer = () => {
@@ -95,10 +111,15 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: L
         if (!$box.current) { return }
         if ($box.current.position.y > -2) {
             $box.current.position.y += vel
-            $box.current.rotation.z += rotSpeed
         }
-        if ($box.current.position.y < -2 && score >= 0) { 
+        
+        if ($box.current.position.y < -2 && score >= SCORE_CONDITIONS.WIN_THRESHOLD) { 
+            // console.log("You Lose!"); 
             // onToast("You Lose!"); 
+            finishGame() 
+        }
+        
+        if ($box.current.position.y < -2 && score >= 0) { 
             finishGame() 
         }
         if (vel <= MAX_VEL) { return }
@@ -106,8 +127,9 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: L
     })
 
     const onStepClick = () => {
-        localStorage.setItem('level6_completion', Date.now().toString());
-        return window.location.href = ROUTES.NEXT_LEVEL
+        localStorage.setItem('level8_completion', Date.now().toString());
+        const completionTime = localStorage.getItem('gameCompletionTime');
+        return window.location.href = ROUTES.WIN_PAGE(completionTime || '0:00');
     }
 
     return (<>
@@ -119,22 +141,23 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: L
                 levelName="Level Six"
             />
         )}
-        {score < SCORE_CONDITIONS.PROCEED_TO_NEXT_LEVEL &&
+        {score < SCORE_CONDITIONS.PROCEED_TO_WIN &&
             <Html position={[0, -1, 0]}>
-                <button className="tx-lgx nowrap flex-col opaci-chov--50" onClick={onStepClick}
-                style={{ textShadow: "-1px 1px 1px #110700", color: "#14B7E7" }}>
-                <div className="tx-altfont-2 ">+1 Point!</div>
-                <div style={{color: "#ff9900"}} className="tx-altfont-1 tx-md">Tap to continue!</div>
+                <button className=" tx-lgx nowrap flex-col opaci-chov--50" onClick={onStepClick}
+                    style={{ textShadow: "-2px 2px 2px #110700", color: "#ffaa00" }}>
+                    <div>You Win!</div>
+                    <div className="tx-altfont-1 tx-md">Time: {localStorage.getItem('gameCompletionTime') || '0:00'}</div>
+                    <div className="tx-altfont-1 tx-sm">Tap to continue!</div>
                 </button>
             </Html>
         }
-        {score > SCORE_CONDITIONS.PROCEED_TO_NEXT_LEVEL &&
+        {score > -2 &&
             <Cylinder args={[0.5, 0.5, 0.1]} onClick={boxClick} ref={$box} rotation={[Math.PI / 2, 0, 0]}>
-                <meshMatcapMaterial matcap={miniHdri} color={"#ffdd00"} />
+                <meshMatcapMaterial matcap={miniHdri} color={"#ff8800"} />
             </Cylinder>
         }
         <group position={[0, -0.5, 1]}>
-            <Stairs brightColors={false} activatedSteps={[0,1,2]} />
+            <Stairs />
         </group>
 
         <Box args={[0.5, 0.75, 0.5]} position={[0, -2.82, 0]}
@@ -143,7 +166,7 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: L
             <meshStandardMaterial color="#aaaaaa" />
         </Box>
 
-        {!!hasCompletedAllLevels && <Plane
+        <Plane
             args={[5, 5]}
             position={[0, -2.44, -1.75]}
             rotation={[-Math.PI / 2, 0, 0]}
@@ -152,14 +175,14 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = () => { } }: L
             <meshBasicMaterial
                 map={solanaLogo}
                 transparent={true}
-                opacity={0.25}
+                opacity={0.85}
             />
-        </Plane>}
+        </Plane>
 
-        <Cylinder args={[0.5, 0.6, 0.2, 12, 1]} position={[0, -2.44, 0]}
-      receiveShadow castShadow scale={[1, 1, 1]}>
-      <meshStandardMaterial color="#666666" />
-    </Cylinder>
+        <Box args={[0.5, 0.2, 0.5]} position={[0, -2.44, 0]}
+            receiveShadow castShadow scale={[2.04, 1, 0.46]}>
+            <meshStandardMaterial color="#666666" />
+        </Box>
         <pointLight receiveShadow castShadow
             position={[2.9, -0.8, -3.28]} distance={20} intensity={80} />
         <pointLight receiveShadow castShadow

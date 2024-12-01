@@ -1,11 +1,11 @@
 import Script from 'next/script'
 import styles from '../page.module.css'
-import { GameContainer } from '@/GameContainer'
+import { SpawnContainer } from '@/SpawnContainer'
 
 export default function WinPage() {
   return (
     <main className={styles.main}>
-      <GameContainer initialLevel="win" />
+      <SpawnContainer initialLevel="win" />
     </main>
   )
 } 

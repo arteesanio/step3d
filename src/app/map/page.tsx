@@ -1,6 +1,5 @@
 import Script from 'next/script'
 import styles from '../page.module.css'
-import { GameContainer } from '@/GameContainer'
 import { GameMapContainer } from '@/model/level/map/GameMapContainer'
 // import { GameMapContainer } from '@/components/GameMapContainer'
 

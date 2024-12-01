@@ -1,10 +1,10 @@
 import { Html, Cylinder, Box, useTexture, Plane } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useContext, useRef, useState } from "react";
-import { levelTwo_quizOptions } from "@/scripts/helpers";
 import { QuizModal } from "@/model/bit/text/QuizModal";
 import { Stairs } from "@/model/core/Stairs";
 import { GameContext } from "../../../../script/state/GameContext";
+import { useLanguageContext } from "@/context/LanguageContext";
 
 interface LevelTwoProps {
     score: number;
@@ -26,6 +26,7 @@ const ROUTES = {
 } as const;
 
 export const LevelTwo = ({ score, s__score = () => { }, onToast = () => { } }: LevelTwoProps) => {
+    const { levelTwo_quizOptions } = useLanguageContext()
     const solanaLogo = useTexture("./solana.png");
     const miniHdri = useTexture("./miniHdri.jpg");
     const [vel, s__vel] = useState(MAX_VEL);

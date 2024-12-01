@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Script from 'next/script'
+import { LanguageProvider } from '../context/LanguageContext';
 
 
 export const metadata: Metadata = {
@@ -42,7 +43,11 @@ export default function RootLayout({
           // strategy="beforeInteractive" // ensures the script loads before the page renders
         />
         </head>
-      <body className='tx-altfont-1' >{children}</body>
+      <body className='tx-altfont-1' >
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
+      </body>
     </html>
   )
 }

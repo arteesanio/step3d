@@ -15,8 +15,9 @@ import * as THREE from 'three'
 import { Box, Plane, Text } from '@react-three/drei';
 import { MeshBasicMaterial, MeshStandardMaterial, Vector3 } from 'three';
 import FixedScrollingCamera from "@/model/bit/camera/FixedScrollingCamera";
-import { useQuizResults } from "@/GameContainer";
+import { useQuizResults } from "@/SpawnContainer";
 import { MapStairs } from "./MapStairs";
+import { useLanguageContext } from "@/context/LanguageContext";
 
 // export default Basic2DText
 
@@ -39,6 +40,7 @@ export default function BookVerticalListScene() {
   const [resetting, setResetting] = useState(false);
   const [confirmModal, setConfirmModal] = useState({ isVisible: false, message: '', symbols: '', onConfirm: () => {} });
   const { someValid, resetResults } = useQuizResults();
+  const { tierpackNames } = useLanguageContext();
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -90,7 +92,7 @@ export default function BookVerticalListScene() {
 
     const url: string = TIERPACK_LINKS[index];
     const symbols = extractSymbols(url);
-    const message = `Go to "${(TIERPACK_NAMES[index] || 'Unnamed').replace("\n", " ")}" portfolio link?`;
+    const message = `Go to "${(tierpackNames[index] || 'Unnamed').replace("\n", " ")}" portfolio link?`;
 
     setConfirmModal({
       isVisible: true,
@@ -99,13 +101,6 @@ export default function BookVerticalListScene() {
       onConfirm: () => {
         if (!TIERPACK_REDIRECT_LINKS[index]) { return }
         window.location.href = TIERPACK_REDIRECT_LINKS[index];
-        // if (/^https?:\/\//i.test(url)) {
-        //   window.location.href = url;
-        // } else if (url.startsWith('/')) {
-        //   window.location.href = window.location.origin + url;
-        // } else {
-        //   window.location.href = `https://${url}`;
-        // }
       }
     });
   };
@@ -139,7 +134,7 @@ export default function BookVerticalListScene() {
         <Plane args={[3,200]} rotation={[-Math.PI/2,0,0]} receiveShadow position={[0,-0.17,-23.5]}>
           <meshStandardMaterial color="white"  emissive="#aaaaaa" />
         </Plane>
-
+        {!!someValid &&
         <group onPointerDown={()=>{
           setResetting(true);
           resetResults();
@@ -153,11 +148,9 @@ export default function BookVerticalListScene() {
         position={[0, -0.1, 9]}
         font={0.2}
         color="red"
-        // color="#331100" emissive="#331100" textAlign="center"
-            // font={0.3} position={[-2, -0.05, 0.2]}  hoverSpeed={2}
           />
-</group>
-
+        </group>
+        }
 
         <group rotation={[0, Math.PI / 4 * 3, 0]} position={[0.25, 1.8, 3]}>
           <MapStairs />
@@ -176,10 +169,10 @@ export default function BookVerticalListScene() {
             rotation={[0, 0, 0]} 
             hoverSpeed={2}
           />
-          <Basic2DText text={`${"Click a RED Button"}`} color="#331100" emissive="#331100" textAlign="center"
+          <Basic2DText text={`${"Click a RED Button"}`} color="#003366" emissive="#003366" textAlign="center"
             font={0.3} position={[-1.1, 0.4, 0.13]} rotation={[0, 0, 0]} hoverSpeed={2}
           />
-          <Basic2DText text={`${"|\nv"}`} color="#660000" emissive="#331100" textAlign="center"
+          <Basic2DText text={`${"|\nv"}`} color="#000066" emissive="#003366" textAlign="center"
             font={0.3} position={[-2, -0.05, 0.2]} rotation={[0, 0, -.5]} hoverSpeed={2}
           />
         </group>

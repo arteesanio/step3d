@@ -1,9 +1,10 @@
 import { Html, Cylinder, Box, useTexture, Plane } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useContext, useRef, useState } from "react";
-import { levelOne_quizOptions } from "@/scripts/helpers";
+// import { levelOne_quizOptions } from "@/scripts/helpers";
 import { QuizModal } from "@/model/bit/text/QuizModal";
 import { GameContext } from "../../../../script/state/GameContext";
+import { useLanguageContext } from "@/context/LanguageContext";
 // import { Stairs } from "./Stairs";
 // import { QuizModal } from "./QuizModal";
 // import { BlockchainLink } from "./BlockchainLink";
@@ -30,7 +31,7 @@ const ROUTES = {
 
 export const LevelOne = ({ score, s__score = () => { }, onToast = () => { } }: LevelOneProps) => {
   const { hasCompletedAllLevels } = useContext(GameContext);
-
+  const { levelOne_quizOptions } = useLanguageContext()
     const solanaLogo = useTexture("./solana.png");
     const miniHdri = useTexture("./miniHdri.jpg");
     const [vel, s__vel] = useState(MAX_VEL);

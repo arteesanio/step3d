@@ -1,377 +1,92 @@
 [
     {
-        "a0": {
-            "symbol": "Blockchain",
-            "floor": "37500",
-            "roof": "46200"
-        },
-        "b0": {
-            "symbol": "Wallet",
-            "floor": "11.9",
-            "roof": "17.5"
-        },
-        "b1": {
-            "symbol": "Keys",
-            "floor": "90",
-            "roof": "112"
-        },
-        "c0": {
-            "symbol": "Rewards",
-            "floor": "3.7",
-            "roof": "6.3"
-        },
-        "c1": {
-            "symbol": "Gas",
-            "floor": "23",
-            "roof": "38"
-        },
-        "d0": {
-            "symbol": "Liquidity",
-            "floor": "55",
-            "roof": "125"
-        },
-        "e1": {
-            "symbol": "Scams",
-            "floor": "2.6",
-            "roof": "4.5"
-        },
-        "e2": {
-            "symbol": "Security",
-            "floor": "9.5",
-            "roof": "18"
-        }
+        "a0": { "symbol": "Blockchain", "floor": "37500", "roof": "46200" },
+        "b0": { "symbol": "Token", "floor": "11.9", "roof": "17.5" },
+        "c0": { "symbol": "Wallet", "floor": "23", "roof": "38" },
+        "d0": { "symbol": "Keys", "floor": "9.5", "roof": "18" },
+        "d1": { "symbol": "Phrase", "floor": "9.5", "roof": "18" },
+        "e0": { "symbol": "Gas", "floor": "55", "roof": "125" },
+        "e1": { "symbol": "Theft", "floor": "3.7", "roof": "6.3" }
     },
     {
-        "a0": {
-            "symbol": "Tokens",
-            "floor": "100",
-            "roof": "150"
-        },
-        "d1": {
-            "symbol": "Mining",
-            "floor": "80",
-            "roof": "120"
-        },
-        "b0": {
-            "symbol": "Staking",
-            "floor": "40",
-            "roof": "60"
-        },
-        "e1": {
-            "symbol": "Yield",
-            "floor": "30",
-            "roof": "45"
-        },
-        "c0": {
-            "symbol": "Rewards",
-            "floor": "20",
-            "roof": "35"
-        }
+        "a0": { "symbol": "Tokens", "floor": "100", "roof": "150" },
+        "d1": { "symbol": "Mining", "floor": "80", "roof": "120" },
+        "b0": { "symbol": "Staking", "floor": "40", "roof": "60" },
+        "e1": { "symbol": "Yield", "floor": "30", "roof": "45" },
+        "c0": { "symbol": "Rewards", "floor": "20", "roof": "35" }
     },
     {
-        "a0": {
-            "symbol": "Neural",
-            "floor": "200",
-            "roof": "300"
-        },
-        "b1": {
-            "symbol": "Learning",
-            "floor": "150",
-            "roof": "250"
-        },
-        "e0": {
-            "symbol": "Models",
-            "floor": "100",
-            "roof": "180"
-        },
-        "c0": {
-            "symbol": "Data",
-            "floor": "75",
-            "roof": "125"
-        },
-        "d0": {
-            "symbol": "Training",
-            "floor": "90",
-            "roof": "160"
-        }
+        "a0": { "symbol": "Neural", "floor": "200", "roof": "300" },
+        "b1": { "symbol": "Learning", "floor": "150", "roof": "250" },
+        "e0": { "symbol": "Models", "floor": "100", "roof": "180" },
+        "c0": { "symbol": "Data", "floor": "75", "roof": "125" },
+        "d0": { "symbol": "Training", "floor": "90", "roof": "160" }
     },
     {
-        "a0": {
-            "symbol": "Community",
-            "floor": "120",
-            "roof": "180"
-        },
-        "b0": {
-            "symbol": "Network",
-            "floor": "70",
-            "roof": "120"
-        },
-        "d2": {
-            "symbol": "Social",
-            "floor": "50",
-            "roof": "90"
-        },
-        "c3": {
-            "symbol": "Metrics",
-            "floor": "40",
-            "roof": "80"
-        },
-        "e1": {
-            "symbol": "Adoption",
-            "floor": "60",
-            "roof": "100"
-        },
-        "e0": {
-            "symbol": "Users",
-            "floor": "30",
-            "roof": "70"
-        },
-        "d0": {
-            "symbol": "Scale",
-            "floor": "55",
-            "roof": "95"
-        }
+        "a0": { "symbol": "Community", "floor": "120", "roof": "180" },
+        "b0": { "symbol": "Network", "floor": "70", "roof": "120" },
+        "d2": { "symbol": "Social", "floor": "50", "roof": "90" },
+        "c3": { "symbol": "Metrics", "floor": "40", "roof": "80" },
+        "e1": { "symbol": "Adoption", "floor": "60", "roof": "100" },
+        "e0": { "symbol": "Users", "floor": "30", "roof": "70" },
+        "d0": { "symbol": "Scale", "floor": "55", "roof": "95" }
     },
     {
-        "a0": {
-            "symbol": "Investment",
-            "floor": "300",
-            "roof": "450"
-        },
-        "b0": {
-            "symbol": "Risk",
-            "floor": "180",
-            "roof": "320"
-        },
-        "b1": {
-            "symbol": "Growth",
-            "floor": "150",
-            "roof": "280"
-        },
-        "c1": {
-            "symbol": "Analysis",
-            "floor": "100",
-            "roof": "200"
-        },
-        "d0": {
-            "symbol": "Strat",
-            "floor": "90",
-            "roof": "180"
-        },
-        "d1": {
-            "symbol": "Portfolio",
-            "floor": "80",
-            "roof": "160"
-        },
-        "e0": {
-            "symbol": "Markets",
-            "floor": "70",
-            "roof": "140"
-        },
-        "e2": {
-            "symbol": "Trends",
-            "floor": "50",
-            "roof": "100"
-        }
+        "a0": { "symbol": "Investment", "floor": "300", "roof": "450" },
+        "b0": { "symbol": "Risk", "floor": "180", "roof": "320" },
+        "b1": { "symbol": "Growth", "floor": "150", "roof": "280" },
+        "c1": { "symbol": "Analysis", "floor": "100", "roof": "200" },
+        "d0": { "symbol": "Strat", "floor": "90", "roof": "180" },
+        "d1": { "symbol": "Portfolio", "floor": "80", "roof": "160" },
+        "e0": { "symbol": "Markets", "floor": "70", "roof": "140" },
+        "e2": { "symbol": "Trends", "floor": "50", "roof": "100" }
     },
     {
-        "a0": {
-            "symbol": "Trading",
-            "floor": "200",
-            "roof": "350"
-        },
-        "e1": {
-            "symbol": "Analysis",
-            "floor": "150",
-            "roof": "300"
-        },
-        "b0": {
-            "symbol": "Chart Patterns",
-            "floor": "120",
-            "roof": "250"
-        },
-        "c0": {
-            "symbol": "Volume",
-            "floor": "80",
-            "roof": "160"
-        },
-        "c1": {
-            "symbol": "Signals",
-            "floor": "70",
-            "roof": "140"
-        },
-        "d0": {
-            "symbol": "Strategy",
-            "floor": "60",
-            "roof": "120"
-        },
-        "d1": {
-            "symbol": "Risk",
-            "floor": "50",
-            "roof": "100"
-        }
+        "a0": { "symbol": "Trading", "floor": "200", "roof": "350" },
+        "e1": { "symbol": "Analysis", "floor": "150", "roof": "300" },
+        "b0": { "symbol": "Chart Patterns", "floor": "120", "roof": "250" },
+        "c0": { "symbol": "Volume", "floor": "80", "roof": "160" },
+        "c1": { "symbol": "Signals", "floor": "70", "roof": "140" },
+        "d0": { "symbol": "Strategy", "floor": "60", "roof": "120" },
+        "d1": { "symbol": "Risk", "floor": "50", "roof": "100" }
     },
     {
-        "a0": {
-            "symbol": "Assets",
-            "floor": "250",
-            "roof": "400"
-        },
-        "a1": {
-            "symbol": "Value",
-            "floor": "200",
-            "roof": "350"
-        },
-        "b0": {
-            "symbol": "Storage",
-            "floor": "150",
-            "roof": "300"
-        },
-        "b1": {
-            "symbol": "Transfer",
-            "floor": "120",
-            "roof": "250"
-        },
-        "c0": {
-            "symbol": "Security",
-            "floor": "100",
-            "roof": "200"
-        },
-        "c1": {
-            "symbol": "Privacy",
-            "floor": "80",
-            "roof": "160"
-        }
+        "a0": { "symbol": "Assets", "floor": "250", "roof": "400" },
+        "a1": { "symbol": "Value", "floor": "200", "roof": "350" },
+        "b0": { "symbol": "Storage", "floor": "150", "roof": "300" },
+        "b1": { "symbol": "Transfer", "floor": "120", "roof": "250" },
+        "c0": { "symbol": "Security", "floor": "100", "roof": "200" },
+        "c1": { "symbol": "Privacy", "floor": "80", "roof": "160" }
     },
     {
-        "a0": {
-            "symbol": "Bitcoin",
-            "floor": "300",
-            "roof": "450"
-        },
-        "a1": {
-            "symbol": "Mining",
-            "floor": "250",
-            "roof": "400"
-        },
-        "b0": {
-            "symbol": "Network",
-            "floor": "200",
-            "roof": "350"
-        },
-        "b1": {
-            "symbol": "Protocol",
-            "floor": "150",
-            "roof": "300"
-        },
-        "c0": {
-            "symbol": "Blocks",
-            "floor": "120",
-            "roof": "250"
-        },
-        "c1": {
-            "symbol": "Hash",
-            "floor": "100",
-            "roof": "200"
-        },
-        "d0": {
-            "symbol": "Nodes",
-            "floor": "80",
-            "roof": "160"
-        }
+        "a0": { "symbol": "Bitcoin", "floor": "300", "roof": "450" },
+        "a1": { "symbol": "Mining", "floor": "250", "roof": "400" },
+        "b0": { "symbol": "Network", "floor": "200", "roof": "350" },
+        "b1": { "symbol": "Protocol", "floor": "150", "roof": "300" },
+        "c0": { "symbol": "Blocks", "floor": "120", "roof": "250" },
+        "c1": { "symbol": "Hash", "floor": "100", "roof": "200" },
+        "d0": { "symbol": "Nodes", "floor": "80", "roof": "160" }
     },
     {
-        "a0": {
-            "symbol": "Layer1",
-            "floor": "400",
-            "roof": "600"
-        },
-        "a1": {
-            "symbol": "Scaling",
-            "floor": "300",
-            "roof": "500"
-        },
-        "b0": {
-            "symbol": "Protocol",
-            "floor": "250",
-            "roof": "450"
-        },
-        "b1": {
-            "symbol": "Network",
-            "floor": "200",
-            "roof": "400"
-        },
-        "c0": {
-            "symbol": "Speed",
-            "floor": "150",
-            "roof": "350"
-        },
-        "c1": {
-            "symbol": "Capacity",
-            "floor": "120",
-            "roof": "300"
-        },
-        "d0": {
-            "symbol": "Security",
-            "floor": "100",
-            "roof": "250"
-        },
-        "d1": {
-            "symbol": "Consensus",
-            "floor": "80",
-            "roof": "200"
-        },
-        "e0": {
-            "symbol": "Nodes",
-            "floor": "60",
-            "roof": "150"
-        },
-        "e1": {
-            "symbol": "Validators",
-            "floor": "50",
-            "roof": "120"
-        }
+        "a0": { "symbol": "Layer1", "floor": "400", "roof": "600" },
+        "a1": { "symbol": "Scaling", "floor": "300", "roof": "500" },
+        "b0": { "symbol": "Protocol", "floor": "250", "roof": "450" },
+        "b1": { "symbol": "Network", "floor": "200", "roof": "400" },
+        "c0": { "symbol": "Speed", "floor": "150", "roof": "350" },
+        "c1": { "symbol": "Capacity", "floor": "120", "roof": "300" },
+        "d0": { "symbol": "Security", "floor": "100", "roof": "250" },
+        "d1": { "symbol": "Consensus", "floor": "80", "roof": "200" },
+        "e0": { "symbol": "Nodes", "floor": "60", "roof": "150" },
+        "e1": { "symbol": "Validators", "floor": "50", "roof": "120" }
     },    
     {
-        "a0": {
-            "symbol": "Future",
-            "floor": "500",
-            "roof": "800"
-        },
-        "a1": {
-            "symbol": "Innovation",
-            "floor": "400",
-            "roof": "700"
-        },
-        "b0": {
-            "symbol": "Research",
-            "floor": "300",
-            "roof": "600"
-        },
-        "b1": {
-            "symbol": "Progress",
-            "floor": "250",
-            "roof": "500"
-        },
-        "c0": {
-            "symbol": "Vision",
-            "floor": "200",
-            "roof": "400"
-        },
-        "c1": {
-            "symbol": "Growth",
-            "floor": "150",
-            "roof": "300"
-        },
-        "d0": {
-            "symbol": "Change",
-            "floor": "100",
-            "roof": "250"
-        },
-        "e0": {
-            "symbol": "Impact",
-            "floor": "80",
-            "roof": "200"
-        }
+        "a0": { "symbol": "Future", "floor": "500", "roof": "800" },
+        "a1": { "symbol": "Innovation", "floor": "400", "roof": "700" },
+        "b0": { "symbol": "Research", "floor": "300", "roof": "600" },
+        "b1": { "symbol": "Progress", "floor": "250", "roof": "500" },
+        "c0": { "symbol": "Vision", "floor": "200", "roof": "400" },
+        "c1": { "symbol": "Growth", "floor": "150", "roof": "300" },
+        "d0": { "symbol": "Change", "floor": "100", "roof": "250" },
+        "e0": { "symbol": "Impact", "floor": "80", "roof": "200" }
     }
 ]

@@ -6,17 +6,15 @@ import { GameLevel } from "./model/core/GameLevel";
 import { LevelWin, LevelWinHeader } from "./model/level/LevelWin";
 import { useSearchParams } from 'next/navigation';
 import { HomeScreenGroup } from "./HomeScreenGroup";
-import { LevelEight } from "./model/level/stage0/LevelEight";
 import { LevelFive } from "./model/level/stage0/LevelFive";
 import { LevelFour } from "./model/level/stage0/LevelFour";
 import { LevelOne } from "./model/level/stage0/LevelOne";
-import { LevelSeven } from "./model/level/stage0/LevelSeven";
-import { LevelSix } from "./model/level/stage0/LevelSix";
 import { LevelThree } from "./model/level/stage0/LevelThree";
 import { LevelTwo } from "./model/level/stage0/LevelTwo";
 import { LevelZero } from "./model/level/stage0/LevelZero";
 import { WinContainer } from "./model/level/win/WinContainer";
 import { useLocalStorage } from "usehooks-ts";
+import { LevelSix } from "./model/level/stage0/LevelSix";
 
 interface GameContainerProps {
     initialLevel?: string;
@@ -32,7 +30,7 @@ const lookup_levelMap: { [key: string]: string } = {
     "7": "seven",
     "8": "eight"
 };
-export const GameContainer = ({ initialLevel = "start" }: GameContainerProps) => {
+export const SpawnContainer = ({ initialLevel = "start" }: GameContainerProps) => {
     const searchParams = useSearchParams();
     const [score, s__score] = useState(0);
     const [toast, _s__toast] = useState("");
@@ -191,10 +189,6 @@ const defaultLevelHeader = () => {
                 return <LevelFive score={score} s__score={s__score} onToast={s__toast} />;
             case "six":
                 return <LevelSix score={score} s__score={s__score} onToast={s__toast} />;
-            case "seven":
-                return <LevelSeven score={score} s__score={s__score} onToast={s__toast} />;
-            case "eight":
-                return <LevelEight score={score} s__score={s__score} onToast={s__toast} />;
             default:
                 return <LevelZero score={score} s__score={s__score} onToast={s__toast} />;
         }

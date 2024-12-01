@@ -4,10 +4,10 @@ import { useContext, useRef, useState } from "react";
 // import { Stairs } from "./Stairs";
 // import { QuizModal } from "./QuizModal";
 // import { GameContext } from "../../script/state/GameContext";
-import { levelFive_quizOptions } from "@/scripts/helpers";
 import { QuizModal } from "@/model/bit/text/QuizModal";
 import { Stairs } from "@/model/core/Stairs";
 import { GameContext } from "../../../../script/state/GameContext";
+import { useLanguageContext } from "@/context/LanguageContext";
 
 interface LevelFiveProps {
     score: number;
@@ -36,6 +36,7 @@ export const LevelFive = ({ score, s__score = () => { }, onToast = () => { } }: 
     const [completedQuiz, s__completedQuiz] = useState(false);
     const $box: any = useRef(null);
     const { hasCompletedAllLevels } = useContext(GameContext);
+    const { levelFive_quizOptions } = useLanguageContext()
     const [rotSpeed] = useState((Math.random() - 0.5) * 0.05);
     const finishGame = () => {
         if (score == 0) { s__score(-1) } else {

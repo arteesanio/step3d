@@ -1,17 +1,22 @@
 import TIERPACK_LINKS_JSON from "./TIERPACKS.json"
 
 export const TIERPACK_COLORS = [
-    ["#b5b5b5", "#999999", "#ff0000"], // webpov
-    ["#A7FEDB", "#18FB9F", "#7824eC"], // Solana Season
-    ["#FFCB9B", "#FfFbaC", "#a12F00"], // AI Future
-    ["#d0f0FF", "#a0e2FF", "#333333"], // Coinbase Ventures
-    ["#FDD9B0", "#FBBF7D", "#ffffff"], // a16z
-    ["#D2FFD2", "#ffffff", "#000000"], // paradigm
-    ["#eAFcFf", "#bAF9Ff", "#e0f0e0"], // winkelvoss
-    ["#dddddd", "#999999", "#ff6600"], // btc/neco
-    ["#ddeeff", "#f0f0f0", "#000000"],  // Layer 1
+    ["#b5b5b5", "#999999", "#ff0000"], // getting\nstarted
+    ["#A7FEDB", "#18FB9F", "#dd4400"], // crypto\nbasics
+    ["#FFCB9B", "#FfFbaC", "#a17F00"], // digital\nwallets
 
-    ["#Ffeff0", "#F8d7e8", "#8D002B"],  // technology\npoet
+    ["#d0f0FF", "#a0e2FF", "#339933"], // staking\nrewards
+    ["#FDD9B0", "#FBBF7D", "#00ff00"], // decentralized\napps
+    ["#D2FFD2", "#ffffff", "#0077ff"], // defi\nbasics
+
+    ["#eAFcFf", "#bAF9Ff", "#0033cc"], // dapp\ndevelopment
+    ["#dddddd", "#999999", "#0000ff"], // blockchain\nsafety
+    ["#ddeeff", "#f0f0f0", "#ff00ff"],  // web3\ndomains
+    ["#Ffeff0", "#F8d7e8", "#8D002B"],  // 
+    ["#dddddd", "#999999", "#ff6600"], // 
+    ["#ddeeff", "#f0f0f0", "#000000"],  // 
+
+    ["#Ffeff0", "#F8d7e8", "#8D002B"],  // 
 
 ]
 
@@ -27,21 +32,34 @@ export const TIERPACK_COLORS = [
 // Volumen 9: Uso de dominios .sol y su integración en el ecosistema.
 // Volumen 10: Futuras actualizaciones y el roadmap de Solana.
 
-export const TIERPACK_NAMES = [
-    "Getting\nStarted",
-    
-    "Crypto\nBasics",
-    "Digital\nWallets",
-    "Staking\nRewards",
+export const TIERPACK_NAMES = {
+    en: [
+        "Getting\nStarted",
+        "Crypto\nBasics",
+        "Digital\nWallets",
 
-    "NFT\nExploring",
-    "DeFi\nBasics",
-    "dApp\nBuilding",
-    "Blockchain\nSafety",
-    "Web3\nDomains",
+        "Staking\nRewards",
+        "Decentralized\nApps",
+        "DeFi\nBasics",
 
-    "Future\nTech",
-]
+        "Dapp\nDevelopment",
+        "Blockchain\nSafety",
+        "Web3\nDomains",
+        "Interoperability",
+    ],
+    es: [
+        "Primeros\nPasos",
+        "Conceptos\nBásicos",
+        "Monederos\nDigitales",
+        "Staking y\nRecompensas",
+        "Apps\nDescentralizadas",
+        "DeFi\nBásico",
+        "Desarrollo\nDapp",
+        "Seguridad\nBlockchain",
+        "Dominios\nWeb3",
+        "Interoperabilidad",
+    ]
+}
 
 
 

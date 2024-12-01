@@ -1,10 +1,10 @@
 import { Html, Cylinder, Box, useTexture, Plane } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useContext, useRef, useState } from "react";
-import { levelThree_quizOptions } from "@/scripts/helpers";
 import { QuizModal } from "@/model/bit/text/QuizModal";
 import { Stairs } from "@/model/core/Stairs";
 import { GameContext } from "../../../../script/state/GameContext";
+import { useLanguageContext } from "@/context/LanguageContext";
 
 interface LevelThreeProps {
     score: number;
@@ -33,7 +33,7 @@ export const LevelThree = ({ score, s__score = () => { }, onToast = () => { } }:
     const [completedQuiz, s__completedQuiz] = useState(false);
     const $box: any = useRef(null);
     const { hasCompletedAllLevels } = useContext(GameContext);
-
+    const { levelThree_quizOptions } = useLanguageContext()
     const finishGame = () => {
         if (score == 0) { s__score(-1) } else {
             if (-score < SCORE_CONDITIONS.PROCEED_TO_NEXT_LEVEL) {

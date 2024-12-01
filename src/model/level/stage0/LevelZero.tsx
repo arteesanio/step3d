@@ -1,11 +1,11 @@
 import { Html, Cylinder, Box, useTexture, Plane } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef, useState, useEffect, useContext } from "react";
-import { levelZero_quizOptions } from "@/scripts/helpers";
 import { QuizModal } from "@/model/bit/text/QuizModal";
 import { Stairs } from "@/model/core/Stairs";
 import { BlockchainLink } from "@/model/core/BlockchainLink";
 import { GameContext } from "../../../../script/state/GameContext";
+import { useLanguageContext } from "@/context/LanguageContext";
 
 interface LevelOneProps {
   score: number;
@@ -15,12 +15,12 @@ interface LevelOneProps {
 // tap the coin or lose
 export const LevelZero = ({ score, s__score = () => { }, onToast = (arg1) => { } }: LevelOneProps) => {
   const { hasCompletedAllLevels } = useContext(GameContext);
-
+  const { levelZero_quizOptions } = useLanguageContext();
   const solanaLogo = useTexture("./solana.png");
   const miniHdri = useTexture("./miniHdri.jpg");
   const MAX_VEL = -0.005;
   const [vel, s__vel] = useState(MAX_VEL);
-  const [rotSpeed] = useState((Math.random() - 0.5) * 0.05);
+  const [rotSpeed] = useState((Math.random() - 0.5) * 0.05 *2);
   const [showQuiz, s__showQuiz] = useState(false);
   const $box: any = useRef(null);
 
@@ -56,7 +56,7 @@ export const LevelZero = ({ score, s__score = () => { }, onToast = (arg1) => { }
 
   const handleCorrectAnswer = () => {
     s__showQuiz(false);
-    onToast("Correct! Keep going!");
+    onToast("Correct!");
     s__score(score + 2);
     if ($box.current) {
       // $box.current.position.z += 0.2;

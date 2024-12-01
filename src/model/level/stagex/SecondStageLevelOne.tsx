@@ -1,11 +1,12 @@
 import { Html, Cylinder, Box, useTexture, Plane } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef, useState, useEffect, useContext } from "react";
-import { secondStage_levelOne } from "@/scripts/helpers";
+import {  } from "@/scripts/helpers";
 import { GameContext } from "../../../../script/state/GameContext";
 import { QuizModal } from "@/model/bit/text/QuizModal";
 import { BlockchainLink } from "@/model/core/BlockchainLink";
 import { Stairs } from "@/model/core/Stairs";
+import { useLanguageContext } from "@/context/LanguageContext";
 // import { Stairs } from "./Stairs";
 // import { QuizModal } from "./QuizModal";
 // import { BlockchainLink } from "./BlockchainLink";
@@ -19,6 +20,8 @@ interface SecondStageLevelOneProps {
 
 export const SecondStageLevelOne = ({ score, s__score = () => { }, onToast = () => { } }: SecondStageLevelOneProps) => {
   const { hasCompletedAllLevels } = useContext(GameContext);
+  const langCtx = useLanguageContext()
+  const secondStage_levelOne = langCtx.secondStage_levelSets[1]
 
   const solanaLogo = useTexture("./solana.png");
   const miniHdri = useTexture("./miniHdri.jpg");

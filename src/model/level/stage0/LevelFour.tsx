@@ -1,10 +1,10 @@
 import { Html, Cylinder, Box, useTexture, Plane } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useContext, useRef, useState } from "react";
-import { levelFour_quizOptions } from "@/scripts/helpers";
 import { QuizModal } from "@/model/bit/text/QuizModal";
 import { Stairs } from "@/model/core/Stairs";
 import { GameContext } from "../../../../script/state/GameContext";
+import { useLanguageContext } from "@/context/LanguageContext";
 
 interface LevelFourProps {
     score: number;
@@ -19,7 +19,7 @@ const SCORE_CONDITIONS = {
     SHOW_QUIZ_THRESHOLD: 3,
     WIN_THRESHOLD: 5,
     POINTS_PER_CLICK: 2,
-} as const;
+} as const; 
 
 const ROUTES = {
     NEXT_LEVEL: "/?lvl=5",
@@ -33,6 +33,7 @@ export const LevelFour = ({ score, s__score = () => { }, onToast = () => { } }: 
     const [completedQuiz, s__completedQuiz] = useState(false);
     const $box: any = useRef(null);
     const { hasCompletedAllLevels } = useContext(GameContext);
+    const { levelFour_quizOptions } = useLanguageContext()
     const [rotSpeed] = useState((Math.random() - 0.5) * 0.05);
     const finishGame = () => {
         if (score == 0) { s__score(-1) } else {

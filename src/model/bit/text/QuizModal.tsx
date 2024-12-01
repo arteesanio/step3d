@@ -1,3 +1,4 @@
+import { useLanguageContext } from '../../../context/LanguageContext';
 import { QuizSet, shuffleArray } from "@/scripts/helpers";
 import { Html } from "@react-three/drei";
 import { useMemo } from "react";
@@ -10,6 +11,7 @@ interface QuizModalProps {
 }
 
 export const QuizModal = ({ quizSet, onCorrect, onIncorrect, levelName = "" }: QuizModalProps) => {
+    const { language } = useLanguageContext();
     const shuffledOptions = useMemo(() => shuffleArray(quizSet.options), [quizSet]);
 
     const handleAnswer = (isCorrect: boolean) => {

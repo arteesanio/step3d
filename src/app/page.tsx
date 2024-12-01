@@ -1,5 +1,5 @@
 import styles from './page.module.css'
-import { GameContainer } from '@/GameContainer'
+import { SpawnContainer } from '@/SpawnContainer'
 // import WebApp from '@twa-dev/sdk'
 import { GameProvider } from '../../script/state/GameContext'
 
@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <GameProvider>
-        <GameContainer initialLevel="start" />
+        <SpawnContainer initialLevel="start" />
       </GameProvider>
     </main>
   )

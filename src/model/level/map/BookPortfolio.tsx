@@ -9,11 +9,13 @@ import { HoverSelector } from "@/model/tools/HoverSelector";
 import { BookImagePlane } from "./BookImagePlane";
 import { SingleBookTierList } from "./SingleBookTierList";
 import Basic2DText from "@/model/bit/text/Basic2DText";
-import { useQuizResults } from "@/GameContainer";
+import { useQuizResults } from "@/SpawnContainer";
+import { useLanguageContext } from "@/context/LanguageContext";
 // import Basic2DText from "@/model/bit/text/Basic2DText";
 
 
 export const BookPortfolio = forwardRef(({ state, calls }: any)=> {
+  const { tierpackNames } = useLanguageContext();
   const { quizResults, allValid } = useQuizResults();
     const $hoverSelector = useRef<any>(null);
   const [isSelected, s__isSelected] = useState(false);
@@ -95,8 +97,12 @@ export const BookPortfolio = forwardRef(({ state, calls }: any)=> {
           {/* <Basic2DText text={`${TIERPACK_NAMES[state.index] || 'Book'}`} color={TIERPACK_COLORS[state.index][2]} emissive={TIERPACK_COLORS[state.index][2]}
               font={0.17} position={[0, 0, -0.45]} 
             /> */}
-            <Basic2DText text={`${TIERPACK_NAMES[state.index] || 'Book'}`} color={TIERPACK_COLORS[state.index][2]} emissive={TIERPACK_COLORS[state.index][2]}
-              font={0.17} position={[-.95, -0.05, -0.84]} 
+            <Basic2DText 
+              text={`${tierpackNames[state.index] || 'Book'}`} 
+              color={TIERPACK_COLORS[state.index][2]} 
+              emissive={TIERPACK_COLORS[state.index][2]}
+              font={0.17} 
+              position={[-.95, -0.05, -0.84]} 
             />
             <Suspense fallback={<group> <Box args={[0.1,0.1,0.1]}></Box> </group>}>
               {/* <BookImagePlane src={TIERPACK_IMAGES[state.index]} position={[0, 0.001, 0.05]} /> */}

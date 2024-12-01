@@ -6,7 +6,7 @@ import { useEffect, useRef, useState, forwardRef, useImperativeHandle } from "re
 // import WebApp from '@twa-dev/sdk'
 import { verifyLevelProgression } from "@/scripts/helpers";
 import { createSolanaRequest } from "../../../script/webdk";
-import { useQuizResults } from "@/GameContainer";
+import { useQuizResults } from "@/SpawnContainer";
 
 interface LevelWinProps {
     score: number;
