@@ -178,7 +178,8 @@ export const secondStageQuizSets: QuizContent = {
             question: "What is a CEX?",
             options: [
                 { text: "Trading system", correct: true },
-                { text: "Decentralized protocol", correct: true },
+                { text: "Decentralized protocol", correct: false },
+                { text: "Centralized exchange", correct: true },
                 { text: "Transfer platform", correct: false },
                 { text: "All of the above", correct: false }
             ]

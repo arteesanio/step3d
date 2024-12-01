@@ -60,7 +60,7 @@ export const TIERPACK_NAMES = {
         "Desarrollo\nDapp",
         "Seguridad\nBlockchain",
         "Dominios\nWeb3",
-        
+
         "Interoperabilidad",
     ]
 }
@@ -105,21 +105,9 @@ export function getTierPackLinks(tierpacks:any[], basePackUrl:string):string[] {
 export const basePackUrl = process.env.NODE_ENV === "production"? "https://webqub.com/trade/?" : "http://localhost:3800/trade/?"
 
 export const TIERPACK_LINKS = getTierPackLinks(TIERPACK_LINKS_JSON ,basePackUrl);
+export const TIERPACK_NAMEBASES = ["basics","wallet","connect","play","trends","analysis","chart-patterns","volume","signals", "invest"]
 export const TIERPACK_REDIRECT_LINKS = [
-    `/?lvl=0`,
-    
-
-    `/learn`,
-    `/learn/connect`,
-    `/learn/play`,
-
-    `/learn/trends`,
-    `/learn/analysis`,
-    `/learn/chart-patterns`,
-    `/learn/volume`,
-    `/learn/signals`,
-
-    `/learn/invest`,
-
-
+    `/?lvl=0`, // basics
+    `/learn`, // wallet
+    ...TIERPACK_NAMEBASES.slice(2).map(base => `/learn/${base}`) // Rest of the items with /learn/base
 ]

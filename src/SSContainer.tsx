@@ -11,13 +11,18 @@ import { useSearchParams } from 'next/navigation';
 // import { LevelOne } from "./components/LevelOne";
 // import { LevelTwo } from "./components/LevelTwo";
 // import { SecondStageLevelTwo } from "./components/SecondStageLevelTwo";
-import { ThirdStageLevelZero } from "./model/level/stagex/ThirdStageLevelZero";
+import { ThirdStageLevelZero } from "./model/level/stagex/third/ThirdStageLevelZero";
 import { LevelOne } from "./model/level/stage0/LevelOne";
 import { LevelTwo } from "./model/level/stage0/LevelTwo";
 import { LevelZero } from "./model/level/stage0/LevelZero";
-import { SecondStageLevelOne } from "./model/level/stagex/SecondStageLevelOne";
-import { SecondStageLevelTwo } from "./model/level/stagex/SecondStageLevelTwo";
-import { SecondStageLevelZero } from "./model/level/stagex/SecondStageLevelZero";
+// import { SecondStageLevelOne } from "./model/level/stagex/SecondStageLevelOne";
+// import { SecondStageLevelTwo } from "./model/level/stagex/SecondStageLevelTwo";
+import { SecondStageLevelZero } from "./model/level/stagex/second/SecondStageLevelZero";
+import { SecondStageLevelThree } from "./model/level/stagex/second/SecondStageLevelThree";
+import { SecondStageLevelFour } from "./model/level/stagex/second/SecondStageLevelFour";
+import { SecondStageLevelFive } from "./model/level/stagex/second/SecondStageLevelFive";
+import { SecondStageLevelOne } from "./model/level/stagex/second/SecondStageLevelOne";
+import { SecondStageLevelTwo } from "./model/level/stagex/second/SecondStageLevelTwo";
 
 interface SSContainerProps {
     initialLevel?: string;
@@ -182,6 +187,9 @@ export const SSContainer = ({ initialLevel = "start", initialStage = "2" }: SSCo
                         case "zero": return <SecondStageLevelZero {...levelProps} />;
                         case "one": return <SecondStageLevelOne {...levelProps} />;
                         case "two": return <SecondStageLevelTwo {...levelProps} />;
+                        case "three": return <SecondStageLevelThree {...levelProps} />;
+                        case "four": return <SecondStageLevelFour {...levelProps} />;
+                        case "five": return <SecondStageLevelFive {...levelProps} />;
                         // Add more level cases for stage 2
                         default: return <SecondStageLevelZero {...levelProps} />;
                     }

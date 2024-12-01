@@ -156,7 +156,7 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = (arg1) => { } 
                 <meshMatcapMaterial matcap={miniHdri} color={"#ff8800"} />
             </Cylinder>
         }
-        <group position={[0, -0.5, 1]}>
+        <group position={[0, -0.5, 1.5]}>
             <Stairs />
         </group>
 

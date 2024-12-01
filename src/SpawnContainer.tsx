@@ -44,6 +44,8 @@ export const SpawnContainer = ({ initialLevel = "start" }: GameContainerProps) =
 
     useEffect(() => {
         const lvlParam = searchParams.get('lvl');
+        const stageParam = searchParams.get('stage');
+        
         if (!lvlParam) return;
 
         // Handle numeric level

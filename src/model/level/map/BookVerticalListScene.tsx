@@ -92,7 +92,7 @@ export default function BookVerticalListScene() {
 
     const url: string = TIERPACK_LINKS[index];
     const symbols = extractSymbols(url);
-    const message = `Go to "${(tierpackNames[index] || 'Unnamed').replace("\n", " ")}" portfolio link?`;
+    const message = `Start level ${index}: "${(tierpackNames[index] || 'Unnamed').replace("\n", " ")}"?`;
 
     setConfirmModal({
       isVisible: true,
@@ -202,7 +202,7 @@ const ConfirmModalContent = ({ isVisible, message, symbols, onConfirm, onCancel 
         <div className="pb-4 tx-altfont-7 underline">Confirm Redirection</div>
         <div className="pb-4">{message}</div>
         <div className="bg-w-20 bord-r-15 pa-2 mb-4">
-          <div className="pb-2">Tokens</div>
+          <div className="pb-2">Topics</div>
           <div className="pb-4 tx-altfont-7">{symbols.replaceAll("USDT", "")}</div>
         </div>
         <div className="flex gap-2">

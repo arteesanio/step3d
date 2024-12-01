@@ -136,7 +136,7 @@ export const BookPortfolio = forwardRef(({ state, calls }: any)=> {
         { (
           <group position={[0, 0.03, -0.13]} rotation={[0.2,0,0]}>
             <group position={[-1, .72, 0]}>
-              <Basic2DText text={`Click Here to Enter`} color="#000" emissive="#000" textAlign="start"
+              <Basic2DText text={`Click to Start lvl ${state.index}`} color="#000" emissive="#000" textAlign="start"
                 font={0.075} position={[0, 0, 0.115]} rotation={[0, 0, 0]} 
               />
             </group>

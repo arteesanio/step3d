@@ -6,10 +6,10 @@ import { useContext, useRef, useState } from "react";
 // import { GameContext } from "../../script/state/GameContext";
 import { QuizModal } from "@/model/bit/text/QuizModal";
 import { Stairs } from "@/model/core/Stairs";
-import { GameContext } from "../../../../script/state/GameContext";
+import { GameContext } from "../../../../../script/state/GameContext";
 import { useLanguageContext } from "@/context/LanguageContext";
 
-interface LevelFiveProps {
+interface SecondStageLevelFourProps {
     score: number;
     s__score: (score: number) => void;
     onToast: (message: string) => void;
@@ -25,10 +25,10 @@ const SCORE_CONDITIONS = {
 } as const;
 
 const ROUTES = {
-    NEXT_LEVEL: "/?lvl=6",
+    NEXT_LEVEL: "/learn?lvl=5",
 } as const;
 
-export const LevelFive = ({ score, s__score = () => { }, onToast = () => { } }: LevelFiveProps) => {
+export const SecondStageLevelFour = ({ score, s__score = () => { }, onToast = () => { } }: SecondStageLevelFourProps) => {
     const solanaLogo = useTexture("./solana.png");
     const miniHdri = useTexture("./miniHdri.jpg");
     const [vel, s__vel] = useState(MAX_VEL);
@@ -36,7 +36,7 @@ export const LevelFive = ({ score, s__score = () => { }, onToast = () => { } }: 
     const [completedQuiz, s__completedQuiz] = useState(false);
     const $box: any = useRef(null);
     const { hasCompletedAllLevels } = useContext(GameContext);
-    const { levelFive_quizOptions } = useLanguageContext()
+    // const { SecondStageLevelFour_quizOptions } = useLanguageContext()
     const [rotSpeed] = useState((Math.random() - 0.5) * 0.05);
     const finishGame = () => {
         if (score == 0) { s__score(-1) } else {
@@ -114,14 +114,14 @@ export const LevelFive = ({ score, s__score = () => { }, onToast = () => { } }: 
         localStorage.setItem('level5_completion', Date.now().toString());
         return window.location.href = ROUTES.NEXT_LEVEL
     }
-
+    const secondStage_levelSets = useLanguageContext().secondStage_levelSets
     return (<>
         {showQuiz && (
             <QuizModal
-                quizSet={levelFive_quizOptions}
+                quizSet={secondStage_levelSets[4]}
                 onCorrect={handleCorrectAnswer}
                 onIncorrect={handleIncorrectAnswer}
-                levelName="Level Five"
+                levelName="Level Four"
             />
         )}
         {score < SCORE_CONDITIONS.PROCEED_TO_NEXT_LEVEL &&

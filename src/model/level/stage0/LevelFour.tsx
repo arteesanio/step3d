@@ -136,7 +136,7 @@ export const LevelFour = ({ score, s__score = () => { }, onToast = () => { } }: 
             </Cylinder>
         }
         <group position={[0, -0.5, 1]}>
-            <Stairs brightColors={false} activatedSteps={[0,]} />
+            <Stairs brightColors={false} activatedSteps={[0,1,2,3]} />
         </group>
 
         <Box args={[0.5, 0.75, 0.5]} position={[0, -2.82, 0]}

@@ -133,9 +133,9 @@ export const LevelThree = ({ score, s__score = () => { }, onToast = () => { } }:
                 <meshMatcapMaterial matcap={miniHdri} color={"#ffdd00"} />
             </Cylinder>
         }
-        {/* <group position={[0, -0.5, 1]}>
-            <Stairs brightColors={false} activatedSteps={[0,1]} />
-        </group> */}
+        <group position={[0, -0.5, 1]}>
+            <Stairs brightColors={false} activatedSteps={[0,1,2]} />
+        </group>
 
         <Box args={[0.5, 0.75, 0.5]} position={[0, -2.82, 0]}
             receiveShadow castShadow
