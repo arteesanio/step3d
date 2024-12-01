@@ -12,7 +12,7 @@ export const HomeScreenGroup = () => {
       groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime) * 0.25
       // calculate the fps with the elapseTime
       // const fps = 1 / delta;
-      // console.log(fps);
+      // console.warn(fps);
     }
   });
 

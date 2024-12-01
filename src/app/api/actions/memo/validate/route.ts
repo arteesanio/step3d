@@ -35,7 +35,6 @@ const sendTokenToThisAddress = async (addr: string) => {
         const txSignature = await connection.sendRawTransaction(transaction.serialize());
         await connection.confirmTransaction(txSignature);
 
-        console.log('Sent 0.001 SOL to', addr, 'Transaction:', txSignature);
         return txSignature;
     } catch (error) {
         console.error('Error sending reward SOL:', error);

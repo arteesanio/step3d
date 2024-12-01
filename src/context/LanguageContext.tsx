@@ -37,7 +37,6 @@ const LanguageContext = createContext<LanguageContextType>({
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [language, setLanguage] = useLocalStorage<Language>('lang', 'es');
 
-    // make all these use memo
     const levelZero_quizOptions = useMemo(() => firstStageQuizSets?.[language]?.[0] || [], [language]);
     const levelOne_quizOptions = useMemo(() => firstStageQuizSets?.[language]?.[1] || [], [language]);
     const levelTwo_quizOptions = useMemo(() => firstStageQuizSets?.[language]?.[2] || [], [language]);
@@ -49,17 +48,6 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const thirdStage_levelSets = useMemo(() => thirdStageQuizSets[language], [language]);    
     const tierpackNames = useMemo(() => TIERPACK_NAMES[language], [language]);
 
-
-
-    // console.log("tierpackNames", tierpackNames, TIERPACK_NAMES, language);
-    // const [isClientReady, s__isClientReady] = useState(false);
-    // useEffect(() => {
-    //     if (!isClientReady) {
-    //         s__isClientReady(true)
-    //         // setLanguage(window.localStorage.getItem('language') as Language)
-    //         return
-    //     }
-    // }, [])
 
     return (
         <LanguageContext.Provider value={{

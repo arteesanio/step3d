@@ -111,8 +111,6 @@ const defaultLevelHeader = () => {
         };
         
         const levelKey = lookup_levelMap[currentLevel]
-        console.log("levelKey", levelKey)
-        console.log("HeaderlevelMap[levelKey]", HeaderlevelMap[levelKey])
         return HeaderlevelMap[levelKey] || defaultLevelHeader();
     }
 
@@ -280,7 +278,6 @@ export const useQuizResults = () => {
         const level6Time = parseInt(window.localStorage.getItem('level6_completion') || '0');
         const level7Time = parseInt(window.localStorage.getItem('level7_completion') || '0');
         const level8Time = parseInt(window.localStorage.getItem('level8_completion') || '0');
-        console.log("times", level1Time, level2Time, level3Time, level4Time, level5Time, level6Time, level7Time, level8Time)
 
         if (level1Time || level2Time || level3Time || level4Time || level5Time || level6Time || level7Time || level8Time) {
             s__someValid(true);

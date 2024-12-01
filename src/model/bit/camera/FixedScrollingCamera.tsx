@@ -9,18 +9,13 @@ export const FixedScrollingCamera = ({dimensionThreshold=24, scrollAxis="z"}:{di
   const velocity = useRef(0);
   const dampingFactor = 0.4;
 
-  // Function to handle camera movement with damping
   const moveCamera = (deltaZ: number) => {
     velocity.current += deltaZ;
   };
 
-  // Damping effect
   useFrame(() => {
     if (Math.abs(velocity.current) < 0.0005) velocity.current = 0;
     if (velocity.current !== 0) {
-      // console.log("camera.position.z", camera.position.z)
-      // if (camera.position.z - velocity.current > 5.5) {return}
-      // if (camera.position.z - velocity.current < -20) {return}
       camera.position.z -= velocity.current;
       if (lightRef.current) {
         lightRef.current.position.z -= velocity.current / 1.25;

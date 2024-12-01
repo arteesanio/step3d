@@ -12,8 +12,6 @@ export const WinContainer = ({ score, s__score, s__toast }: { score: number, s__
     
     useEffect(() => {
         const stageParam = searchParams.get('stage');
-        console.log(stageParam)
-        // check if stage is a number
         if (!isNaN(Number(stageParam))) {
             s__stage(Number(stageParam));
         }

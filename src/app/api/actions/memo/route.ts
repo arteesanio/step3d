@@ -91,7 +91,6 @@ export const OPTIONS = GET
 export async function POST(request: NextRequest) {
     try {
         const body:ActionPostRequest = await request.json();
-        // console.log(body);
         let theAddress:PublicKey;
 
         try {

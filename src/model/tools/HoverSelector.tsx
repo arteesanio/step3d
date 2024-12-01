@@ -66,34 +66,26 @@ export const HoverSelector = forwardRef<HoverSelectorRef, HoverSelectorProps>(({
         if ($mainGroupRef.current.position.z > 0 && $mainGroupRef.current.position.z < 0.01){
 
           $mainGroupRef.current.position.z = 0
-          console.log("here")
           if (reachedEnd) {
             s__reachedEnd(false)
             s__fullSpinCount(fullSpinCount+1)
           }
         } else {
-          // console.log("$mainGroupRef.current.position.z", $mainGroupRef.current.position.z)
         }
       }
     return
   }
-  // console.log("555", $mainGroupRef.current.position.z)
     
 
   const ACTION_DISTANCE = 1
-  // const ACTION_DISTANCE = Math.PI * 1.95
     
     if (Math.round($mainGroupRef.current.position.z) >= ACTION_DISTANCE) {
-      // $mainGroupRef.current.position.z = 0
-      // console.log("kkk")
 
       if (!reachedEnd) {
         s__reachedEnd(true)
         
-        // console.log("qqqqq")
         setTimeout(()=>{
           s__isActionActive(false)
-          // console.log("asdasdasdaegerg")
         },5000)
       }
       
@@ -105,7 +97,6 @@ export const HoverSelector = forwardRef<HoverSelectorRef, HoverSelectorProps>(({
       $mainGroupRef.current.position.z += ACTION_SPEED * delta
     }
     }
-    // console.log("$mainGroupRef.current.position.z", $mainGroupRef.current.position.z)
   })
 
   return (<>

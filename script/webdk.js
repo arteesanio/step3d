@@ -51,7 +51,6 @@ export const createStepUser = async (userData) => {
 }
 
 export async function checkExistingSolanaRequest(solAddress) {
-    console.log("checkExistingSolanaRequest solAddress", solAddress);
     const supabase = getSupabaseClient()
     const { data, error } = await supabase
         .from('solana_requests')
@@ -65,7 +64,6 @@ export async function checkExistingSolanaRequest(solAddress) {
         throw error;
     }
     
-    console.log("data", data);
     return data;
 }
 export async function checkExistingSolanaRequestWithTg(solAddress, tg_id) {

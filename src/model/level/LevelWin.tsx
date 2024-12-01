@@ -81,11 +81,8 @@ export const LevelWin = forwardRef<LevelWinRef, LevelWinProps>(({ score, s__scor
     const setTelegram = async () => {
         // @ts-ignore: expect error cuz of unkonwn telegram object inside window context
         const wwwTg = window?.Telegram?.WebApp
-        console.log("wwwTg", wwwTg);
         s__wndwTg(wwwTg)
-        console.log("wwwTg?.initDataUnsafe?.user?.id", wwwTg?.initDataUnsafe?.user);
         s__telegram_id(wwwTg?.initDataUnsafe?.user?.id)
-        console.log("*****************************************", );
     }
 
     useFrame((_, delta) => {
@@ -141,16 +138,11 @@ export const LevelWin = forwardRef<LevelWinRef, LevelWinProps>(({ score, s__scor
         }
     };
     useEffect(() => {
-        // console.log("WebApp", WebApp);
         setTelegram();
         setQuizRes();
-//   WebApp.ready();
-
     }, []);
     const verifyTransactionByTgId = async () => {
-        // console.log("WebApp", WebApp);
         if (!telegram_id) {
-            console.log("Telegram ID not found!");
             onToast("Telegram ID not found!");
             return;
         }
@@ -223,9 +215,7 @@ export const LevelWin = forwardRef<LevelWinRef, LevelWinProps>(({ score, s__scor
                     quiz_results: quizResults
                 })
             });
-            console.log("callToEndpoint", callToEndpoint);
             const dataRes = await callToEndpoint.json();
-            console.log("dataRes", dataRes);
 
             if ((dataRes).valid) {
                 // show coin
@@ -237,14 +227,12 @@ export const LevelWin = forwardRef<LevelWinRef, LevelWinProps>(({ score, s__scor
             return;
         }
         if (!allValid) {
-            console.log("Invalid level progression detected!");
             onToast("Invalid level progression detected!");
             s__invalidLevelProgression(true);
             return;
         }
 
         if (isProcessing || showVerifyButton) {
-            console.log("isProcessing || showVerifyButton!");
             verifyTransaction();
             return;
         };
@@ -257,22 +245,16 @@ export const LevelWin = forwardRef<LevelWinRef, LevelWinProps>(({ score, s__scor
         }
         
         setIsProcessing(true);
-        console.log("setIsProcessing(true");
         try {
-            console.log("check phantom");
             const phantom = (window as any)?.phantom?.solana;
             if (!telegram_id && !phantom?.isConnected) {
                 await phantom.connect();
             }
-            // console.log("WebApp", WebApp);
-            console.log("telegram_id", telegram_id);
-            console.log("phantom.publicKey.toString()", phantom?.publicKey, phantom?.publicKey?.toString());
             if (!phantom?.publicKey?.toString()) {
                 if (!telegram_id) {
                     alert("Failed to connect. Please try again.");
                     return;
                 } else {
-                    console.log("verifyTransactionByTgId");
                     verifyTransactionByTgId();
                     return;
                 }
@@ -300,11 +282,9 @@ export const LevelWin = forwardRef<LevelWinRef, LevelWinProps>(({ score, s__scor
             
             onToast("Please approve the memo transaction...");
             const signedTransaction = await phantom.signTransaction(transaction);
-            console.log("Transaction signed:", signedTransaction);
             
             const connection = new Connection(process.env.NEXT_PUBLIC_SOLANA_RPC_URL!);
             const signature = await connection.sendRawTransaction(signedTransaction.serialize());
-            console.log("Transaction sent:", signature);
             
             setTxSignature(signature);
             setShowVerifyButton(true);

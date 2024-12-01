@@ -26,7 +26,6 @@ export async function POST(request: NextRequest) {
 
         // Check for existing solana_request only with this address 
         const existingRequestByAddress = await checkExistingSolanaRequest(addr);
-        console.log("existingRequestByAddress", existingRequestByAddress);
         if (existingRequestByAddress) {
             return Response.json(
                 { 
@@ -41,7 +40,6 @@ export async function POST(request: NextRequest) {
         }
         // Check for existing solana_request with this address and telegram_id
         const existingRequest = await checkExistingSolanaRequestWithTg(addr, tgid);
-        console.log("existingRequest", existingRequest);
         if (existingRequest) {
             return Response.json(
                 { 

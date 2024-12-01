@@ -37,9 +37,6 @@ export function LoadingFullScreen() {
 
 export default function BookVerticalListScene() {
   const { stageStorage } = useContext(GameContext);
-  useEffect(()=>{
-    console.log("stageStorage", stageStorage)
-  }, [stageStorage])
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const [mounted, setMounted] = useState(false);
   const [resetting, setResetting] = useState(false);

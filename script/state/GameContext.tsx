@@ -14,31 +14,21 @@ export function GameProvider({ children }: any) {
     const [live_stageStorage, s__live_stageStorage] = useState<any>(null);
 
     const addToStageStorage = (lvl:number) => {
-        // add to string
         const newString = live_stageStorage + (!live_stageStorage ? "" : ",") + lvl
-        // split, reorder and remove duplicates 
         const newArray = newString.split(",").sort().filter((v, i, self) => self.indexOf(v) === i)
         setStageStorage(newArray.join(","))
     }
     const setStageStorage = (arg:any) => {
         s__live_stageStorage(arg)
         s__LS_stageStorage(arg)
-        console.log("stageStorage", stageStorage)
     }
-    // useEffect(()=>{
-    //     console.log("************************************", )
-    // }, [])
     const stageStorage = useMemo(()=>{
-        console.log("************************************", )
-        console.log("obj state storage", LS_stageStorage, live_stageStorage)
         if(!LS_stageStorage && !live_stageStorage) return {}
-        // return object with all levels as boolean
         const levels = LS_stageStorage.split(",")
         const obj:any = {}
         levels.forEach((lvl:string)=>{
             obj[lvl] = true
         })
-        console.log("obj state storage", obj)
         return obj
     }, [LS_stageStorage, live_stageStorage])
     const [sessionData, s__sessionData] = useState<any>({});

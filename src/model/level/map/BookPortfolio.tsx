@@ -38,7 +38,6 @@ export const BookPortfolio = forwardRef(({ state, calls }: any)=> {
     s__isSelected(true)
   }
   const triggerFullSpinCount = (val:any) => {
-    console.log("triggerFullSpinCount", val);
     s__fullSpinCount(val);
   }
 
