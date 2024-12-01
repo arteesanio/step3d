@@ -14,7 +14,7 @@ export function GameProvider({ children }: any) {
     const [live_stageStorage, s__live_stageStorage] = useState<any>(null);
 
     const addToStageStorage = (lvl:number) => {
-        const newString = live_stageStorage + (!live_stageStorage ? "" : ",") + lvl
+        const newString = LS_stageStorage + (!LS_stageStorage ? "" : ",") + lvl
         const newArray = newString.split(",").sort().filter((v, i, self) => self.indexOf(v) === i)
         setStageStorage(newArray.join(","))
     }
@@ -24,7 +24,8 @@ export function GameProvider({ children }: any) {
     }
     const stageStorage = useMemo(()=>{
         if(!LS_stageStorage && !live_stageStorage) return {}
-        const levels = LS_stageStorage.split(",")
+        const levels = LS_stageStorage?.toString()?.split(",")
+        if (!levels) { return {} }
         const obj:any = {}
         levels.forEach((lvl:string)=>{
             obj[lvl] = true

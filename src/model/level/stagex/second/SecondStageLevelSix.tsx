@@ -30,6 +30,7 @@ const ROUTES = {
 
 export const SecondStageLevelFive = ({ score, s__score = () => { }, onToast = () => { } }: SecondStageLevelFiveProps) => {
     const solanaLogo = useTexture("./solana.png");
+    const { addToStageStorage } = useContext(GameContext);
     const miniHdri = useTexture("./miniHdri.jpg");
     const [vel, s__vel] = useState(MAX_VEL);
     const [showQuiz, s__showQuiz] = useState(false);
@@ -112,6 +113,7 @@ export const SecondStageLevelFive = ({ score, s__score = () => { }, onToast = ()
 
     const onStepClick = () => {
         localStorage.setItem('level5_completion', Date.now().toString());
+        addToStageStorage(2)
         return window.location.href = ROUTES.NEXT_LEVEL
     }
     const secondStage_levelSets = useLanguageContext().secondStage_levelSets

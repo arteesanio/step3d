@@ -1,6 +1,6 @@
 "use client";
 import { Canvas } from "@react-three/fiber";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useContext } from "react";
 import { Toast } from "./dom/Toast";
 import { GameLevel } from "./model/core/GameLevel";
 import { LevelWin, LevelWinHeader } from "./model/level/LevelWin";
@@ -15,6 +15,7 @@ import { LevelZero } from "./model/level/stage0/LevelZero";
 import { WinContainer } from "./model/level/win/WinContainer";
 import { useLocalStorage } from "usehooks-ts";
 import { LevelSix } from "./model/level/stage0/LevelSix";
+import { GameContext } from "../script/state/GameContext";
 
 interface GameContainerProps {
     initialLevel?: string;
@@ -36,7 +37,7 @@ export const SpawnContainer = ({ initialLevel = "start" }: GameContainerProps) =
     const [toast, _s__toast] = useState("");
     const [toastCount, s__toastCount] = useState(0);
     const [currentLevel, s__currentLevel] = useState("");
-    
+    const stageParam = parseInt(searchParams.get('stage') || '2');
     const s__toast = (v:any) => {
         s__toastCount((prev)=>prev+1)
         _s__toast(v);
@@ -44,7 +45,6 @@ export const SpawnContainer = ({ initialLevel = "start" }: GameContainerProps) =
 
     useEffect(() => {
         const lvlParam = searchParams.get('lvl');
-        const stageParam = searchParams.get('stage');
         
         if (!lvlParam) return;
 
@@ -276,14 +276,12 @@ export const useQuizResults = () => {
         const level4Time = parseInt(window.localStorage.getItem('level4_completion') || '0');
         const level5Time = parseInt(window.localStorage.getItem('level5_completion') || '0');
         const level6Time = parseInt(window.localStorage.getItem('level6_completion') || '0');
-        const level7Time = parseInt(window.localStorage.getItem('level7_completion') || '0');
-        const level8Time = parseInt(window.localStorage.getItem('level8_completion') || '0');
 
-        if (level1Time || level2Time || level3Time || level4Time || level5Time || level6Time || level7Time || level8Time) {
+        if (level1Time || level2Time || level3Time || level4Time || level5Time || level6Time ) {
             s__someValid(true);
         }
-        if (level1Time && level2Time && level3Time && level4Time && level5Time && level6Time && level7Time && level8Time) {
-            const quiz_results = `${level1Time},${level2Time},${level3Time},${level4Time},${level5Time},${level6Time},${level7Time},${level8Time}`;
+        if (level1Time && level2Time && level3Time && level4Time && level5Time && level6Time) {
+            const quiz_results = `${level1Time},${level2Time},${level3Time},${level4Time},${level5Time},${level6Time}`;
             s__quizResults(quiz_results);
             s__allValid(true);
         }
@@ -303,6 +301,13 @@ export const useQuizResults = () => {
 
 const HomeScreenStage = () => {
     const {quizResults, clientLoaded, allValid, setQuizRes} = useQuizResults();
+    const { stageStorage } = useContext(GameContext);
+    
+    const lastStagePosible = useMemo(() => {
+        if (!stageStorage) return 1;
+        const stages = Object.keys(stageStorage).map(Number);
+        return Math.max(...stages, 1);
+    }, [stageStorage]);
 
     return (<>
         {!!clientLoaded && !allValid && (
@@ -335,7 +340,7 @@ const HomeScreenStage = () => {
         
         {!!clientLoaded && !!allValid && (<>
             <button className="flex-col z-100 pa-1 opaci-chov--50  tx-lgx  bord-r-50" 
-                onClick={()=>{window.location.href = "/learn"}}
+                onClick={()=>{window.location.href = `/learn?stage=${lastStagePosible + 1}`}}
                 style={
                     {
                         background: "linear-gradient(180deg, #cccccc, #AAAAAA 30%, #0F0F0D 100%)",
