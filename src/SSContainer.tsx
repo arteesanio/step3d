@@ -209,7 +209,7 @@ export const SSContainer = ({ initialLevel = "start", initialStage = "2" }: SSCo
                     }
                 // Add more stage cases here
                 default:
-                    return <SecondStageLevelZero {...levelProps} />;
+                    return <LevelZero {...levelProps} />;
             }
         } catch (error) {
             console.error("Error loading level:", error);

@@ -109,5 +109,5 @@ export const TIERPACK_NAMEBASES = ["basics","wallet","connect","play","trends","
 export const TIERPACK_REDIRECT_LINKS = [
     `/?lvl=0`, // basics
     `/learn`, // wallet
-    ...TIERPACK_NAMEBASES.slice(2).map(base => `/learn/${base}`) // Rest of the items with /learn/base
+    ...TIERPACK_NAMEBASES.slice(2).map((base, nIndex) => `/learn/?stage=${nIndex + 3}`) // Rest of the items with /learn/base
 ]

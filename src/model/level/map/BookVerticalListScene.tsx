@@ -1,6 +1,6 @@
 "use client"
 import { Canvas } from "@react-three/fiber";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import { TIERPACK_LINKS, TIERPACK_NAMES, TIERPACK_REDIRECT_LINKS } from "@/../script/constant/DEFAULT_PACKS";
 import { BookPortfolio } from "./BookPortfolio";
@@ -18,6 +18,7 @@ import FixedScrollingCamera from "@/model/bit/camera/FixedScrollingCamera";
 import { useQuizResults } from "@/SpawnContainer";
 import { MapStairs } from "./MapStairs";
 import { useLanguageContext } from "@/context/LanguageContext";
+import { GameContext } from "../../../../script/state/GameContext";
 
 // export default Basic2DText
 
@@ -35,6 +36,10 @@ export function LoadingFullScreen() {
 }
 
 export default function BookVerticalListScene() {
+  const { stageStorage } = useContext(GameContext);
+  useEffect(()=>{
+    console.log("stageStorage", stageStorage)
+  }, [stageStorage])
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const [mounted, setMounted] = useState(false);
   const [resetting, setResetting] = useState(false);
@@ -92,7 +97,7 @@ export default function BookVerticalListScene() {
 
     const url: string = TIERPACK_LINKS[index];
     const symbols = extractSymbols(url);
-    const message = `Start level ${index}: "${(tierpackNames[index] || 'Unnamed').replace("\n", " ")}"?`;
+    const message = `Start stage ${index + 1}: "${(tierpackNames[index] || 'Unnamed').replace("\n", " ")}"?`;
 
     setConfirmModal({
       isVisible: true,
@@ -181,7 +186,7 @@ export default function BookVerticalListScene() {
           {boxPositions.map((position, index) => (
             <group key={index} position={[0.7, 0, 0]} rotation={[0, 0, 0]}>
               <BookPortfolio 
-                state={{ index, position }} 
+                state={{ index, position, prevStageReady: index == 0 ? true : stageStorage?.[index] }} 
                 calls={{ openLinkInThisTab }} 
               />
             </group>

@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber"
 import { LevelWinHeader, LevelWin } from "../LevelWin"
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { GameProvider } from "../../../../script/state/GameContext";
 
 export const WinContainer = ({ score, s__score, s__toast }: { score: number, s__score: any, s__toast: any }) => {
     const winRef = useRef<any>(null);
@@ -43,13 +44,12 @@ export const WinContainer = ({ score, s__score, s__toast }: { score: number, s__
                  >Continue</div>
             </button>
             )}
-            
-        <div style={{ position: "absolute", top: "0", left: "0", width: "100%", height: "100%" }}>
-            <Canvas shadows>
+                <div style={{ position: "absolute", top: "0", left: "0", width: "100%", height: "100%" }}>
+                    <Canvas shadows>
                 <GameLevel score={score}>
                     <LevelWin ref={winRef} score={score} s__score={s__score} onToast={s__toast} />
                 </GameLevel>
-            </Canvas>
-        </div>
+                    </Canvas>
+                </div>
         </>)
 }

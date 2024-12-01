@@ -1,6 +1,7 @@
 import Script from 'next/script'
 import styles from '../page.module.css'
 import { GameMapContainer } from '@/model/level/map/GameMapContainer'
+import { GameProvider } from '../../../script/state/GameContext'
 // import { GameMapContainer } from '@/components/GameMapContainer'
 
 export default function WinPage() {
@@ -10,7 +11,9 @@ export default function WinPage() {
       width: '100vw',
       height: '100vh',
     }}>
-      <GameMapContainer />
+            <GameProvider>  
+            <GameMapContainer />
+            </GameProvider>
     </div>
   )
 } 

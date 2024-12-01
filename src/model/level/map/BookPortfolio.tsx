@@ -2,7 +2,7 @@
 import { Box, Cylinder, RoundedBox } from "@react-three/drei";
 import * as THREE from 'three';
 import { TIERPACK_NAMES, TIERPACK_COLORS, TIERPACK_IMAGES } from "@/../script/constant/DEFAULT_PACKS";
-import { Suspense, forwardRef, useImperativeHandle, useRef, useState } from "react";
+import { Suspense, forwardRef, useContext, useImperativeHandle, useRef, useState } from "react";
 import React from 'react';
 import { HoverSelector } from "@/model/tools/HoverSelector";
 // import PickBookCover from "@/model/level/pick/PickBookCover";
@@ -11,10 +11,12 @@ import { SingleBookTierList } from "./SingleBookTierList";
 import Basic2DText from "@/model/bit/text/Basic2DText";
 import { useQuizResults } from "@/SpawnContainer";
 import { useLanguageContext } from "@/context/LanguageContext";
+import { GameContext } from "../../../../script/state/GameContext";
 // import Basic2DText from "@/model/bit/text/Basic2DText";
 
 
 export const BookPortfolio = forwardRef(({ state, calls }: any)=> {
+  const { stageStorage } = useContext(GameContext);
   const { tierpackNames } = useLanguageContext();
   const { quizResults, allValid } = useQuizResults();
     const $hoverSelector = useRef<any>(null);
@@ -80,7 +82,7 @@ export const BookPortfolio = forwardRef(({ state, calls }: any)=> {
             <Cylinder args={[0.25,0.25,0.3,24,1]} position={[0,0,(!isMoonSpinActive && !reachedEnd) ? -0.02 : -0.1]}
               rotation={[Math.PI/2, 0, 0]}
             >
-              <meshStandardMaterial color={(!isMoonSpinActive && !reachedEnd) && allValid ? "red" : "grey"} />
+              <meshStandardMaterial color={(!isMoonSpinActive && !reachedEnd) && state.prevStageReady ? "red" : "grey"} />
             </Cylinder>
             <RoundedBox position={[0,0,-0.1]} args={[0.75,0.75,0.25]} >
               <meshStandardMaterial color={"white"} />
@@ -136,7 +138,7 @@ export const BookPortfolio = forwardRef(({ state, calls }: any)=> {
         { (
           <group position={[0, 0.03, -0.13]} rotation={[0.2,0,0]}>
             <group position={[-1, .72, 0]}>
-              <Basic2DText text={`Click to Start lvl ${state.index}`} color="#000" emissive="#000" textAlign="start"
+              <Basic2DText text={`Click to Start Stage ${state.index + 1}`} color="#000" emissive="#000" textAlign="start"
                 font={0.075} position={[0, 0, 0.115]} rotation={[0, 0, 0]} 
               />
             </group>

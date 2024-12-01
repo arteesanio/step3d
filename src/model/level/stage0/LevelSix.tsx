@@ -4,6 +4,7 @@ import { useContext, useRef, useState } from "react";
 import { QuizModal } from "@/model/bit/text/QuizModal";
 import { Stairs } from "@/model/core/Stairs";
 import { useLanguageContext } from "@/context/LanguageContext";
+import { GameContext } from "../../../../script/state/GameContext";
 // import { Stairs } from "./Stairs";
 // import { QuizModal } from "./QuizModal";
 // import { GameContext } from "../../script/state/GameContext";
@@ -35,6 +36,7 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = (arg1) => { } 
     const $box: any = useRef(null);
     const [completedQuiz, s__completedQuiz] = useState(false);
     const { levelSix_quizOptions } = useLanguageContext()
+    const { stageStorage, addToStageStorage } = useContext(GameContext);  
     
     const calculateCompletionTime = () => {
         const startTime = localStorage.getItem('gameStartTime');
@@ -126,9 +128,12 @@ export const LevelSix = ({ score, s__score = () => { }, onToast = (arg1) => { } 
         s__vel(vel - 0.001)
     })
 
+    
+
     const onStepClick = () => {
-        localStorage.setItem('level8_completion', Date.now().toString());
+        localStorage.setItem('level6_completion', Date.now().toString());
         const completionTime = localStorage.getItem('gameCompletionTime');
+        addToStageStorage(1)
         return window.location.href = ROUTES.WIN_PAGE(completionTime || '0:00');
     }
 
