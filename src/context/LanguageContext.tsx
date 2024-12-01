@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, useMemo } from 'react';
 import { firstStageQuizSets, Language, QuizSet, secondStageQuizSets } from '../scripts/helpers';
 import { useLocalStorage } from 'usehooks-ts';
 import { TIERPACK_NAMES } from '../../script/constant/DEFAULT_PACKS';
@@ -33,19 +33,30 @@ const LanguageContext = createContext<LanguageContextType>({
 });
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [language, setLanguage] = useLocalStorage<Language>('language', 'es');
-    const levelZero_quizOptions = firstStageQuizSets[language][0];
-    const levelOne_quizOptions = firstStageQuizSets[language][1];
-    const levelTwo_quizOptions = firstStageQuizSets[language][2];
-    const levelThree_quizOptions = firstStageQuizSets[language][3];
-    const levelFour_quizOptions = firstStageQuizSets[language][4];
-    const levelFive_quizOptions = firstStageQuizSets[language][5];
-    const levelSix_quizOptions = firstStageQuizSets[language][6];
+    const [language, setLanguage] = useLocalStorage<Language>('lang', 'es');
+
+    // make all these use memo
+    const levelZero_quizOptions = useMemo(() => firstStageQuizSets?.[language]?.[0] || [], [language]);
+    const levelOne_quizOptions = useMemo(() => firstStageQuizSets?.[language]?.[1] || [], [language]);
+    const levelTwo_quizOptions = useMemo(() => firstStageQuizSets?.[language]?.[2] || [], [language]);
+    const levelThree_quizOptions = useMemo(() => firstStageQuizSets?.[language]?.[3] || [], [language]);
+    const levelFour_quizOptions = useMemo(() => firstStageQuizSets?.[language]?.[4] || [], [language]);
+    const levelFive_quizOptions = useMemo(() => firstStageQuizSets?.[language]?.[5] || [], [language]);
+    const levelSix_quizOptions = useMemo(() => firstStageQuizSets?.[language]?.[6] || [], [language]);    
+    const secondStage_levelSets = useMemo(() => secondStageQuizSets[language], [language]);    
+    const tierpackNames = useMemo(() => TIERPACK_NAMES[language], [language]);
 
 
-    const secondStage_levelSets = secondStageQuizSets[language]
 
-    const tierpackNames = TIERPACK_NAMES[language];
+    // console.log("tierpackNames", tierpackNames, TIERPACK_NAMES, language);
+    // const [isClientReady, s__isClientReady] = useState(false);
+    // useEffect(() => {
+    //     if (!isClientReady) {
+    //         s__isClientReady(true)
+    //         // setLanguage(window.localStorage.getItem('language') as Language)
+    //         return
+    //     }
+    // }, [])
 
     return (
         <LanguageContext.Provider value={{

@@ -97,6 +97,7 @@ export const BookPortfolio = forwardRef(({ state, calls }: any)=> {
           {/* <Basic2DText text={`${TIERPACK_NAMES[state.index] || 'Book'}`} color={TIERPACK_COLORS[state.index][2]} emissive={TIERPACK_COLORS[state.index][2]}
               font={0.17} position={[0, 0, -0.45]} 
             /> */}
+            {tierpackNames?.[state?.index] && 
             <Basic2DText 
               text={`${tierpackNames[state.index] || 'Book'}`} 
               color={TIERPACK_COLORS[state.index][2]} 
@@ -104,6 +105,7 @@ export const BookPortfolio = forwardRef(({ state, calls }: any)=> {
               font={0.17} 
               position={[-.95, -0.05, -0.84]} 
             />
+          }
             <Suspense fallback={<group> <Box args={[0.1,0.1,0.1]}></Box> </group>}>
               {/* <BookImagePlane src={TIERPACK_IMAGES[state.index]} position={[0, 0.001, 0.05]} /> */}
             </Suspense>

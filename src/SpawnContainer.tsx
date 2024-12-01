@@ -89,26 +89,19 @@ const defaultLevelHeader = () => {
             </>,
             "three": <>
             <div className="tx-altfont-1 tx-mdl">Level Three</div>
-                <div className="tx-altfont-2 tx-xl">Avoid <br /> Theft</div>
+                <div className="tx-altfont-2 tx-xl">Secret <br /> Phrase</div>
             </>,
             "four": <>
             <div className="tx-altfont-1 tx-mdl">Level Four</div>
-                <div className="tx-altfont-2 tx-xl tx-center">Earn <br /> Rewards!</div>
+                <div className="tx-altfont-2 tx-xl tx-center">Avoid <br /> Theft!</div>
             </>,
             "five": <>
             <div className="tx-altfont-1 tx-mdl">Level Five</div>
-                <div className="tx-altfont-2 tx-xl tx-center">Liquidity <br /> Pools!</div>
+                <div className="tx-altfont-2 tx-xl tx-center">Blockchain <br /> Gas</div>
             </>,
             "six": <>
             <div className="tx-altfont-1 tx-mdl">Level Six</div>
-                <div className="tx-altfont-2 tx-xl tx-center">Smart <br /> Contracts!</div>
-            </>,
-            "seven": <>
-            <div className="tx-altfont-1 tx-mdl">Level Seven</div>
-                <div className="tx-altfont-2 tx-xl tx-center">Blockchain <br /> Gas!</div>
-            </>,
-            "eight": <>
-                <div className="tx-altfont-2 tx-xl tx-center">What is <br /> Solana?</div>
+                <div className="tx-altfont-2 tx-xl tx-center">Decentralization </div>
             </>,
             "win": <>
                 <div className="tx-altfont-2 tx-xl tx-center">Victory!</div>

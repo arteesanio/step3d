@@ -45,18 +45,22 @@ export const TIERPACK_NAMES = {
         "Dapp\nDevelopment",
         "Blockchain\nSafety",
         "Web3\nDomains",
+
         "Interoperability",
     ],
     es: [
         "Primeros\nPasos",
         "Conceptos\nBásicos",
         "Monederos\nDigitales",
+
         "Staking y\nRecompensas",
         "Apps\nDescentralizadas",
         "DeFi\nBásico",
+
         "Desarrollo\nDapp",
         "Seguridad\nBlockchain",
         "Dominios\nWeb3",
+        
         "Interoperabilidad",
     ]
 }

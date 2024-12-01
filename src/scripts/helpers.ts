@@ -635,7 +635,7 @@ export const shuffleArray = <T>(array: T[]): T[] => {
     // Find "All of the above" option if it exists
     const allOfAboveIndex = shuffled.findIndex((item: any) => 
         item.text?.toLowerCase().includes("all") && 
-        (item.text?.toLowerCase().includes("option") || item.text?.toLowerCase().includes("above"))
+        (item.text?.toLowerCase().includes("option") || (item.text?.toLowerCase().includes("above") || item.text?.toLowerCase().includes("anterior")))
     );
 
     if (allOfAboveIndex !== -1) {
