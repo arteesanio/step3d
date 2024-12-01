@@ -3,9 +3,9 @@ import { useFrame } from "@react-three/fiber";
 import { useRef, useState, useEffect, useContext } from "react";
 import { Stairs } from "../../core/Stairs";
 import { QuizModal } from "../../bit/text/QuizModal";
-import { thirdStage_levelZero } from "@/scripts/helpers";
 import { BlockchainLink } from "../../core/BlockchainLink";
 import { GameContext } from "../../../../script/state/GameContext";
+import { useLanguageContext } from "@/context/LanguageContext";
 
 interface ThirdStageLevelZeroProps {
   score: number;
@@ -15,7 +15,9 @@ interface ThirdStageLevelZeroProps {
 
 export const ThirdStageLevelZero = ({ score, s__score = () => { }, onToast = () => { } }: ThirdStageLevelZeroProps) => {
   const { hasCompletedAllLevels } = useContext(GameContext);
-
+  
+  const langCtx = useLanguageContext()
+  const thirdStage_levelZero = langCtx.thirdStage_levelSets[0]
   const solanaLogo = useTexture("./solana.png");
   const miniHdri = useTexture("./miniHdri.jpg");
   const MAX_VEL = -0.018; // Slightly faster than stage 2

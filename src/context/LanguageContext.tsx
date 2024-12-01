@@ -1,6 +1,6 @@
 "use client";
 import React, { createContext, useContext, useEffect, useState, useMemo } from 'react';
-import { firstStageQuizSets, Language, QuizSet, secondStageQuizSets } from '../scripts/helpers';
+import { firstStageQuizSets, Language, QuizSet, secondStageQuizSets, thirdStageQuizSets } from '../scripts/helpers';
 import { useLocalStorage } from 'usehooks-ts';
 import { TIERPACK_NAMES } from '../../script/constant/DEFAULT_PACKS';
 
@@ -15,6 +15,7 @@ interface LanguageContextType {
     levelFive_quizOptions: QuizSet;
     levelSix_quizOptions: QuizSet;
     secondStage_levelSets: QuizSet[];
+    thirdStage_levelSets: QuizSet[];
     tierpackNames: string[];
 }
 
@@ -29,6 +30,7 @@ const LanguageContext = createContext<LanguageContextType>({
     levelFive_quizOptions: firstStageQuizSets.en[5],
     levelSix_quizOptions: firstStageQuizSets.en[6],
     secondStage_levelSets: secondStageQuizSets.en,
+    thirdStage_levelSets: thirdStageQuizSets.en,
     tierpackNames: TIERPACK_NAMES.en
 });
 
@@ -44,6 +46,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const levelFive_quizOptions = useMemo(() => firstStageQuizSets?.[language]?.[5] || [], [language]);
     const levelSix_quizOptions = useMemo(() => firstStageQuizSets?.[language]?.[6] || [], [language]);    
     const secondStage_levelSets = useMemo(() => secondStageQuizSets[language], [language]);    
+    const thirdStage_levelSets = useMemo(() => thirdStageQuizSets[language], [language]);    
     const tierpackNames = useMemo(() => TIERPACK_NAMES[language], [language]);
 
 
@@ -70,7 +73,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
             levelSix_quizOptions,
 
             secondStage_levelSets,
-
+            thirdStage_levelSets,
             tierpackNames
         }}>
             {children}
